@@ -14,6 +14,7 @@ public class LibraryTest {
         System.out.println("Markus macht nen 960");
 
         System.out.println("Gruﬂ von Markus");
+        System.out.print("Hallo");
 
     }
 }
