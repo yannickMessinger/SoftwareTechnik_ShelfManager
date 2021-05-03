@@ -10,6 +10,10 @@ public class LibraryTest {
     @Test public void testSomeLibraryMethod() {
         Library classUnderTest = new Library();
         assertTrue("someLibraryMethod should return 'true'", classUnderTest.someLibraryMethod());
+
+        System.out.println("Markus macht nen 960");
+
         System.out.println("Gruﬂ von Markus");
+
     }
 }
