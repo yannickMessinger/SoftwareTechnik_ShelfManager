@@ -15,6 +15,7 @@ public class LibraryTest {
 
         System.out.println("Gruﬂ von Markus");
         System.out.print("Hallo");
+        System.out.print("HalliHallo");
 
     }
 }
