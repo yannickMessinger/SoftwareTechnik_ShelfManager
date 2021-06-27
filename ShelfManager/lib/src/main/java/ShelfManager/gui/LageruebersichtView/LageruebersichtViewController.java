@@ -54,13 +54,15 @@ public class LageruebersichtViewController extends ViewController {
 
         ObservableList<Paket> uiModel = paketlistView.getItems();
 
-        //Testarraylist
-        ArrayList<Paket> pakete = new ArrayList<>();
-        for (int i = 1; i<6; i++) {
-            Paket newPaket = new Paket();
-            newPaket.setName("Paket" + i);
-            pakete.add(newPaket);
-        }
+//        Testarraylist
+//        ArrayList<Paket> pakete = new ArrayList<>();
+//        for (int i = 1; i<6; i++) {
+//            Paket newPaket = new Paket();
+//            newPaket.setName("Paket" + i);
+//            pakete.add(newPaket);
+//        }
+
+        ArrayList<Paket> pakete = hauptLager.getAllPakets();
 
         uiModel.addAll(pakete);
 

@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Lager extends Gegenstand {
     private int hoehe;
@@ -48,6 +49,23 @@ public class Lager extends Gegenstand {
             }
 
         }
+    }
+
+
+    /**
+     * Gibt alle Pakete aus dem Lager in einer ArrayList zurück
+     * @return
+     */
+    public ArrayList<Paket> getAllPakets() {
+        ArrayList<Paket> allPakets = new ArrayList<>();
+        for (Regal r : regale) {
+            for (Regalfach rf : r.getRegalfaecher()) {
+                for (Paket p : rf.getPakete()) {
+                    allPakets.add(p);
+                }
+            }
+        }
+        return allPakets;
     }
 
 
