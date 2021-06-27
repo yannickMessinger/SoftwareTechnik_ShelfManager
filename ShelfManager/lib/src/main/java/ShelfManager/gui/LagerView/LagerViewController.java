@@ -1,12 +1,20 @@
 package ShelfManager.gui.LagerView;
 
 import ShelfManager.Lager.Lager;
+import ShelfManager.Lager.Paket;
 import ShelfManager.ShelfManagerApplication;
 import ShelfManager.gui.Scenes;
 import ShelfManager.gui.ViewController;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
+import javafx.util.Callback;
+
+import java.util.ArrayList;
 
 public class LagerViewController extends ViewController {
     private ShelfManagerApplication main;
@@ -16,6 +24,7 @@ public class LagerViewController extends ViewController {
     private Button createShelfButton;
     private Button createPacketbutton;
     private Button lageruebersichtButton;
+    private ListView<Paket> createdPaketsListView;
 
     public LagerViewController(Lager hauptLager, ShelfManagerApplication main) {
         this.main = main;
@@ -24,6 +33,7 @@ public class LagerViewController extends ViewController {
         this.createShelfButton = lagerView.getCreateShelfButton();
         this.createPacketbutton = lagerView.getCreatePacketButton();
         this.lageruebersichtButton = lagerView.getLageruebersichtButton();
+        this.createdPaketsListView = lagerView.getCreatedPaketsListView();
 
         rootView = this.lagerView;
         initialize();
@@ -42,6 +52,25 @@ public class LagerViewController extends ViewController {
         lageruebersichtButton.addEventHandler(ActionEvent.ACTION, event -> {
             main.switchScene(Scenes.LAGERUEBERISCHT_VIEW);
         });
+
+        createdPaketsListView.setCellFactory(new Callback<ListView<Paket>, ListCell<Paket>>() {
+            @Override
+            public ListCell<Paket> call(ListView<Paket> param) {
+                return new PaketCell();
+            }
+        });
+
+        ObservableList<Paket> uiModel = createdPaketsListView.getItems();
+        ObservableList<Paket> pakete = hauptLager.getObservablePaketList();
+        uiModel.addAll(pakete);
+
+        pakete.addListener((ListChangeListener<Paket>) change -> {
+            System.out.println(change);
+            uiModel.clear();
+            uiModel.addAll(pakete);
+            createdPaketsListView.refresh();
+        });
+
     }
 
     public Pane getRootView() {

@@ -40,8 +40,9 @@ public class Paket extends Gegenstand{
 
     //-----GETTER----------------------------
 
-    public String getName() {
-        return name;
+
+    public String getPaketName() {
+        return paketName;
     }
 
     public int getHoehe() {

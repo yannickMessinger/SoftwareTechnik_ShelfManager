@@ -1,20 +1,26 @@
 package ShelfManager.gui.LagerView;
 
+import ShelfManager.Lager.Paket;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 
 public class LagerView extends BorderPane {
 
-    Button createShelfButton;
-    Button createPacketButton;
-    Button lageruebersichtButton;
+    private Button createShelfButton;
+    private Button createPacketButton;
+    private Button lageruebersichtButton;
+    private ListView<Paket> createdPaketsListView;
 
     public LagerView() {
 
         Label viewName = new Label("LagerView");
         this.setTop(viewName);
+
+        createdPaketsListView = new ListView<>();
+        this.setRight(createdPaketsListView);
 
         HBox box = new HBox();
 
@@ -37,5 +43,9 @@ public class LagerView extends BorderPane {
 
     public Button getLageruebersichtButton() {
         return lageruebersichtButton;
+    }
+
+    public ListView<Paket> getCreatedPaketsListView() {
+        return createdPaketsListView;
     }
 }

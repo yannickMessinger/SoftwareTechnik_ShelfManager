@@ -17,6 +17,7 @@ public class PaketConfigView extends BorderPane {
     private TextField tragKraftField;
     private ColorPicker paketColor;
     private Button addNewPaket;
+    private Button backToLagerView;
 
 
 
@@ -45,9 +46,10 @@ public class PaketConfigView extends BorderPane {
         paketColor = new ColorPicker();
 
 
-        addNewPaket = new Button("Paket hinzufügen");
+        addNewPaket = new Button("Paket hinzufuegen");
+        backToLagerView = new Button("zurueck");
 
-        inputBox.getChildren().addAll(viewName,name, nameField,hoehe, hoeheField, breite,breiteField,gewicht, gewichtField,paketFarbe,paketColor, tragKraft, tragKraftField, addNewPaket);
+        inputBox.getChildren().addAll(viewName,name, nameField,hoehe, hoeheField, breite,breiteField,gewicht, gewichtField,paketFarbe,paketColor, tragKraft, tragKraftField,backToLagerView, addNewPaket);
 
         this.setTop(inputBox);
 
@@ -82,5 +84,9 @@ public class PaketConfigView extends BorderPane {
 
     public Button getAddNewPaket() {
         return addNewPaket;
+    }
+
+    public Button getBackToLagerView() {
+        return backToLagerView;
     }
 }

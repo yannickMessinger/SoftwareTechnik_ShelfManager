@@ -59,7 +59,7 @@ public class ShelfManagerApplication extends Application {
             this.primaryStage = primaryStage;
             Pane root = new Pane();
 
-            Scene scene = new Scene(root, 400, 400);
+            Scene scene = new Scene(root, 1200, 800);
             this.primaryStage.setScene(scene);
             this.primaryStage.setTitle("ShelfManager");
 

@@ -1,4 +1,4 @@
-package ShelfManager.gui.LageruebersichtView;
+package ShelfManager.gui.LagerView;
 
 import ShelfManager.Lager.Paket;
 import javafx.scene.control.Label;
@@ -9,16 +9,11 @@ public class PaketCell extends ListCell<Paket> {
 
     HBox root;
     Label paketnameLabel;
-    Label regalNrLabel;
-    Label fachNrLabel;
 
     public PaketCell() {
         root = new HBox();
-
         paketnameLabel = new Label();
-        regalNrLabel = new Label();
-        fachNrLabel = new Label();
-        root.getChildren().addAll(paketnameLabel, regalNrLabel, fachNrLabel);
+        root.getChildren().addAll(paketnameLabel);
         this.setGraphic(root);
     }
 
@@ -28,7 +23,6 @@ public class PaketCell extends ListCell<Paket> {
 
         if (!empty) {
             paketnameLabel.setText(item.getPaketName());
-            // TODO: regalNr & fachNr
 
             this.setGraphic(root);
         } else {

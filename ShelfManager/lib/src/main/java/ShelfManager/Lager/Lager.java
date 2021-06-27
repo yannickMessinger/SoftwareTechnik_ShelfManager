@@ -1,5 +1,8 @@
 package ShelfManager.Lager;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -10,7 +13,8 @@ public class Lager extends Gegenstand {
     private int hoehe;
     private int breite;
     private ArrayList<Regal> regale;
-    private ArrayList<Paket> paketListe;
+    //private ArrayList<Paket> paketListe;
+    private ObservableList<Paket> observablePaketList;
 
     /**
      * Konstruktor - Lager
@@ -20,7 +24,8 @@ public class Lager extends Gegenstand {
         //this.hoehe = erfasseHoehe();
         //this.breite = erfasseBreite();
         this.regale = new ArrayList<Regal>();
-        this.paketListe = new ArrayList<Paket>();
+        //this.paketListe = new ArrayList<Paket>();
+        this.observablePaketList = FXCollections.observableArrayList();
     }
 
 
@@ -54,7 +59,7 @@ public class Lager extends Gegenstand {
 
     /**
      * Gibt alle Pakete aus dem Lager in einer ArrayList zurück
-     * @return
+     * @return allPakets
      */
     public ArrayList<Paket> getAllPakets() {
         ArrayList<Paket> allPakets = new ArrayList<>();
@@ -69,7 +74,12 @@ public class Lager extends Gegenstand {
     }
 
 
-
+    /**
+     * fügt Paket zu paketListe hinzu
+     */
+    public void addPaketToList(Paket paket) {
+        observablePaketList.add(paket);
+    }
 
 
 
@@ -92,8 +102,12 @@ public class Lager extends Gegenstand {
         return regale;
     }
 
-    public ArrayList<Paket> getPaketListe() {
-        return paketListe;
+//    public ArrayList<Paket> getPaketListe() {
+//        return paketListe;
+//    }
+
+    public ObservableList<Paket> getObservablePaketList() {
+        return observablePaketList;
     }
 
     //-----SETTER----------------------------

@@ -3,6 +3,7 @@ package ShelfManager.gui.PaketConfigView;
 import ShelfManager.Lager.Lager;
 import ShelfManager.Lager.Paket;
 import ShelfManager.ShelfManagerApplication;
+import ShelfManager.gui.Scenes;
 import ShelfManager.gui.ViewController;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
@@ -23,6 +24,7 @@ public class PaketConfigViewController extends ViewController {
     private TextField tragKraftField;
     private ColorPicker paketColor;
     private Button addNewPaket;
+    private Button backToLagerView;
 
     public PaketConfigViewController(Lager hauptLager, ShelfManagerApplication main) {
         this.hauptLager = hauptLager;
@@ -37,7 +39,7 @@ public class PaketConfigViewController extends ViewController {
         this.paketColor = paketConfigView.getPaketColor();
 
         this.addNewPaket = paketConfigView.getAddNewPaket();
-
+        this.backToLagerView = paketConfigView.getBackToLagerView();
 
 
         rootView = this.paketConfigView;
@@ -49,6 +51,7 @@ public class PaketConfigViewController extends ViewController {
         addNewPaket.addEventHandler(ActionEvent.ACTION, event -> {
 
             String paketName = nameField.getText();
+            System.out.println(paketName);
             int hoehePaket = Integer.parseInt(hoeheField.getText());
             int breitePaket = Integer.parseInt(breiteField.getText());
             int gewichtPaket = Integer.parseInt(gewichtField.getText());
@@ -62,7 +65,7 @@ public class PaketConfigViewController extends ViewController {
             paketToAdd.setGewicht(gewichtPaket);
             paketToAdd.setTragkraft(tragKraft);
 
-            hauptLager.getPaketListe().add(paketToAdd);
+            hauptLager.addPaketToList(paketToAdd);
             System.out.println("neues Paket angelegt");
 
 
@@ -70,7 +73,14 @@ public class PaketConfigViewController extends ViewController {
             hoeheField.setText("");
             breiteField.setText("");
             gewichtField.setText("");
+            tragKraftField.setText("");
 
+            main.switchScene(Scenes.LAGER_VIEW);
+
+        });
+
+        backToLagerView.addEventHandler(ActionEvent.ACTION, event -> {
+            main.switchScene(Scenes.LAGER_VIEW);
         });
 
     }
