@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class Regal {
     private ArrayList<Regalfach> regalfaecher;
-    private Stuetze[] stuetze = new Stuetze[2];
+    private Stuetze[] stuetzen = new Stuetze[2];
     private int hoehe;
     private int breite;
     private int tragkraft;
@@ -16,26 +16,18 @@ public class Regal {
     public static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
 
+    public Regal() {
+        this.stuetzen = addSupport();
 
-    public void addSupport() {
-        int hoehe = 0;
-        int breite = 0;
-        try {
-            while (hoehe <= 0) {
-                System.out.println("Hoehe:");
-                hoehe = Integer.parseInt(reader.readLine());
-            }
-            while (hoehe <= 0) {
-                System.out.println("Breite:");
-                breite = Integer.parseInt(reader.readLine());
-            }
+    }
 
-            //Stuetze stuetze1 = new Stuetze(hoehe, breite);
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
+    public Stuetze[] addSupport() {
+        Stuetze stuetze1 = new Stuetze();
+        Stuetze stuetze2 = new Stuetze();
+
+        return new Stuetze[]{stuetze1, stuetze2};
     }
 
 

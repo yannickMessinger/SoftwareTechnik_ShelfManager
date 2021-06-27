@@ -24,67 +24,52 @@ public class ShelfManagerApplication extends Application {
         boolean validCommand = false;
         Lager lager = null;
 
-        System.out.println("Was möchten Sie tun?");
-        try {
-            String input = reader.readLine();
-            System.out.println(input);
+        while (true) {
+            System.out.println("Was möchten Sie tun?");
+            try {
+                String input = reader.readLine();
+                System.out.println(input);
 
-
-            for(Command c: Command.values()) {
-                if (c.toString().equals(input)){
-                    validCommand = true;
-                    command = Command.valueOf(input);
-                    break;
+                for(Command c: Command.values()) {
+                    if (c.toString().equals(input)){
+                        validCommand = true;
+                        command = Command.valueOf(input);
+                        break;
+                    }
                 }
+
+                if (validCommand){
+                    switch (command){
+                        case ADD_WAREHOUSE:     System.out.println("Lager hinzufügen");
+                                                lager = new Lager();
+                                                System.out.println("neues Lager erstellt");
+                            break;
+                        case ADD_SHELF:         System.out.println("Regal hinzufügen");
+
+
+                            break;
+                        case ADD_COMPARTMENT:   System.out.println("Regalfach hinzufügen");
+                            break;
+                        case ADD_PACKAGE:       System.out.println("Paket hinzufügen");
+                            break;
+                        case CONFIGURE_PACKAGE: System.out.println("Paket konfigurieren");
+                            break;
+                        default:
+                            System.out.println("Kommando nicht gefunden");
+                    }
+                }
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
             }
 
-            if (validCommand){
-                switch (command){
-                    case ADD_WAREHOUSE:     System.out.println("Lager hinzufügen");
-                                            lager = new Lager();
-                        break;
-                    case ADD_SHELF:         System.out.println("Regal hinzufügen");
-
-                        break;
-                    case ADD_COMPARTMENT:   System.out.println("Regalfach hinzufügen");
-                        break;
-                    case ADD_PACKAGE:       System.out.println("Paket hinzufügen");
-                        break;
-                    case CONFIGURE_PACKAGE: System.out.println("Paket konfigurieren");
-                        break;
-                    default:
-                        System.out.println("Kommando nicht gefunden");
-                }
-            }
-
-
-        } catch (IOException e) {
-            e.printStackTrace();
         }
+
         //-----------------------------------------------
         //launch(args);
     }
-    //--------------------------------------------------------------------------------------------
-//    public static Lager addWarehouse(){
-//        int hoehe = 0;
-//        int breite = 0;
-//
-//        try {
-//            while (hoehe <= 0) {
-//                System.out.println("Hoehe:");
-//                hoehe = Integer.parseInt(reader.readLine());
-//            }
-//            while (hoehe <= 0) {
-//                System.out.println("Breite:");
-//                breite = Integer.parseInt(reader.readLine());
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//        return new Lager(hoehe, breite);
-//    }
-    //--------------------------------------------------------------------------------------------
+
 
 
     //------------------------JAVAFX---------------------------------------------------------------
