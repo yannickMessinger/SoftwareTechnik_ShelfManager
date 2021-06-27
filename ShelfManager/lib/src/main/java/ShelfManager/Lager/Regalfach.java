@@ -2,19 +2,24 @@ package ShelfManager.Lager;
 
 import java.util.ArrayList;
 
-public class Regalfach {
+public class Regalfach extends Gegenstand {
     private Einlegeboden boden;
     private ArrayList<Paket> pakete;
     private int hoehe;
     private int xPos;
     private int yPos;
 
-
-
-
-
-
-
+    /**
+     * Konstruktor - Regal
+     */
+    public Regalfach() {
+        setBoden();
+        this.pakete = new ArrayList<Paket>();
+        //spaeter wird Hoehe über yPos im Regal bzw. Abstand zu naechstem Boden im Regal berechnet
+        this.hoehe = this.erfasseHoehe();
+        this.xPos = 0;
+        this.yPos = 0;
+    }
 
     //-----GETTER----------------------------
 
@@ -41,8 +46,9 @@ public class Regalfach {
     //-----SETTER----------------------------
 
 
-    public void setBoden(Einlegeboden boden) {
-        this.boden = boden;
+    public void setBoden() {
+        System.out.println("Einlegeboden:");
+        this.boden = new Einlegeboden();
     }
 
     public void setPakete(ArrayList<Paket> pakete) {
