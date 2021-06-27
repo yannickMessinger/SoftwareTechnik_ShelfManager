@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-public class Regal {
+public class Regal extends Gegenstand{
     private ArrayList<Regalfach> regalfaecher;
     private Stuetze[] stuetzen = new Stuetze[2];
     private int hoehe;
@@ -18,10 +18,20 @@ public class Regal {
 
     public Regal() {
         this.stuetzen = addSupport();
+        this.breite = this.erfasseBreite();
+        this.tragkraft = calculateLoadCapacity();
+
+
 
     }
 
 
+    public int calculateLoadCapacity() {
+        for(Regalfach r: regalfaecher) {
+
+        }
+        return 3;
+    }
 
     public Stuetze[] addSupport() {
         Stuetze stuetze1 = new Stuetze();
