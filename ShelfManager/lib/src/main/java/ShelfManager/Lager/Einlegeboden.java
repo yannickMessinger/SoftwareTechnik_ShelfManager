@@ -1,13 +1,33 @@
 package ShelfManager.Lager;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-public class Einlegeboden {
+import static java.lang.Integer.*;
+
+public class Einlegeboden extends Gegenstand {
+
+    private Regal regal;
     private int hoehe;
     private int breite;
     private int tragkraft;
     private int xPos;
     private int yPos;
+    public BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+
+    public Einlegeboden() {
+
+        this.hoehe = this.erfasseHoehe();
+        this.breite = regal.getBreite();
+        this.tragkraft = setTragkraft();
+        this.xPos = 0;
+        this.yPos = 0;
+
+    }
+
 
     //-----GETTER----------------------------
 
@@ -41,8 +61,17 @@ public class Einlegeboden {
         this.breite = breite;
     }
 
-    public void setTragkraft(int tragkraft) {
-        this.tragkraft = tragkraft;
+    public int setTragkraft() {
+
+        try {
+            System.out.println("Tragkraft des Bodens eingeben: ");
+            tragkraft = Integer.parseInt(reader.readLine());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return tragkraft;
+
     }
 
     public void setxPos(int xPos) {

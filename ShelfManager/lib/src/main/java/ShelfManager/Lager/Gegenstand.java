@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 public class Gegenstand {
     int hoehe = 0;
     int breite = 0;
-    public static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    public BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
 
 
@@ -34,6 +34,8 @@ public class Gegenstand {
         }
         return breite;
     }
+
+
 
 
 }

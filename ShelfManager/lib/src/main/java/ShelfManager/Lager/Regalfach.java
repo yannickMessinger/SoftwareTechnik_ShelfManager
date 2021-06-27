@@ -9,6 +9,13 @@ public class Regalfach {
     private int xPos;
     private int yPos;
 
+
+
+
+
+
+
+
     //-----GETTER----------------------------
 
     public Einlegeboden getBoden() {
