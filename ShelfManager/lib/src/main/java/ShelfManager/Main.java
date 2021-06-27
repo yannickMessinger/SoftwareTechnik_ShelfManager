@@ -2,6 +2,7 @@ package ShelfManager;
 
 import ShelfManager.Lager.Command;
 import ShelfManager.Lager.Lager;
+import ShelfManager.Lager.Regalfach;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,7 +13,7 @@ public class Main {
 
 
     public static void main(String[] args) {
-        ShelfManagerApplication.main(args);
+        //ShelfManagerApplication.main(args);
 
 
         Command command = null;
@@ -37,14 +38,13 @@ public class Main {
                 if (validCommand){
                     switch (command){
                         case ADD_WAREHOUSE:     System.out.println("Lager hinzufügen");
-                            lager = new Lager();
-                            System.out.println("neues Lager erstellt");
+                                                lager = new Lager();
+                                                System.out.println("neues Lager erstellt");
                             break;
                         case ADD_SHELF:         System.out.println("Regal hinzufügen");
-
-
                             break;
                         case ADD_COMPARTMENT:   System.out.println("Regalfach hinzufügen");
+                                                Regalfach testFach = new Regalfach();
                             break;
                         case ADD_PACKAGE:       System.out.println("Paket hinzufügen");
                             break;

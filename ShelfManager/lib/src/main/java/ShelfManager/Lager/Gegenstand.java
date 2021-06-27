@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 public class Gegenstand {
     int hoehe = 0;
     int breite = 0;
+    String name = "";
     public static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
 

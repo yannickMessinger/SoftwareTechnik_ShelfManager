@@ -10,6 +10,9 @@ public class Lager extends Gegenstand {
     private int breite;
     private ArrayList<Regal> regale;
 
+    /**
+     * Konstruktor - Lager
+     */
     public Lager() {
         this.hoehe = erfasseHoehe();
         this.breite = erfasseBreite();
