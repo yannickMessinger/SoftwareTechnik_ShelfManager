@@ -2,6 +2,7 @@ package ShelfManager;
 
 import ShelfManager.Lager.Command;
 import ShelfManager.Lager.Lager;
+import ShelfManager.Lager.Regal;
 import ShelfManager.Lager.Regalfach;
 
 import java.io.BufferedReader;
@@ -10,7 +11,7 @@ import java.io.InputStreamReader;
 
 public class Main {
     public static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-
+    private static Regal testRegal;
 
     public static void main(String[] args) {
         //ShelfManagerApplication.main(args);
@@ -42,9 +43,10 @@ public class Main {
                                                 System.out.println("neues Lager erstellt");
                             break;
                         case ADD_SHELF:         System.out.println("Regal hinzufügen");
+                                                testRegal = new Regal();
                             break;
                         case ADD_COMPARTMENT:   System.out.println("Regalfach hinzufügen");
-                                                Regalfach testFach = new Regalfach();
+                                                Regalfach testFach = new Regalfach(testRegal);
                             break;
                         case ADD_PACKAGE:       System.out.println("Paket hinzufügen");
                             break;

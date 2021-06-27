@@ -16,6 +16,7 @@ public class Regal extends Gegenstand{
      * Konstruktor - Regal
      */
     public Regal() {
+        this.regalfaecher = new ArrayList<Regalfach>();
         this.stuetzen = addSupport();
         this.hoehe = this.stuetzen[0].getHoehe();
         this.breite = this.erfasseBreite();
@@ -43,7 +44,9 @@ public class Regal extends Gegenstand{
      */
     public Stuetze[] addSupport() {
         Stuetze stuetze1 = new Stuetze();
+        System.out.println("Stuetze 1 hinzugefügt");
         Stuetze stuetze2 = new Stuetze();
+        System.out.println("Stuetze 2 hinzugefügt");
         return new Stuetze[]{stuetze1, stuetze2};
     }
 
