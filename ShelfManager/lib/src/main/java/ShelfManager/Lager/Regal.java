@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Regal extends Gegenstand{
     private ArrayList<Regalfach> regalfaecher;
-    private Stuetze[] stuetzen = new Stuetze[2];
+    private Stuetze[] stuetzen;
     private int hoehe;
     private int breite;
     private int tragkraft;
@@ -12,25 +12,38 @@ public class Regal extends Gegenstand{
     private int yPos;
 
 
+    /**
+     * Konstruktor - Regal
+     */
     public Regal() {
         this.stuetzen = addSupport();
         this.hoehe = this.stuetzen[0].getHoehe();
         this.breite = this.erfasseBreite();
         this.tragkraft = calculateLoadCapacity();
+        this.xPos = 0;
+        this.yPos = 0;
     }
 
+    /**
+     * Berechnet aus der Liste aller Regalfaecher im Regal
+     * die Gesamttragkraft des ganzen Regals
+     * @return capacity
+     */
     public int calculateLoadCapacity() {
         int capacity = 0;
         for(Regalfach r: regalfaecher) {
             capacity = capacity + r.getBoden().getTragkraft();
         }
-        return 3;
+        return capacity;
     }
 
+    /**
+     * Liest die Stuetzen fuer ein Regal ein und gibt diese zurueck
+     * @return Stuetzen des Regals
+     */
     public Stuetze[] addSupport() {
         Stuetze stuetze1 = new Stuetze();
         Stuetze stuetze2 = new Stuetze();
-
         return new Stuetze[]{stuetze1, stuetze2};
     }
 
