@@ -1,4 +1,16 @@
 package ShelfManager.gui.LageruebersichtView;
 
-public class LageruebersichtViewController {
+import ShelfManager.gui.ViewController;
+
+public class LageruebersichtViewController extends ViewController {
+
+    public LageruebersichtViewController() {
+
+    }
+
+    @Override
+    public void initialize() {
+
+    }
+
 }
