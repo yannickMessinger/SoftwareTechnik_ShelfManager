@@ -4,6 +4,8 @@ import ShelfManager.Lager.Command;
 import ShelfManager.Lager.Lager;
 import ShelfManager.gui.LagerConfigView.LagerConfigViewController;
 import ShelfManager.gui.LagerView.LagerViewController;
+import ShelfManager.gui.PaketConfigView.PaketConfigViewController;
+import ShelfManager.gui.RegalConfigView.RegalConfigViewController;
 import ShelfManager.gui.Scenes;
 import ShelfManager.gui.ViewController;
 import javafx.application.Application;
@@ -32,10 +34,18 @@ public class ShelfManagerApplication extends Application {
         hauptLager = new Lager();
         scenes = new HashMap<>();
         ViewController controller;
+
         controller = new LagerConfigViewController(hauptLager, this);
         scenes.put(Scenes.LAGER_CONFIG_VIEW, controller.getRootView());
+
         controller = new LagerViewController(hauptLager, this);
         scenes.put(Scenes.LAGER_VIEW, controller.getRootView());
+
+        controller = new RegalConfigViewController(hauptLager, this);
+        scenes.put(Scenes.REGAL_CONFIG_VIEW, controller.getRootView());
+
+        controller = new PaketConfigViewController(hauptLager, this);
+        scenes.put(Scenes.PAKET_CONFIG_VIEW, controller.getRootView());
 
     }
 
@@ -45,7 +55,7 @@ public class ShelfManagerApplication extends Application {
             this.primaryStage = primaryStage;
             Pane root = new Pane();
 
-            Scene scene = new Scene(root, 200, 400);
+            Scene scene = new Scene(root, 400, 400);
             this.primaryStage.setScene(scene);
             this.primaryStage.setTitle("ShelfManager");
 
