@@ -4,6 +4,7 @@ import ShelfManager.Lager.Command;
 import ShelfManager.Lager.Lager;
 import ShelfManager.gui.LagerConfigView.LagerConfigViewController;
 import ShelfManager.gui.LagerView.LagerViewController;
+import ShelfManager.gui.LageruebersichtView.LageruebersichtViewController;
 import ShelfManager.gui.PaketConfigView.PaketConfigViewController;
 import ShelfManager.gui.RegalConfigView.RegalConfigViewController;
 import ShelfManager.gui.Scenes;
@@ -46,6 +47,9 @@ public class ShelfManagerApplication extends Application {
 
         controller = new PaketConfigViewController(hauptLager, this);
         scenes.put(Scenes.PAKET_CONFIG_VIEW, controller.getRootView());
+
+        controller = new LageruebersichtViewController(hauptLager, this);
+        scenes.put(Scenes.LAGERUEBERISCHT_VIEW, controller.getRootView());
 
     }
 

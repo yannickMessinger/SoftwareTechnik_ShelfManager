@@ -7,12 +7,12 @@ import javafx.scene.layout.Pane;
 
 public class RegalConfigViewController extends ViewController {
 
-    private Lager hauptlager;
+    private Lager hauptLager;
     private ShelfManagerApplication main;
     private RegalConfigView regalConfigView;
 
-    public RegalConfigViewController(Lager hauptlager, ShelfManagerApplication main) {
-        this.hauptlager = hauptlager;
+    public RegalConfigViewController(Lager hauptLager, ShelfManagerApplication main) {
+        this.hauptLager = hauptLager;
         this.main = main;
         this.regalConfigView = new RegalConfigView();
 

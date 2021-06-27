@@ -15,6 +15,7 @@ public class LagerViewController extends ViewController {
 
     private Button createShelfButton;
     private Button createPacketbutton;
+    private Button lageruebersichtButton;
 
     public LagerViewController(Lager hauptLager, ShelfManagerApplication main) {
         this.main = main;
@@ -22,6 +23,7 @@ public class LagerViewController extends ViewController {
         this.lagerView = new LagerView();
         this.createShelfButton = lagerView.getCreateShelfButton();
         this.createPacketbutton = lagerView.getCreatePacketButton();
+        this.lageruebersichtButton = lagerView.getLageruebersichtButton();
 
         rootView = this.lagerView;
         initialize();
@@ -36,6 +38,9 @@ public class LagerViewController extends ViewController {
         });
         createPacketbutton.addEventHandler(ActionEvent.ACTION, event -> {
             main.switchScene(Scenes.PAKET_CONFIG_VIEW);
+        });
+        lageruebersichtButton.addEventHandler(ActionEvent.ACTION, event -> {
+            main.switchScene(Scenes.LAGERUEBERISCHT_VIEW);
         });
     }
 

@@ -9,6 +9,7 @@ public class LagerView extends BorderPane {
 
     Button createShelfButton;
     Button createPacketButton;
+    Button lageruebersichtButton;
 
     public LagerView() {
 
@@ -18,9 +19,10 @@ public class LagerView extends BorderPane {
         HBox box = new HBox();
 
         createShelfButton = new Button("neues Regal");
-        createPacketButton = new Button("neues Packet");
+        createPacketButton = new Button("neues Paket");
+        lageruebersichtButton = new Button("Lageruebersicht");
 
-        box.getChildren().addAll(createShelfButton, createPacketButton);
+        box.getChildren().addAll(createShelfButton, createPacketButton, lageruebersichtButton);
         this.setBottom(box);
 
     }
@@ -31,5 +33,9 @@ public class LagerView extends BorderPane {
 
     public Button getCreatePacketButton() {
         return createPacketButton;
+    }
+
+    public Button getLageruebersichtButton() {
+        return lageruebersichtButton;
     }
 }

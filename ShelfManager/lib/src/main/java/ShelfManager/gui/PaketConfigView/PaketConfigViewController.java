@@ -7,12 +7,12 @@ import javafx.scene.layout.Pane;
 
 public class PaketConfigViewController extends ViewController {
 
-    private Lager hauptlager;
+    private Lager hauptLager;
     private ShelfManagerApplication main;
     private PaketConfigView paketConfigView;
 
-    public PaketConfigViewController(Lager hauptlager, ShelfManagerApplication main) {
-        this.hauptlager = hauptlager;
+    public PaketConfigViewController(Lager hauptLager, ShelfManagerApplication main) {
+        this.hauptLager = hauptLager;
         this.main = main;
         this.paketConfigView = new PaketConfigView();
 
