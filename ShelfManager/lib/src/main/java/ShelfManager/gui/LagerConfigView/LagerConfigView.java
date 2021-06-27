@@ -15,7 +15,7 @@ public class LagerConfigView extends BorderPane {
 
     public LagerConfigView() {
         VBox box = new VBox();
-        Label hoeheLabel = new Label("Höhe:");
+        Label hoeheLabel = new Label("Hoehe:");
         this.hoeheTextField = new TextField();
         Label breiteLabel = new Label("Breite:");
         this.breiteTextField = new TextField();
