@@ -1,8 +1,5 @@
 package ShelfManager.Lager;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class Regal extends Gegenstand{
@@ -13,22 +10,19 @@ public class Regal extends Gegenstand{
     private int tragkraft;
     private int xPos;
     private int yPos;
-    public static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
 
     public Regal() {
         this.stuetzen = addSupport();
+        this.hoehe = this.stuetzen[0].getHoehe();
         this.breite = this.erfasseBreite();
         this.tragkraft = calculateLoadCapacity();
-
-
-
     }
 
-
     public int calculateLoadCapacity() {
+        int capacity = 0;
         for(Regalfach r: regalfaecher) {
-
+            capacity = capacity + r.getBoden().getTragkraft();
         }
         return 3;
     }
