@@ -14,7 +14,7 @@ public class Main {
     private static Regal testRegal;
 
     public static void main(String[] args) {
-        //ShelfManagerApplication.main(args);
+        ShelfManagerApplication.main(args);
 
 
         Command command = null;

@@ -3,9 +3,12 @@ package ShelfManager;
 import ShelfManager.Lager.Command;
 import ShelfManager.Lager.Lager;
 import ShelfManager.gui.LagerConfigView.LagerConfigViewController;
+import ShelfManager.gui.LagerView.LagerViewController;
+import ShelfManager.gui.Scenes;
 import ShelfManager.gui.ViewController;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -17,19 +20,23 @@ import java.util.Map;
 
 
 public class ShelfManagerApplication extends Application {
-    public enum Scenes {LAGER_CONFIG_VIEW}
+
     private Map<Scenes, Pane> scenes;
     private Stage primaryStage;
-
+    private Lager hauptLager;
 
     public static void main(String[] args) { launch(args); }
 
     @Override
     public void init() {
+        hauptLager = new Lager();
         scenes = new HashMap<>();
-        ViewController controller = new LagerConfigViewController();
-
+        ViewController controller;
+        controller = new LagerConfigViewController(hauptLager, this);
         scenes.put(Scenes.LAGER_CONFIG_VIEW, controller.getRootView());
+        controller = new LagerViewController(hauptLager, this);
+        scenes.put(Scenes.LAGER_VIEW, controller.getRootView());
+
     }
 
     //------------------------JAVAFX---------------------------------------------------------------

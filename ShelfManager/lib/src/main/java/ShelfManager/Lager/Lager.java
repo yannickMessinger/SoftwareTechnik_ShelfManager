@@ -14,10 +14,13 @@ public class Lager extends Gegenstand {
      * Konstruktor - Lager
      */
     public Lager() {
-        this.hoehe = erfasseHoehe();
-        this.breite = erfasseBreite();
+        //auskommentiert für Testzwecke wegen Threadproblematik
+        //this.hoehe = erfasseHoehe();
+        //this.breite = erfasseBreite();
         this.regale = new ArrayList<Regal>();
     }
+
+
 
     //-----METHODEN--------------------------
 

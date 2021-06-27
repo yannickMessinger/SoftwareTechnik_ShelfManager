@@ -1,4 +1,10 @@
 package ShelfManager.gui.LagerView;
 
-public class LagerView {
+import javafx.scene.layout.BorderPane;
+
+public class LagerView extends BorderPane {
+
+    public LagerView() {
+
+    }
 }
