@@ -21,7 +21,7 @@ public class Gegenstand {
             e.printStackTrace();
         }
         return hoehe;
-    };
+    }
 
     public int erfasseBreite() {
         try {
@@ -33,7 +33,7 @@ public class Gegenstand {
             e.printStackTrace();
         }
         return breite;
-    };
+    }
 
 
 }
