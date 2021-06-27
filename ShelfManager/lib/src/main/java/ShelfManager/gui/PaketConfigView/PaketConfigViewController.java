@@ -66,6 +66,7 @@ public class PaketConfigViewController extends ViewController {
             paketToAdd.setTragkraft(tragKraft);
 
             hauptLager.addPaketToList(paketToAdd);
+            hauptLager.addPaketToAllPakets(paketToAdd);
             System.out.println("neues Paket angelegt");
 
 

@@ -5,6 +5,7 @@ import ShelfManager.Lager.Paket;
 import ShelfManager.ShelfManagerApplication;
 import ShelfManager.gui.Scenes;
 import ShelfManager.gui.ViewController;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
@@ -53,18 +54,15 @@ public class LageruebersichtViewController extends ViewController {
         });
 
         ObservableList<Paket> uiModel = paketlistView.getItems();
-
-//        Testarraylist
-//        ArrayList<Paket> pakete = new ArrayList<>();
-//        for (int i = 1; i<6; i++) {
-//            Paket newPaket = new Paket();
-//            newPaket.setName("Paket" + i);
-//            pakete.add(newPaket);
-//        }
-
-        ArrayList<Paket> pakete = hauptLager.getAllPakets();
-
+        ObservableList<Paket> pakete = hauptLager.getAllPakets();
         uiModel.addAll(pakete);
+
+        pakete.addListener((ListChangeListener<Paket>) change -> {
+            System.out.println(change);
+            uiModel.clear();
+            uiModel.addAll(pakete);
+            paketlistView.refresh();
+        });
 
 
     }

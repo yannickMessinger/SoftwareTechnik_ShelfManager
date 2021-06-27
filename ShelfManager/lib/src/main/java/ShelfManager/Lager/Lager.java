@@ -15,6 +15,7 @@ public class Lager extends Gegenstand {
     private ArrayList<Regal> regale;
     //private ArrayList<Paket> paketListe;
     private ObservableList<Paket> observablePaketList;
+    private ObservableList<Paket> allPakets;
 
     /**
      * Konstruktor - Lager
@@ -26,6 +27,7 @@ public class Lager extends Gegenstand {
         this.regale = new ArrayList<Regal>();
         //this.paketListe = new ArrayList<Paket>();
         this.observablePaketList = FXCollections.observableArrayList();
+        this.allPakets = FXCollections.observableArrayList();
     }
 
 
@@ -58,33 +60,18 @@ public class Lager extends Gegenstand {
 
 
     /**
-     * Gibt alle Pakete aus dem Lager in einer ArrayList zurück
-     * @return allPakets
-     */
-    public ArrayList<Paket> getAllPakets() {
-        ArrayList<Paket> allPakets = new ArrayList<>();
-        for (Regal r : regale) {
-            for (Regalfach rf : r.getRegalfaecher()) {
-                for (Paket p : rf.getPakete()) {
-                    allPakets.add(p);
-                }
-            }
-        }
-        return allPakets;
-    }
-
-
-    /**
      * fügt Paket zu paketListe hinzu
      */
     public void addPaketToList(Paket paket) {
         observablePaketList.add(paket);
     }
 
-
-
-
-
+    /**
+     * fügt Paket zu allPakets hinzu
+     */
+    public void addPaketToAllPakets(Paket paket) {
+        allPakets.add(paket);
+    }
 
 
 
@@ -108,6 +95,10 @@ public class Lager extends Gegenstand {
 
     public ObservableList<Paket> getObservablePaketList() {
         return observablePaketList;
+    }
+
+    public ObservableList<Paket> getAllPakets() {
+        return allPakets;
     }
 
     //-----SETTER----------------------------
