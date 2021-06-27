@@ -1,19 +1,23 @@
 package ShelfManager.Lager;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-public class Lager {
+public class Lager extends Gegenstand {
     private int hoehe;
     private int breite;
     private ArrayList<Regal> regale;
 
-    public Lager(int hoehe, int breite) {
-        this.hoehe = hoehe;
-        this.breite = breite;
+    public Lager() {
+        this.hoehe = erfasseHoehe();
+        this.breite = erfasseBreite();
         this.regale = new ArrayList<Regal>();
     }
 
     //-----METHODEN--------------------------
+
 
     /**
      * prueft vor dem Hinzufuegen eines neuen Regals,

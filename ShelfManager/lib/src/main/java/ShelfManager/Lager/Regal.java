@@ -1,14 +1,42 @@
 package ShelfManager.Lager;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class Regal {
     private ArrayList<Regalfach> regalfaecher;
+    private Stuetze[] stuetze = new Stuetze[2];
     private int hoehe;
     private int breite;
     private int tragkraft;
     private int xPos;
     private int yPos;
+    public static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+
+
+    public void addSupport() {
+        int hoehe = 0;
+        int breite = 0;
+        try {
+            while (hoehe <= 0) {
+                System.out.println("Hoehe:");
+                hoehe = Integer.parseInt(reader.readLine());
+            }
+            while (hoehe <= 0) {
+                System.out.println("Breite:");
+                breite = Integer.parseInt(reader.readLine());
+            }
+
+            //Stuetze stuetze1 = new Stuetze(hoehe, breite);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 
 
 

@@ -3,7 +3,7 @@ package ShelfManager.Lager;
 import java.util.ArrayList;
 
 public class Regalfach {
-    private Einlegeboeden boden;
+    private Einlegeboden boden;
     private ArrayList<Paket> pakete;
     private int hoehe;
     private int xPos;
@@ -11,7 +11,7 @@ public class Regalfach {
 
     //-----GETTER----------------------------
 
-    public Einlegeboeden getBoden() {
+    public Einlegeboden getBoden() {
         return boden;
     }
 
@@ -34,7 +34,7 @@ public class Regalfach {
     //-----SETTER----------------------------
 
 
-    public void setBoden(Einlegeboeden boden) {
+    public void setBoden(Einlegeboden boden) {
         this.boden = boden;
     }
 

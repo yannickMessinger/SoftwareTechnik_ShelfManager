@@ -1,13 +1,14 @@
 package ShelfManager.Lager;
 
-import java.util.ArrayList;
-
-public class Einlegeboeden {
+public class Stuetze {
     private int hoehe;
     private int breite;
-    private int tragkraft;
     private int xPos;
     private int yPos;
+
+
+
+
 
     //-----GETTER----------------------------
 
@@ -17,10 +18,6 @@ public class Einlegeboeden {
 
     public int getBreite() {
         return breite;
-    }
-
-    public int getTragkraft() {
-        return tragkraft;
     }
 
     public int getxPos() {
@@ -39,10 +36,6 @@ public class Einlegeboeden {
 
     public void setBreite(int breite) {
         this.breite = breite;
-    }
-
-    public void setTragkraft(int tragkraft) {
-        this.tragkraft = tragkraft;
     }
 
     public void setxPos(int xPos) {
