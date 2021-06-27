@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class Paket extends Gegenstand{
     public BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-    private String name;
+    private String paketName;
     private int hoehe;
     private int breite;
     private int gewicht;
@@ -24,12 +24,12 @@ public class Paket extends Gegenstand{
      * Konstruktor - Paket
      */
     public Paket() {
-        setName();
-        this.hoehe = this.erfasseHoehe();
-        this.breite = this.erfasseBreite();
-        setGewicht();
+        setName(paketName);
+        //this.hoehe = this.erfasseHoehe();
+        //this.breite = this.erfasseBreite();
+        setGewicht(gewicht);
         this.farbe = new Color(255,255,255);
-        setTragkraft();
+        setTragkraft(tragkraft);
         this.xPos = 0;
         this.yPos = 0;
         this.unvertraeglichkeiten = new ArrayList<>();
@@ -83,18 +83,8 @@ public class Paket extends Gegenstand{
      * und gibt diesen zurueck
      * @return name
      */
-    public void setName() {
-        name = "";
-        try {
-            while (name.equals("")) {
-                //TO DO: Ueberpruefung, ob Name schon existiert
-                System.out.println("Gib einen Namen ein:");
-                name = reader.readLine();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        this.name = name;
+    public void setName(String name) {
+        this.paketName = name;
     }
 
     public void setHoehe(int hoehe) {
@@ -110,16 +100,8 @@ public class Paket extends Gegenstand{
      * und gibt dieses zurueck
      * @return gewicht
      */
-    public void setGewicht() {
-        gewicht = 0;
-        try {
-            while (gewicht <= 0) {
-                System.out.println("Trage das Gewicht ein:");
-                gewicht = Integer.parseInt(reader.readLine());
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void setGewicht(int gewicht) {
+
         this.gewicht = gewicht;
     }
 
@@ -127,16 +109,8 @@ public class Paket extends Gegenstand{
         this.farbe = farbe;
     }
 
-    public void setTragkraft() {
-        tragkraft = 0;
-        try {
-            while (tragkraft < 0) {
-                System.out.println("Trage das Gewicht ein:");
-                tragkraft = Integer.parseInt(reader.readLine());
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void setTragkraft(int tragkraft) {
+
         this.tragkraft = tragkraft;
     }
 
