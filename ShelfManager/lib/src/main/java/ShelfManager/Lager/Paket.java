@@ -24,12 +24,13 @@ public class Paket extends Gegenstand{
      * Konstruktor - Paket
      */
     public Paket() {
-        setName();
-        this.hoehe = this.erfasseHoehe();
-        this.breite = this.erfasseBreite();
-        setGewicht();
+        // Auskommentiert zu Testzwecken für LageruebersichtViewController
+//        setName();
+//        this.hoehe = this.erfasseHoehe();
+//        this.breite = this.erfasseBreite();
+//        setGewicht();
         this.farbe = new Color(255,255,255);
-        setTragkraft();
+//        setTragkraft();
         this.xPos = 0;
         this.yPos = 0;
         this.unvertraeglichkeiten = new ArrayList<>();
@@ -94,6 +95,11 @@ public class Paket extends Gegenstand{
         } catch (IOException e) {
             e.printStackTrace();
         }
+        this.name = name;
+    }
+
+    // Methode zum Testen fuer LageruebersichtViewController
+    public void setName(String name) {
         this.name = name;
     }
 
