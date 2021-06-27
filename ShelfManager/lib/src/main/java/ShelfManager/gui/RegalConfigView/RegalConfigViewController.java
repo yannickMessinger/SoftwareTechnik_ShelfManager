@@ -1,4 +1,16 @@
 package ShelfManager.gui.RegalConfigView;
 
-public class RegalConfigViewController {
+import ShelfManager.gui.ViewController;
+
+public class RegalConfigViewController extends ViewController {
+
+    public RegalConfigViewController() {
+
+    }
+
+    @Override
+    public void initialize() {
+
+    }
+
 }
