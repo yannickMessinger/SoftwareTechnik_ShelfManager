@@ -1,0 +1,81 @@
+package ShelfManager.Lager;
+
+import java.util.ArrayList;
+
+public class Lager {
+    private int hoehe;
+    private int breite;
+    private ArrayList<Regal> regale;
+
+    public Lager(int hoehe, int breite) {
+        this.hoehe = hoehe;
+        this.breite = breite;
+        this.regale = new ArrayList<Regal>();
+    }
+
+    //-----METHODEN--------------------------
+
+    /**
+     * prueft vor dem Hinzufuegen eines neuen Regals,
+     * ob das gewuenschte Regal in das Lager passt
+     * @param regalToAdd
+     */
+    public void addRegal(Regal regalToAdd) {
+        int verfuegbarerPlatz = breite;
+        for (Regal r: regale) {
+            verfuegbarerPlatz = verfuegbarerPlatz - r.getBreite();
+        }
+
+        if (regalToAdd.getHoehe() <= hoehe && regalToAdd.getBreite() <= verfuegbarerPlatz){
+            regale.add(regalToAdd);
+        } else {
+            if (regalToAdd.getHoehe() > hoehe) {
+                System.out.println("Das Regal ist zu hoch.");
+            } else if (regalToAdd.getBreite() > verfuegbarerPlatz) {
+                System.out.println("Das Regal ist zu breit.");
+            }
+
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    //-----GETTER----------------------------
+    public int getHoehe() {
+        return hoehe;
+    }
+
+    public int getBreite() {
+        return breite;
+    }
+
+    public ArrayList<Regal> getRegale() {
+        return regale;
+    }
+
+    //-----SETTER----------------------------
+    public void setHoehe(int hoehe) {
+        this.hoehe = hoehe;
+    }
+
+    public void setBreite(int breite) {
+        this.breite = breite;
+    }
+
+    public void setRegale(ArrayList<Regal> regale) {
+        this.regale = regale;
+    }
+
+
+
+
+}
