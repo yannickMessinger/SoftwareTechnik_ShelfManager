@@ -11,6 +11,11 @@ public class Stuetze extends Gegenstand {
         this.breite = erfasseBreite();
     }
 
+    public Stuetze(int hoehe, int breite) {
+        this.hoehe = hoehe;
+        this.breite = breite;
+    }
+
 
 
     //-----GETTER----------------------------

@@ -16,11 +16,20 @@ public class Regal extends Gegenstand{
      * Konstruktor - Regal
      */
     public Regal() {
-        this.regalfaecher = new ArrayList<Regalfach>();
+        this.regalfaecher = new ArrayList<>();
         this.stuetzen = addSupport();
         this.hoehe = this.stuetzen[0].getHoehe();
         this.breite = this.erfasseBreite();
         this.tragkraft = calculateLoadCapacity();
+        this.xPos = 0;
+        this.yPos = 0;
+    }
+
+    public Regal(int hoehe, int breite) {
+        this.regalfaecher = new ArrayList<>();
+        this.hoehe = hoehe;
+        this.breite = breite;
+        this.tragkraft = 0;
         this.xPos = 0;
         this.yPos = 0;
     }
@@ -50,12 +59,29 @@ public class Regal extends Gegenstand{
         return new Stuetze[]{stuetze1, stuetze2};
     }
 
+    /**
+     * Liest die Stuetzen fuer ein Regal ein und gibt diese zurueck
+     * @param stuetzenhoehe und stuetzenbreite
+     * @return Stuetzen des Regals
+     */
+    public void addStuetzenByInput(int stuetzenhoehe, int stuetzenbreite) {
+        Stuetze stuetze1 = new Stuetze(stuetzenhoehe, stuetzenbreite);
+        System.out.println("Stuetze 1 hinzugefügt");
+        Stuetze stuetze2 = new Stuetze(stuetzenhoehe, stuetzenbreite);
+        System.out.println("Stuetze 2 hinzugefügt");
+        this.stuetzen =  new Stuetze[]{stuetze1, stuetze2};
+    }
+
 
 
 
     //-----GETTER----------------------------
     public ArrayList<Regalfach> getRegalfaecher() {
         return regalfaecher;
+    }
+
+    public Stuetze[] getStuetzen() {
+        return stuetzen;
     }
 
     public int getHoehe() {
