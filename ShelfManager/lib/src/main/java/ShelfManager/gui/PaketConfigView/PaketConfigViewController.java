@@ -8,6 +8,7 @@ import ShelfManager.gui.ViewController;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -25,6 +26,7 @@ public class PaketConfigViewController extends ViewController {
     private ColorPicker paketColor;
     private Button addNewPaket;
     private Button backToLagerView;
+    private ListView<Paket> existingPakets;
 
     public PaketConfigViewController(Lager hauptLager, ShelfManagerApplication main) {
         this.hauptLager = hauptLager;
@@ -40,6 +42,8 @@ public class PaketConfigViewController extends ViewController {
 
         this.addNewPaket = paketConfigView.getAddNewPaket();
         this.backToLagerView = paketConfigView.getBackToLagerView();
+
+
 
 
         rootView = this.paketConfigView;

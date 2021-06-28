@@ -1,9 +1,8 @@
 package ShelfManager.gui.PaketConfigView;
 
-import javafx.scene.control.Button;
-import javafx.scene.control.ColorPicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import ShelfManager.Lager.Paket;
+import ShelfManager.gui.LagerView.LagerView;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -17,7 +16,8 @@ public class PaketConfigView extends BorderPane {
     private TextField tragKraftField;
     private ColorPicker paketColor;
     private Button addNewPaket;
-    private Button backToLagerView;
+    private Button getBackToLagerView;
+
 
 
 
@@ -45,11 +45,14 @@ public class PaketConfigView extends BorderPane {
         Label paketFarbe = new Label("Paketfarbe");
         paketColor = new ColorPicker();
 
+        Label existPaket = new Label("Unvertr. mit:");
+
+
 
         addNewPaket = new Button("Paket hinzufuegen");
-        backToLagerView = new Button("zurueck");
+        getBackToLagerView = new Button("zurueck");
 
-        inputBox.getChildren().addAll(viewName,name, nameField,hoehe, hoeheField, breite,breiteField,gewicht, gewichtField,paketFarbe,paketColor, tragKraft, tragKraftField,backToLagerView, addNewPaket);
+        inputBox.getChildren().addAll(viewName,name, nameField,hoehe, hoeheField, breite,breiteField,gewicht, gewichtField,paketFarbe,paketColor, tragKraft, tragKraftField, addNewPaket, getBackToLagerView);
 
         this.setTop(inputBox);
 
@@ -86,7 +89,9 @@ public class PaketConfigView extends BorderPane {
         return addNewPaket;
     }
 
+
+
     public Button getBackToLagerView() {
-        return backToLagerView;
+        return getBackToLagerView;
     }
 }

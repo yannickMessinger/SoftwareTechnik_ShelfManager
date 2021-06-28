@@ -1,6 +1,8 @@
 package ShelfManager.gui.LageruebersichtView;
 
+import ShelfManager.Lager.Lager;
 import ShelfManager.Lager.Paket;
+import ShelfManager.gui.PaketListComponent.PaketListComponentController;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
@@ -14,10 +16,13 @@ public class LageruebersichtView extends BorderPane {
     private ComboBox filterBox;
     private Button backToLagerView;
     private ListView<Paket> paketlistView;
+    private PaketListComponentController paketListComponentController;
 
-    public LageruebersichtView() {
+
+    public LageruebersichtView(Lager hauptLager) {
 
         Label viewName = new Label("LageruebersichtView");
+        paketListComponentController = new PaketListComponentController(hauptLager);
         this.setTop(viewName);
 
         VBox centerBox = new VBox();
@@ -33,7 +38,9 @@ public class LageruebersichtView extends BorderPane {
 
         paketlistView = new ListView<>();
 
-        centerBox.getChildren().addAll(filterBox, paketlistView);
+
+
+        centerBox.getChildren().addAll(filterBox, paketListComponentController.getRootView());
 
         this.setCenter(centerBox);
 

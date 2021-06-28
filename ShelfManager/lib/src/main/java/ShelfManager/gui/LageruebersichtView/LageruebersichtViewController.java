@@ -30,7 +30,7 @@ public class LageruebersichtViewController extends ViewController {
     public LageruebersichtViewController(Lager hauptLager, ShelfManagerApplication main) {
         this.hauptLager = hauptLager;
         this.main = main;
-        this.lageruebersichtView = new LageruebersichtView();
+        this.lageruebersichtView = new LageruebersichtView(hauptLager);
 
         this.filterBox = lageruebersichtView.getFilterBox();
         this.backToLagerView = lageruebersichtView.getBackToLagerView();
