@@ -1,6 +1,8 @@
 package ShelfManager.gui.LagerView;
 
+import ShelfManager.Lager.Lager;
 import ShelfManager.Lager.Paket;
+import ShelfManager.gui.PaketListComponent.PaketListComponentController;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -15,10 +17,12 @@ public class LagerView extends BorderPane {
     private Button lageruebersichtButton;
     private ListView<Paket> createdPaketsListView;
     private Pane centerPane;
+    private PaketListComponentController paketListComponentController;
 
-    public LagerView() {
+    public LagerView(Lager hauptLager) {
 
         Label viewName = new Label("LagerView");
+        paketListComponentController = new PaketListComponentController(hauptLager);
         this.setTop(viewName);
 
         this.centerPane = new Pane();
@@ -26,7 +30,8 @@ public class LagerView extends BorderPane {
         this.setCenter(centerPane);
 
         createdPaketsListView = new ListView<>();
-        this.setRight(createdPaketsListView);
+
+        this.setRight(paketListComponentController.getRootView());
 
         HBox box = new HBox();
 

@@ -46,7 +46,7 @@ public class LageruebersichtViewController extends ViewController {
             main.switchScene(Scenes.LAGER_VIEW);
         });
 
-        paketlistView.setCellFactory(new Callback<ListView<Paket>, ListCell<Paket>>() {
+        /*paketlistView.setCellFactory(new Callback<ListView<Paket>, ListCell<Paket>>() {
             @Override
             public ListCell<Paket> call(ListView<Paket> param) {
                 return new PaketCell();
@@ -62,7 +62,7 @@ public class LageruebersichtViewController extends ViewController {
             uiModel.clear();
             uiModel.addAll(pakete);
             paketlistView.refresh();
-        });
+        });*/
 
 
     }

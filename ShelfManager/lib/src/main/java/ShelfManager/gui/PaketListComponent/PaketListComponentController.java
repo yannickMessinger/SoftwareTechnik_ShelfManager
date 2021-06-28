@@ -2,7 +2,6 @@ package ShelfManager.gui.PaketListComponent;
 
 import ShelfManager.Lager.Lager;
 import ShelfManager.Lager.Paket;
-import ShelfManager.gui.LagerView.PaketCell;
 import ShelfManager.gui.ViewController;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;

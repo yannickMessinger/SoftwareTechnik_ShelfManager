@@ -33,7 +33,7 @@ public class LagerViewController extends ViewController {
     public LagerViewController(Lager hauptLager, ShelfManagerApplication main) {
         this.main = main;
         this.hauptLager = hauptLager;
-        this.lagerView = new LagerView();
+        this.lagerView = new LagerView(hauptLager);
         this.createShelfButton = lagerView.getCreateShelfButton();
         this.createPacketbutton = lagerView.getCreatePacketButton();
         this.lageruebersichtButton = lagerView.getLageruebersichtButton();
@@ -57,7 +57,9 @@ public class LagerViewController extends ViewController {
             main.switchScene(Scenes.LAGERUEBERISCHT_VIEW);
         });
 
-        createdPaketsListView.setCellFactory(new Callback<ListView<Paket>, ListCell<Paket>>() {
+    }
+
+        /*createdPaketsListView.setCellFactory(new Callback<ListView<Paket>, ListCell<Paket>>() {
             @Override
             public ListCell<Paket> call(ListView<Paket> param) {
                 return new PaketCell();
@@ -89,7 +91,7 @@ public class LagerViewController extends ViewController {
                 }
             }
         });
-    }
+    }*/
 
     public Pane getRootView() {
         return rootView;
