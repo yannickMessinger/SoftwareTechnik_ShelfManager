@@ -58,12 +58,12 @@ public class PaketConfigViewController extends ViewController {
             int tragKraft = Integer.parseInt(tragKraftField.getText());
             //Paketfarbe hinzufuegen
             //Unvertraeglichkeiten hinzufuegen
-            Paket paketToAdd = new Paket();
-            paketToAdd.setName(paketName);
-            paketToAdd.setHoehe(hoehePaket);
-            paketToAdd.setBreite(breitePaket);
-            paketToAdd.setGewicht(gewichtPaket);
-            paketToAdd.setTragkraft(tragKraft);
+            Paket paketToAdd = new Paket(paketName, hoehePaket, breitePaket,gewichtPaket, tragKraft);
+//            paketToAdd.setName(paketName);
+//            paketToAdd.setHoehe(hoehePaket);
+//            paketToAdd.setBreite(breitePaket);
+//            paketToAdd.setGewicht(gewichtPaket);
+//            paketToAdd.setTragkraft(tragKraft);
 
             hauptLager.addPaketToList(paketToAdd);
             hauptLager.addPaketToAllPakets(paketToAdd);

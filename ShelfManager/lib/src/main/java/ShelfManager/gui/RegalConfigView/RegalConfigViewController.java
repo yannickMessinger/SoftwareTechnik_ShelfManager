@@ -2,8 +2,9 @@ package ShelfManager.gui.RegalConfigView;
 
 import ShelfManager.Lager.Lager;
 import ShelfManager.Lager.Regal;
-import ShelfManager.Lager.Stuetze;
 import ShelfManager.ShelfManagerApplication;
+import ShelfManager.gui.RegalConfigView.EinlegebodenList.EinlegebodenListView;
+import ShelfManager.gui.RegalConfigView.EinlegebodenList.EinlegebodenListViewController;
 import ShelfManager.gui.RegalComponent.RegalComponent;
 import ShelfManager.gui.RegalComponent.RegalComponentController;
 import ShelfManager.gui.Scenes;
@@ -13,7 +14,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Line;
 
 public class RegalConfigViewController extends ViewController {
 
@@ -82,7 +82,16 @@ public class RegalConfigViewController extends ViewController {
         RegalComponentController regalComponentController = new RegalComponentController(regal);
         RegalComponent regalComponent = (RegalComponent) regalComponentController.getRootView();
 
+        EinlegebodenListViewController einlegebodenListViewController = new EinlegebodenListViewController(regal);
+        EinlegebodenListView einlegebodenListView = (EinlegebodenListView) einlegebodenListViewController.getRootView();
+
+//        VBox testBox = new VBox();
+//        testBox.setStyle("-fx-background-color: rgba( 255, 255, 0,1)");
+//        testBox.getChildren().add(new Button("Holla"));
+
         regalConfigView.setCenter(regalComponent);
+        regalConfigView.setRight(einlegebodenListView);
+
 
 
         // erstmal nur ausprobiert

@@ -21,7 +21,6 @@ public class Main {
         boolean validCommand = false;
         Lager lager = null;
 
-
         while (true) {
             System.out.println("Was möchten Sie tun?");
             try {

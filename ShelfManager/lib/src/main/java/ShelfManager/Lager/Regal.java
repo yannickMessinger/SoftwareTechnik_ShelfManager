@@ -21,7 +21,6 @@ public class Regal extends Gegenstand{
      */
     public Regal() {
         this.regalfaecher = new ArrayList<>();
-        this.einlegeboeden = FXCollections.observableArrayList();
         this.stuetzen = addSupport();
         this.hoehe = this.stuetzen[0].getHoehe();
         this.breite = this.erfasseBreite();
@@ -32,6 +31,7 @@ public class Regal extends Gegenstand{
 
     public Regal(int hoehe, int breite) {
         this.regalfaecher = new ArrayList<>();
+        this.einlegeboeden = FXCollections.observableArrayList();
         this.hoehe = hoehe;
         this.breite = breite;
         this.tragkraft = 0;

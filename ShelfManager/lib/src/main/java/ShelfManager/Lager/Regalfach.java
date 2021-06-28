@@ -49,7 +49,7 @@ public class Regalfach extends Gegenstand {
 
     public void setBoden(Regal regal) {
         System.out.println("Einlegeboden:");
-        this.boden = new Einlegeboden(regal);
+        //this.boden = new Einlegeboden(regal);
     }
 
     public void setPakete(ArrayList<Paket> pakete) {

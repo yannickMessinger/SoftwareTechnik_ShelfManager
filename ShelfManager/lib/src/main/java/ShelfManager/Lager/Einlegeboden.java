@@ -18,11 +18,13 @@ public class Einlegeboden extends Gegenstand {
     public BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
 
-    public Einlegeboden(Regal regal) {
+    public Einlegeboden(Regal regal, int hoehe, int tragkraft) {
         this.regal = regal;
-        this.hoehe = this.erfasseHoehe();
+        setHoehe(hoehe);
+        setTragkraft(tragkraft);
+        //this.hoehe = this.erfasseHoehe();
         this.breite = regal.getBreite();
-        this.tragkraft = setTragkraft();
+        //this.tragkraft = setTragkraft();
         this.xPos = 0;
         this.yPos = 0;
 
@@ -61,22 +63,7 @@ public class Einlegeboden extends Gegenstand {
         this.breite = breite;
     }
 
-    /**
-     * Gibt die Tragekraft des Einlegebodens an.
-     * @return
-     */
-    public int setTragkraft() {
-
-        try {
-            System.out.println("Tragkraft des Bodens eingeben: ");
-            tragkraft = Integer.parseInt(reader.readLine());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return tragkraft;
-
-    }
+    public void setTragkraft(int tragkraft) {this.tragkraft = tragkraft;}
 
     public void setxPos(int xPos) {
         this.xPos = xPos;

@@ -23,13 +23,14 @@ public class Paket extends Gegenstand{
     /**
      * Konstruktor - Paket
      */
-    public Paket() {
+    public Paket(String paketName, int hoehePaket, int breitePaket, int gewichtPaket, int tragKraft) {
         setName(paketName);
-        //this.hoehe = this.erfasseHoehe();
-        //this.breite = this.erfasseBreite();
-        setGewicht(gewicht);
+        setHoehe(hoehePaket);
+        setBreite(breitePaket);
+        setGewicht(gewichtPaket);
+        //Farbe noch anpassen!!!
         this.farbe = new Color(255,255,255);
-        setTragkraft(tragkraft);
+        setTragkraft(tragKraft);
         this.xPos = 0;
         this.yPos = 0;
         this.unvertraeglichkeiten = new ArrayList<>();
