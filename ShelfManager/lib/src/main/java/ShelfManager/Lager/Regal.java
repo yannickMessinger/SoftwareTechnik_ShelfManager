@@ -1,9 +1,13 @@
 package ShelfManager.Lager;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.util.ArrayList;
 
 public class Regal extends Gegenstand{
     private ArrayList<Regalfach> regalfaecher;
+    private ObservableList<Einlegeboden> einlegeboeden;
     private Stuetze[] stuetzen;
     private int hoehe;
     private int breite;
@@ -17,6 +21,7 @@ public class Regal extends Gegenstand{
      */
     public Regal() {
         this.regalfaecher = new ArrayList<>();
+        this.einlegeboeden = FXCollections.observableArrayList();
         this.stuetzen = addSupport();
         this.hoehe = this.stuetzen[0].getHoehe();
         this.breite = this.erfasseBreite();
@@ -78,6 +83,10 @@ public class Regal extends Gegenstand{
     //-----GETTER----------------------------
     public ArrayList<Regalfach> getRegalfaecher() {
         return regalfaecher;
+    }
+
+    public ObservableList<Einlegeboden> getEinlegeboeden() {
+        return einlegeboeden;
     }
 
     public Stuetze[] getStuetzen() {

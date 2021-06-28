@@ -12,7 +12,8 @@ import java.util.List;
 public class Lager extends Gegenstand {
     private int hoehe;
     private int breite;
-    private ArrayList<Regal> regale;
+    //private ArrayList<Regal> regale;
+    private ObservableList<Regal> observableRegalList;
     //private ArrayList<Paket> paketListe;
     private ObservableList<Paket> observablePaketList;
     private ObservableList<Paket> allPakets;
@@ -24,7 +25,9 @@ public class Lager extends Gegenstand {
         //auskommentiert für Testzwecke wegen Threadproblematik
         //this.hoehe = erfasseHoehe();
         //this.breite = erfasseBreite();
-        this.regale = new ArrayList<Regal>();
+        //this.regale = new ArrayList<Regal>();
+        this.observableRegalList = FXCollections.observableArrayList();
+
         //this.paketListe = new ArrayList<Paket>();
         this.observablePaketList = FXCollections.observableArrayList();
         this.allPakets = FXCollections.observableArrayList();
@@ -42,12 +45,12 @@ public class Lager extends Gegenstand {
      */
     public void addRegal(Regal regalToAdd) {
         int verfuegbarerPlatz = breite;
-        for (Regal r: regale) {
+        for (Regal r: observableRegalList) {
             verfuegbarerPlatz = verfuegbarerPlatz - r.getBreite();
         }
 
         if (regalToAdd.getHoehe() <= hoehe && regalToAdd.getBreite() <= verfuegbarerPlatz){
-            regale.add(regalToAdd);
+            observableRegalList.add(regalToAdd);
         } else {
             if (regalToAdd.getHoehe() > hoehe) {
                 System.out.println("Das Regal ist zu hoch.");
@@ -85,13 +88,18 @@ public class Lager extends Gegenstand {
         return breite;
     }
 
-    public ArrayList<Regal> getRegale() {
-        return regale;
-    }
+//    public ArrayList<Regal> getRegale() {
+//        return regale;
+//    }
 
 //    public ArrayList<Paket> getPaketListe() {
 //        return paketListe;
 //    }
+
+
+    public ObservableList<Regal> getObservableRegalList() {
+        return observableRegalList;
+    }
 
     public ObservableList<Paket> getObservablePaketList() {
         return observablePaketList;
@@ -110,9 +118,9 @@ public class Lager extends Gegenstand {
         this.breite = breite;
     }
 
-    public void setRegale(ArrayList<Regal> regale) {
-        this.regale = regale;
-    }
+//    public void setRegale(ArrayList<Regal> regale) {
+//        this.regale = regale;
+//    }
 
 
 

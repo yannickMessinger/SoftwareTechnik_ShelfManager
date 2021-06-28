@@ -4,6 +4,8 @@ import ShelfManager.Lager.Lager;
 import ShelfManager.Lager.Regal;
 import ShelfManager.Lager.Stuetze;
 import ShelfManager.ShelfManagerApplication;
+import ShelfManager.gui.RegalComponent.RegalComponent;
+import ShelfManager.gui.RegalComponent.RegalComponentController;
 import ShelfManager.gui.Scenes;
 import ShelfManager.gui.ViewController;
 import javafx.event.ActionEvent;
@@ -61,6 +63,7 @@ public class RegalConfigViewController extends ViewController {
                 int stuetzenbreite = Integer.parseInt(stuetzenbreiteTextField.getText());
                 Regal regal = new Regal(hoehe, breite);
                 regal.addStuetzenByInput(stuetzenhoehe, stuetzenbreite);
+                hauptLager.addRegal(regal);
                 hoeheTextField.setText("");
                 breiteTextField.setText("");
                 stuetzenhoeheTextField.setText("");
@@ -75,20 +78,27 @@ public class RegalConfigViewController extends ViewController {
     }
 
     public void showRegal(Regal regal) {
+
+        RegalComponentController regalComponentController = new RegalComponentController(regal);
+        RegalComponent regalComponent = (RegalComponent) regalComponentController.getRootView();
+
+        regalConfigView.setCenter(regalComponent);
+
+
         // erstmal nur ausprobiert
         // sicherlich sollten wir die Repräsentation eines Regals auslagern
-        Pane regalPane = new Pane();
-        Stuetze[] stuetzen = regal.getStuetzen();
-
-        Line stuetze1 = new Line(50, 50, 50, 50 + stuetzen[0].getHoehe());
-        stuetze1.setStrokeWidth(stuetzen[0].getBreite());
-
-        Line stuetze2 = new Line(50 + regal.getBreite(), 50, 50 + regal.getBreite(), 50 + stuetzen[1].getHoehe());
-        stuetze2.setStrokeWidth(stuetzen[1].getBreite());
-
-        regalPane.getChildren().addAll(stuetze1, stuetze2);
-
-        regalConfigView.setCenter(regalPane);
+//        Pane regalPane = new Pane();
+//        Stuetze[] stuetzen = regal.getStuetzen();
+//
+//        Line stuetze1 = new Line(50, 50, 50, 50 + stuetzen[0].getHoehe());
+//        stuetze1.setStrokeWidth(stuetzen[0].getBreite());
+//
+//        Line stuetze2 = new Line(50 + regal.getBreite(), 50, 50 + regal.getBreite(), 50 + stuetzen[1].getHoehe());
+//        stuetze2.setStrokeWidth(stuetzen[1].getBreite());
+//
+//        regalPane.getChildren().addAll(stuetze1, stuetze2);
+//
+//        regalConfigView.setCenter(regalPane);
     }
 
     public Pane getRootView() {

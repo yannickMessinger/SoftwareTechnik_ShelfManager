@@ -2,12 +2,16 @@ package ShelfManager.gui.LagerView;
 
 import ShelfManager.Lager.Lager;
 import ShelfManager.Lager.Paket;
+import ShelfManager.Lager.Regal;
 import ShelfManager.ShelfManagerApplication;
+import ShelfManager.gui.RegalComponent.RegalComponent;
+import ShelfManager.gui.RegalComponent.RegalComponentController;
 import ShelfManager.gui.Scenes;
 import ShelfManager.gui.ViewController;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -71,6 +75,20 @@ public class LagerViewController extends ViewController {
             createdPaketsListView.refresh();
         });
 
+        ObservableList<Regal> regale = hauptLager.getObservableRegalList();
+
+        ObservableList<Node> regaleInLager = lagerView.getCenterPane().getChildren();
+        regale.addListener(new ListChangeListener<Regal>() {
+            @Override
+            public void onChanged(Change<? extends Regal> c) {
+                for (Regal r : regale) {
+                    System.out.println("Changed");
+                    RegalComponentController regalComponentController = new RegalComponentController(r);
+                    RegalComponent regalComponent = (RegalComponent) regalComponentController.getRootView();
+                    regaleInLager.add(regalComponent);
+                }
+            }
+        });
     }
 
     public Pane getRootView() {
