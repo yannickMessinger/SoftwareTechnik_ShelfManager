@@ -79,7 +79,6 @@ public class PaketConfigViewController extends ViewController {
             breiteField.setText("");
             gewichtField.setText("");
             tragKraftField.setText("");
-
             main.switchScene(Scenes.LAGER_VIEW);
 
         });

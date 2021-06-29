@@ -16,7 +16,6 @@ public class Main {
     public static void main(String[] args) {
         ShelfManagerApplication.main(args);
 
-
         Command command = null;
         boolean validCommand = false;
         Lager lager = null;
