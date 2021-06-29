@@ -36,10 +36,32 @@ public class Paket extends Gegenstand{
         this.unvertraeglichkeiten = new ArrayList<>();
     }
 
+    /**
+     * Konstruktor fuer JSONHandler Parsing-Methods
+     * @param paketName
+     * @param hoehe
+     * @param breite
+     * @param gewicht
+     * @param farbe
+     * @param tragkraft
+     * @param xPos
+     * @param yPos
+     * @param unvertraeglichkeiten
+     */
+    public Paket(String paketName, int hoehe, int breite, int gewicht, Color farbe, int tragkraft, int xPos, int yPos, ArrayList<Color> unvertraeglichkeiten) {
+        this.paketName = paketName;
+        this.hoehe = hoehe;
+        this.breite = breite;
+        this.gewicht = gewicht;
+        this.farbe = farbe;
+        this.tragkraft = tragkraft;
+        this.xPos = xPos;
+        this.yPos = yPos;
+        this.unvertraeglichkeiten = unvertraeglichkeiten;
+    }
 
 
-
-    //-----GETTER----------------------------
+//-----GETTER----------------------------
 
 
     public String getPaketName() {

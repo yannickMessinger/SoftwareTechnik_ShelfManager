@@ -16,9 +16,21 @@ public class Stuetze extends Gegenstand {
         this.breite = breite;
     }
 
+    /**
+     * Konstruktor fuer JSONHandler Parsing-Methods
+     * @param hoehe
+     * @param breite
+     * @param xPos
+     * @param yPos
+     */
+    public Stuetze(int hoehe, int breite, int xPos, int yPos) {
+        this.hoehe = hoehe;
+        this.breite = breite;
+        this.xPos = xPos;
+        this.yPos = yPos;
+    }
 
-
-    //-----GETTER----------------------------
+//-----GETTER----------------------------
 
     public int getHoehe() {
         return hoehe;

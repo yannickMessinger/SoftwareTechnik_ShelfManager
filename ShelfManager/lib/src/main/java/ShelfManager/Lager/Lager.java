@@ -33,7 +33,21 @@ public class Lager extends Gegenstand {
         this.allPakets = FXCollections.observableArrayList();
     }
 
-
+    /**
+     * Konstruktor fuer JSONHandler Parsing-Methods
+     * @param hoehe
+     * @param breite
+     * @param observableRegalList
+     * @param observablePaketList
+     * @param allPakets
+     */
+    public Lager(int hoehe, int breite, ObservableList<Regal> observableRegalList, ObservableList<Paket> observablePaketList, ObservableList<Paket> allPakets) {
+        this.hoehe = hoehe;
+        this.breite = breite;
+        this.observableRegalList = observableRegalList;
+        this.observablePaketList = observablePaketList;
+        this.allPakets = allPakets;
+    }
 
     //-----METHODEN--------------------------
 

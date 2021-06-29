@@ -40,6 +40,28 @@ public class Regal extends Gegenstand{
     }
 
     /**
+     * Konstruktor fuer JSONHandler Parsing-Methods
+     * @param regalfaecher
+     * @param einlegeboeden
+     * @param stuetzen
+     * @param hoehe
+     * @param breite
+     * @param tragkraft
+     * @param xPos
+     * @param yPos
+     */
+    public Regal(ArrayList<Regalfach> regalfaecher, ObservableList<Einlegeboden> einlegeboeden, Stuetze[] stuetzen, int hoehe, int breite, int tragkraft, int xPos, int yPos) {
+        this.regalfaecher = regalfaecher;
+        this.einlegeboeden = einlegeboeden;
+        this.stuetzen = stuetzen;
+        this.hoehe = hoehe;
+        this.breite = breite;
+        this.tragkraft = tragkraft;
+        this.xPos = xPos;
+        this.yPos = yPos;
+    }
+
+    /**
      * Berechnet aus der Liste aller Regalfaecher im Regal
      * die Gesamttragkraft des ganzen Regals
      * @return capacity

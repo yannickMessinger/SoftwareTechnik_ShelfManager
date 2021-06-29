@@ -22,6 +22,22 @@ public class Regalfach extends Gegenstand {
         this.yPos = 0;
     }
 
+    /**
+     * Konstruktor fuer JSONHandler Parsing-Methods
+     * @param boden
+     * @param pakete
+     * @param hoehe
+     * @param xPos
+     * @param yPos
+     */
+    public Regalfach(Einlegeboden boden, ArrayList<Paket> pakete, int hoehe, int xPos, int yPos) {
+        this.boden = boden;
+        this.pakete = pakete;
+        this.hoehe = hoehe;
+        this.xPos = xPos;
+        this.yPos = yPos;
+    }
+
     //-----GETTER----------------------------
 
     public Einlegeboden getBoden() {

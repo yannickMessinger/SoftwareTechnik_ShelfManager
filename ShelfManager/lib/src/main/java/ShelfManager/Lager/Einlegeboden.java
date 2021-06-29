@@ -30,8 +30,25 @@ public class Einlegeboden extends Gegenstand {
 
     }
 
+    /**
+     * Konstruktor fuer JSONHandler Parsing-Methods
+     * @param regal
+     * @param hoehe
+     * @param breite
+     * @param tragkraft
+     * @param xPos
+     * @param yPos
+     */
+    public Einlegeboden(Regal regal, int hoehe, int breite, int tragkraft, int xPos, int yPos) {
+        this.regal = regal;
+        this.hoehe = hoehe;
+        this.breite = breite;
+        this.tragkraft = tragkraft;
+        this.xPos = xPos;
+        this.yPos = yPos;
+    }
 
-    //-----GETTER----------------------------
+//-----GETTER----------------------------
 
     public int getHoehe() {
         return hoehe;

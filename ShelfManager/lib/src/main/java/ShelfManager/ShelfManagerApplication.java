@@ -9,11 +9,15 @@ import ShelfManager.gui.PaketConfigView.PaketConfigViewController;
 import ShelfManager.gui.RegalConfigView.RegalConfigViewController;
 import ShelfManager.gui.Scenes;
 import ShelfManager.gui.ViewController;
+import ShelfManager.persistenz.JSONHandler;
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -33,6 +37,7 @@ public class ShelfManagerApplication extends Application {
     @Override
     public void init() {
         hauptLager = new Lager();
+        //hauptLager = JSONHandler.loadLager();
         scenes = new HashMap<>();
         ViewController controller;
 
@@ -66,6 +71,15 @@ public class ShelfManagerApplication extends Application {
             switchScene(Scenes.LAGER_CONFIG_VIEW);
 
             primaryStage.show();
+
+            primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                @Override
+                public void handle(WindowEvent event) {
+                    //JSONHandler.safeLager(hauptLager);
+                    Platform.exit();
+                    System.exit(0);
+                }
+            });
 
     }
 
