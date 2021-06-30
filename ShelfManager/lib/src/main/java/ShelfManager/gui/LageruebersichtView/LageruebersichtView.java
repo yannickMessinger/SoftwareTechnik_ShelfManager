@@ -10,6 +10,8 @@ import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.util.Callback;
 
 import java.util.ArrayList;
@@ -42,10 +44,10 @@ public class LageruebersichtView extends BorderPane {
         // TODO: Farben aus Logik verwenden
         this.filterBox.getItems().addAll(
             "Alle",
-                "Farbe 1",
-                "Farbe 2",
-                "Farbe 3"
-        );
+                new Rectangle(10, 10, Color.RED),
+                new Rectangle(10, 10, Color.GREEN),
+                new Rectangle(10, 10, Color.BLUE));
+
 
         filter.getChildren().addAll(filterName,filterBox);
         filter.setSpacing(10);

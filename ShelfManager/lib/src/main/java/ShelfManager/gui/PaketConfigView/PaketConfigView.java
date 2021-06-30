@@ -6,6 +6,8 @@ import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 public class PaketConfigView extends BorderPane {
 
@@ -15,6 +17,7 @@ public class PaketConfigView extends BorderPane {
     private TextField gewichtField;
     private TextField tragKraftField;
     private ColorPicker paketColor;
+    private ComboBox<Color> color ;
     private Button addNewPaket;
     private Button getBackToLagerView;
 
@@ -44,6 +47,13 @@ public class PaketConfigView extends BorderPane {
         //Color picker
         Label paketFarbe = new Label("Paketfarbe");
         paketColor = new ColorPicker();
+        color=new ComboBox<>();
+        ComboBox<Rectangle> color = new ComboBox<Rectangle>();
+        color.getItems().addAll(
+                new Rectangle(10, 10, Color.RED),
+                new Rectangle(10, 10, Color.GREEN),
+                new Rectangle(10, 10, Color.BLUE));
+
 
         Label existPaket = new Label("Unvertr. mit:");
 
@@ -52,7 +62,7 @@ public class PaketConfigView extends BorderPane {
         addNewPaket = new Button("Paket hinzufuegen");
         getBackToLagerView = new Button("zurueck");
 
-        inputBox.getChildren().addAll(viewName,name, nameField,hoehe, hoeheField, breite,breiteField,gewicht, gewichtField,paketFarbe,paketColor, tragKraft, tragKraftField, addNewPaket, getBackToLagerView);
+        inputBox.getChildren().addAll(viewName,name, nameField,hoehe, hoeheField, breite,breiteField,gewicht, gewichtField,paketFarbe,color, tragKraft, tragKraftField, addNewPaket, getBackToLagerView);
 
         this.setTop(inputBox);
 
@@ -89,7 +99,9 @@ public class PaketConfigView extends BorderPane {
         return addNewPaket;
     }
 
-
+    public ComboBox<Color> getColor() {
+        return color;
+    }
 
     public Button getBackToLagerView() {
         return getBackToLagerView;

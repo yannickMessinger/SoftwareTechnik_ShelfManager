@@ -6,12 +6,17 @@ import ShelfManager.ShelfManagerApplication;
 import ShelfManager.gui.Scenes;
 import ShelfManager.gui.ViewController;
 import javafx.event.ActionEvent;
+import javafx.scene.control.*;
+
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Button;
-import javafx.scene.control.ColorPicker;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.util.Callback;
+
+import java.awt.*;
 
 public class PaketConfigViewController extends ViewController {
 
@@ -26,6 +31,7 @@ public class PaketConfigViewController extends ViewController {
     private ColorPicker paketColor;
     private Button addNewPaket;
     private Button backToLagerView;
+    private ComboBox<Color> color;
     private ListView<Paket> existingPakets;
 
     public PaketConfigViewController(Lager hauptLager, ShelfManagerApplication main) {
@@ -39,7 +45,7 @@ public class PaketConfigViewController extends ViewController {
         this.gewichtField = paketConfigView.getGewichtField();
         this.tragKraftField = paketConfigView.getTragKraftField();
         this.paketColor = paketConfigView.getPaketColor();
-
+        this.color=paketConfigView.getColor();
         this.addNewPaket = paketConfigView.getAddNewPaket();
         this.backToLagerView = paketConfigView.getBackToLagerView();
 
@@ -60,6 +66,7 @@ public class PaketConfigViewController extends ViewController {
             int breitePaket = Integer.parseInt(breiteField.getText());
             int gewichtPaket = Integer.parseInt(gewichtField.getText());
             int tragKraft = Integer.parseInt(tragKraftField.getText());
+            Color color =paketConfigView.getColor().getValue();
             //Paketfarbe hinzufuegen
             //Unvertraeglichkeiten hinzufuegen
             Paket paketToAdd = new Paket(paketName, hoehePaket, breitePaket,gewichtPaket, tragKraft);
@@ -86,6 +93,7 @@ public class PaketConfigViewController extends ViewController {
         backToLagerView.addEventHandler(ActionEvent.ACTION, event -> {
             main.switchScene(Scenes.LAGER_VIEW);
         });
+
 
     }
 
