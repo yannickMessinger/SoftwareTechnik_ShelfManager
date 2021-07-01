@@ -127,8 +127,9 @@ public class RegalConfigViewController extends ViewController {
                     int yPos = (int) event.getY();
                     Einlegeboden addedEinlegeboden = regal.addEinlegeboden(hoehe, tragkraft, yPos);
                     System.out.println(regal.getInstalledEinlegeboeden().size());
-                    regalComponentController.addEinlegeboden(addedEinlegeboden);
+                    regalComponentController.addEinlegeboden(regal.getInstalledEinlegeboeden(), addedEinlegeboden);
                     success = true;
+
                 }
                 /* let the source know whether the string was successfully
                  * transferred and used */

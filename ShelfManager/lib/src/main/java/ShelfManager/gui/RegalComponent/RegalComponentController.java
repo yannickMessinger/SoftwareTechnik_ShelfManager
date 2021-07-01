@@ -5,6 +5,9 @@ import ShelfManager.Lager.Regal;
 import ShelfManager.Lager.Stuetze;
 import ShelfManager.gui.ViewController;
 import javafx.collections.ObservableList;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
 import javafx.scene.shape.Line;
 
 public class RegalComponentController extends ViewController {
@@ -53,7 +56,7 @@ public class RegalComponentController extends ViewController {
 
     }
 
-    public void addEinlegeboden(Einlegeboden einlegeboden) {
+    public void addEinlegeboden(ObservableList<Einlegeboden> installedEinlegeboeden, Einlegeboden einlegeboden) {
         Line bodenline = new Line();
         bodenline.setStartX(0);
         bodenline.setStartY(einlegeboden.getyPos());
@@ -62,6 +65,23 @@ public class RegalComponentController extends ViewController {
         bodenline.setStrokeWidth(einlegeboden.getHoehe());
 
         regalComponent.getChildren().add(bodenline);
+
+        bodenline.setOnDragDetected(event -> {
+            installedEinlegeboeden.remove(einlegeboden);
+            Dragboard db = bodenline.startDragAndDrop(TransferMode.MOVE);
+            ClipboardContent cc = new ClipboardContent();
+            cc.putString("|" + einlegeboden.getHoehe() + "|" + einlegeboden.getTragkraft());
+            db.setContent(cc);
+            regalComponent.getChildren().remove(bodenline);
+        });
+
+        bodenline.setOnDragOver(event -> {
+            Dragboard db = event.getDragboard();
+            if (db.hasString()) {
+                event.acceptTransferModes(TransferMode.MOVE);
+            }
+        });
+
     }
 
 
