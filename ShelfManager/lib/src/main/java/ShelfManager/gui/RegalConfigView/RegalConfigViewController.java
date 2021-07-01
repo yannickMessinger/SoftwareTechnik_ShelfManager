@@ -1,5 +1,6 @@
 package ShelfManager.gui.RegalConfigView;
 
+import ShelfManager.Lager.Einlegeboden;
 import ShelfManager.Lager.Lager;
 import ShelfManager.Lager.Regal;
 import ShelfManager.ShelfManagerApplication;
@@ -123,8 +124,10 @@ public class RegalConfigViewController extends ViewController {
                     System.out.println("DROPPED on target: " + db.getString());
                     int hoehe = Integer.parseInt(db.getString().split("\\|")[1]);
                     int tragkraft = Integer.parseInt(db.getString().split("\\|")[2]);
-                    regal.addEinlegeboden(hoehe, tragkraft);
+                    int yPos = (int) event.getY();
+                    Einlegeboden addedEinlegeboden = regal.addEinlegeboden(hoehe, tragkraft, yPos);
                     System.out.println(regal.getInstalledEinlegeboeden().size());
+                    regalComponentController.addEinlegeboden(addedEinlegeboden);
                     success = true;
                 }
                 /* let the source know whether the string was successfully

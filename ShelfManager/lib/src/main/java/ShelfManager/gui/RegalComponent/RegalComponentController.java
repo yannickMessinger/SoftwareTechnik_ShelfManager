@@ -1,5 +1,6 @@
 package ShelfManager.gui.RegalComponent;
 
+import ShelfManager.Lager.Einlegeboden;
 import ShelfManager.Lager.Regal;
 import ShelfManager.Lager.Stuetze;
 import ShelfManager.gui.ViewController;
@@ -50,6 +51,17 @@ public class RegalComponentController extends ViewController {
         stuetzeRight.setStrokeWidth(regalStuetzeRight.getBreite());
 
 
+    }
+
+    public void addEinlegeboden(Einlegeboden einlegeboden) {
+        Line bodenline = new Line();
+        bodenline.setStartX(0);
+        bodenline.setStartY(einlegeboden.getyPos());
+        bodenline.setEndX(regal.getBreite());
+        bodenline.setEndY(einlegeboden.getyPos());
+        bodenline.setStrokeWidth(einlegeboden.getHoehe());
+
+        regalComponent.getChildren().add(bodenline);
     }
 
 
