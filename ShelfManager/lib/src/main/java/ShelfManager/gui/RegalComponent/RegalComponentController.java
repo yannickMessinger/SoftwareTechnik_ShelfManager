@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Line;
 
 public class RegalComponentController extends ViewController {
@@ -64,22 +65,20 @@ public class RegalComponentController extends ViewController {
         bodenline.setEndY(einlegeboden.getyPos());
         bodenline.setStrokeWidth(einlegeboden.getHoehe());
 
+
         regalComponent.getChildren().add(bodenline);
 
         bodenline.setOnDragDetected(event -> {
-            installedEinlegeboeden.remove(einlegeboden);
+            bodenline.setStyle("-fx-stroke: rgba(0, 0, 0, 0.4);");
             Dragboard db = bodenline.startDragAndDrop(TransferMode.MOVE);
             ClipboardContent cc = new ClipboardContent();
             cc.putString("|" + einlegeboden.getHoehe() + "|" + einlegeboden.getTragkraft());
             db.setContent(cc);
-            regalComponent.getChildren().remove(bodenline);
         });
 
-        bodenline.setOnDragOver(event -> {
-            Dragboard db = event.getDragboard();
-            if (db.hasString()) {
-                event.acceptTransferModes(TransferMode.MOVE);
-            }
+        bodenline.setOnDragDone(event -> {
+            regalComponent.getChildren().remove(bodenline);
+            installedEinlegeboeden.remove(einlegeboden);
         });
 
     }

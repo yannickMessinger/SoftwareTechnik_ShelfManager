@@ -4,6 +4,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
 
@@ -16,6 +17,7 @@ public class RegalConfigView extends BorderPane {
     private TextField stuetzenbreiteTextField;
     private Button submit;
     private Button backToLagerView;
+    private Button saveRegal;
 
     public RegalConfigView() {
 
@@ -39,8 +41,13 @@ public class RegalConfigView extends BorderPane {
                 stuetzenhoeheLabel, stuetzenhoeheTextField, stuetzenbreiteLabel, stuetzenbreiteTextField, submit);
         this.setCenter(inputBox);
 
-        backToLagerView = new Button("zurueck");
-        this.setBottom(backToLagerView);
+        HBox bottombox = new HBox();
+        this.backToLagerView = new Button("zurueck");
+        this.saveRegal = new Button("speichern");
+        bottombox.getChildren().addAll(backToLagerView, saveRegal);
+        this.setBottom(bottombox);
+
+
 
     }
 
@@ -72,4 +79,7 @@ public class RegalConfigView extends BorderPane {
         return backToLagerView;
     }
 
+    public Button getSaveRegal() {
+        return saveRegal;
+    }
 }

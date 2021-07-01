@@ -37,7 +37,7 @@ public class ShelfManagerApplication extends Application {
     @Override
     public void init() {
         hauptLager = new Lager();
-        //hauptLager = JSONHandler.loadLager();
+        hauptLager = JSONHandler.loadLager();
         scenes = new HashMap<>();
         ViewController controller;
 
@@ -75,7 +75,7 @@ public class ShelfManagerApplication extends Application {
             primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                 @Override
                 public void handle(WindowEvent event) {
-                    //JSONHandler.safeLager(hauptLager);
+                    JSONHandler.safeLager(hauptLager);
                     Platform.exit();
                     System.exit(0);
                 }

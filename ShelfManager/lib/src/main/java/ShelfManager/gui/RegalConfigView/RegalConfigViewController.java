@@ -1,8 +1,6 @@
 package ShelfManager.gui.RegalConfigView;
 
-import ShelfManager.Lager.Einlegeboden;
-import ShelfManager.Lager.Lager;
-import ShelfManager.Lager.Regal;
+import ShelfManager.Lager.*;
 import ShelfManager.ShelfManagerApplication;
 import ShelfManager.gui.RegalConfigView.EinlegebodenList.EinlegebodenListView;
 import ShelfManager.gui.RegalConfigView.EinlegebodenList.EinlegebodenListViewController;
@@ -10,6 +8,7 @@ import ShelfManager.gui.RegalComponent.RegalComponent;
 import ShelfManager.gui.RegalComponent.RegalComponentController;
 import ShelfManager.gui.Scenes;
 import ShelfManager.gui.ViewController;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -18,11 +17,16 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Comparator;
+
 public class RegalConfigViewController extends ViewController {
 
     private Lager hauptLager;
     private ShelfManagerApplication main;
     private RegalConfigView regalConfigView;
+    private Regal regal;
 
     private VBox inputBox;
     private TextField hoeheTextField;
@@ -31,6 +35,7 @@ public class RegalConfigViewController extends ViewController {
     private TextField stuetzenbreiteTextField;
     private Button submit;
     private Button backToLagerView;
+    private Button saveRegal;
 
     public RegalConfigViewController(Lager hauptLager, ShelfManagerApplication main) {
         this.hauptLager = hauptLager;
@@ -44,6 +49,7 @@ public class RegalConfigViewController extends ViewController {
         this.stuetzenbreiteTextField = regalConfigView.getStuetzenbreiteTextField();
         this.submit = regalConfigView.getSubmit();
         this.backToLagerView = regalConfigView.getBackToLagerView();
+        this.saveRegal = regalConfigView.getSaveRegal();
 
         rootView = this.regalConfigView;
         initialize();
@@ -64,7 +70,7 @@ public class RegalConfigViewController extends ViewController {
                 int breite = Integer.parseInt(breiteTextField.getText());
                 int stuetzenhoehe = Integer.parseInt(stuetzenhoeheTextField.getText());
                 int stuetzenbreite = Integer.parseInt(stuetzenbreiteTextField.getText());
-                Regal regal = new Regal(hoehe, breite);
+                regal = new Regal(hoehe, breite);
                 regal.addStuetzenByInput(stuetzenhoehe, stuetzenbreite);
                 hauptLager.addRegal(regal);
                 hoeheTextField.setText("");
@@ -77,6 +83,29 @@ public class RegalConfigViewController extends ViewController {
             } catch(NumberFormatException n) {
                 System.out.println("keine Buchstaben erlaubt!");
             }
+        });
+
+        saveRegal.addEventHandler(ActionEvent.ACTION, event -> {
+
+            if (regal != null) {
+                // Regalfächer berechnen
+                System.out.println("regal");
+                regal.getInstalledEinlegeboeden().sort(Comparator.comparing(Einlegeboden::getyPos));
+
+                for (int i = 0; i< regal.getInstalledEinlegeboeden().size(); i++) {
+                    Einlegeboden curEinlegeboden = regal.getInstalledEinlegeboeden().get(i);
+                    ArrayList<Paket> pakete = new ArrayList<Paket>();
+                    if (i==0) {
+                        Regalfach newRegalfach = new Regalfach(curEinlegeboden, pakete, curEinlegeboden.getyPos(), 0, 0);
+                        regal.getRegalfaecher().add(newRegalfach);
+                    } else {
+                        Einlegeboden prevBoden = regal.getInstalledEinlegeboeden().get(i-1);
+                        Regalfach newRegalfach = new Regalfach(curEinlegeboden, pakete, curEinlegeboden.getyPos() - prevBoden.getyPos(), 0, prevBoden.getyPos());
+                        regal.getRegalfaecher().add(newRegalfach);
+                    }
+                }
+            }
+
         });
     }
 
@@ -149,21 +178,6 @@ public class RegalConfigViewController extends ViewController {
         regalConfigView.setRight(einlegebodenListView);
 
 
-
-        // erstmal nur ausprobiert
-        // sicherlich sollten wir die Repräsentation eines Regals auslagern
-//        Pane regalPane = new Pane();
-//        Stuetze[] stuetzen = regal.getStuetzen();
-//
-//        Line stuetze1 = new Line(50, 50, 50, 50 + stuetzen[0].getHoehe());
-//        stuetze1.setStrokeWidth(stuetzen[0].getBreite());
-//
-//        Line stuetze2 = new Line(50 + regal.getBreite(), 50, 50 + regal.getBreite(), 50 + stuetzen[1].getHoehe());
-//        stuetze2.setStrokeWidth(stuetzen[1].getBreite());
-//
-//        regalPane.getChildren().addAll(stuetze1, stuetze2);
-//
-//        regalConfigView.setCenter(regalPane);
     }
 
     public Pane getRootView() {
