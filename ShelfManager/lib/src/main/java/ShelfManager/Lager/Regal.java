@@ -7,7 +7,13 @@ import java.util.ArrayList;
 
 public class Regal extends Gegenstand{
     private ArrayList<Regalfach> regalfaecher;
+
+    //Einlegeboeden for EinlegbodenListView
     private ObservableList<Einlegeboden> einlegeboeden;
+
+    //Einlegeboeden for RegalComponent
+    private ObservableList<Einlegeboden> installedEinlegeboeden;
+
     private Stuetze[] stuetzen;
     private int hoehe;
     private int breite;
@@ -32,6 +38,7 @@ public class Regal extends Gegenstand{
     public Regal(int hoehe, int breite) {
         this.regalfaecher = new ArrayList<>();
         this.einlegeboeden = FXCollections.observableArrayList();
+        this.installedEinlegeboeden = FXCollections.observableArrayList();
         this.hoehe = hoehe;
         this.breite = breite;
         this.tragkraft = 0;
@@ -99,6 +106,10 @@ public class Regal extends Gegenstand{
         this.stuetzen =  new Stuetze[]{stuetze1, stuetze2};
     }
 
+    public void addEinlegeboden(int hoehe, int tragkraft) {
+        installedEinlegeboeden.add(new Einlegeboden(this, hoehe, tragkraft));
+    }
+
 
 
 
@@ -109,6 +120,10 @@ public class Regal extends Gegenstand{
 
     public ObservableList<Einlegeboden> getEinlegeboeden() {
         return einlegeboeden;
+    }
+
+    public ObservableList<Einlegeboden> getInstalledEinlegeboeden() {
+        return installedEinlegeboeden;
     }
 
     public Stuetze[] getStuetzen() {

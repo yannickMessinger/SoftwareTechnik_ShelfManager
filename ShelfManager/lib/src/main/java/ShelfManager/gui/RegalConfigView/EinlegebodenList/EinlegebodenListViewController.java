@@ -4,10 +4,15 @@ import ShelfManager.Lager.Einlegeboden;
 import ShelfManager.Lager.Paket;
 import ShelfManager.Lager.Regal;
 import ShelfManager.gui.ViewController;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
 import javafx.util.Callback;
 
@@ -18,11 +23,15 @@ public class EinlegebodenListViewController extends ViewController {
     private ListView<Einlegeboden> einlegebodenList;
     private EinlegebodenListView einlegebodenListView;
 
+    private final ObjectProperty<ListCell<Einlegeboden>> dragSource;
+
 
     public EinlegebodenListViewController(Regal regal) {
         this.regal = regal;
         this.einlegebodenListView = new EinlegebodenListView(regal);
         this.einlegebodenList = einlegebodenListView.getEinlegebodenList();
+
+        this.dragSource = new SimpleObjectProperty<>();
 
         rootView = einlegebodenListView;
         initialize();
@@ -31,16 +40,52 @@ public class EinlegebodenListViewController extends ViewController {
     @Override
     public void initialize() {
 
-        einlegebodenList.setCellFactory(new Callback<ListView<Einlegeboden>, ListCell<Einlegeboden>>() {
-            @Override
-            public ListCell<Einlegeboden> call(ListView<Einlegeboden> param) {
-                return new EinlegebodenCell();
-            }
-        });
-
         ObservableList<Einlegeboden> uiModel = einlegebodenList.getItems();
         ObservableList<Einlegeboden> einlegeboeden = regal.getEinlegeboeden();
         uiModel.addAll(einlegeboeden);
+
+
+        // DRAG and DROP source-settings
+
+        einlegebodenList.setCellFactory(new Callback<ListView<Einlegeboden>, ListCell<Einlegeboden>>() {
+            @Override
+            public ListCell<Einlegeboden> call(ListView<Einlegeboden> param) {
+                ListCell<Einlegeboden> cell = new EinlegebodenCell();
+
+                cell.setOnDragDetected(event -> {
+                    if (! cell.isEmpty()) {
+                        Dragboard db = cell.startDragAndDrop(TransferMode.MOVE);
+                        ClipboardContent cc = new ClipboardContent();
+                        cc.putString("|" + cell.getItem().getHoehe() + "|" + cell.getItem().getTragkraft());
+                        db.setContent(cc);
+                        dragSource.set(cell);
+                    }
+                });
+
+                cell.setOnDragOver(event -> {
+                    Dragboard db = event.getDragboard();
+                    if (db.hasString()) {
+                        event.acceptTransferModes(TransferMode.MOVE);
+                    }
+                });
+
+                cell.setOnDragDone(event -> {
+                    einlegeboeden.remove(cell.getItem());
+                });
+
+                cell.setOnDragDropped(event -> {
+                    Dragboard db = event.getDragboard();
+                    if (db.hasString()) {
+                        event.setDropCompleted(true);
+                    } else {
+                        event.setDropCompleted(false);
+                    }
+                    event.consume();
+                });
+
+                return cell;
+            }
+        });
 
 
         einlegeboeden.addListener((ListChangeListener<Einlegeboden>) change -> {

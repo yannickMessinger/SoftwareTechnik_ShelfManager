@@ -12,6 +12,8 @@ import ShelfManager.gui.ViewController;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
@@ -81,6 +83,56 @@ public class RegalConfigViewController extends ViewController {
 
         RegalComponentController regalComponentController = new RegalComponentController(regal);
         RegalComponent regalComponent = (RegalComponent) regalComponentController.getRootView();
+
+        // DRAG and DROP target-settings
+
+        regalComponent.setOnDragOver(event -> {
+            if (event.getGestureSource() != regalComponent &&
+                    event.getDragboard().hasString()) {
+                /* allow for both copying and moving, whatever user chooses */
+                event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+            }
+
+            event.consume();
+        });
+
+        regalComponent.setOnDragEntered(event -> {
+                /* the drag-and-drop gesture entered the target */
+                /* show to the user that it is an actual gesture target */
+                if (event.getGestureSource() != regalComponent &&
+                        event.getDragboard().hasString()) {
+                    regalComponent.setStyle("-fx-background-color: rgba(10, 140, 120, 1)");
+                }
+
+                event.consume();
+        });
+
+        regalComponent.setOnDragExited(event -> {
+                /* mouse moved away, remove the graphical cues */
+            regalComponent.setStyle("-fx-background-color: rgba(120, 140, 120, 1)");
+
+                event.consume();
+        });
+
+        regalComponent.setOnDragDropped(event -> {
+                /* data dropped */
+                /* if there is a string data on dragboard, read it and use it */
+                Dragboard db = event.getDragboard();
+                boolean success = false;
+                if (db.hasString()) {
+                    System.out.println("DROPPED on target: " + db.getString());
+                    int hoehe = Integer.parseInt(db.getString().split("\\|")[1]);
+                    int tragkraft = Integer.parseInt(db.getString().split("\\|")[2]);
+                    regal.addEinlegeboden(hoehe, tragkraft);
+                    System.out.println(regal.getInstalledEinlegeboeden().size());
+                    success = true;
+                }
+                /* let the source know whether the string was successfully
+                 * transferred and used */
+                event.setDropCompleted(success);
+
+                event.consume();
+        });
 
         EinlegebodenListViewController einlegebodenListViewController = new EinlegebodenListViewController(regal);
         EinlegebodenListView einlegebodenListView = (EinlegebodenListView) einlegebodenListViewController.getRootView();
