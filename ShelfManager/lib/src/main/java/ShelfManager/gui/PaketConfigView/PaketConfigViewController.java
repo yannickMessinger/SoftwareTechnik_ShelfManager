@@ -17,6 +17,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.util.Callback;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class PaketConfigViewController extends ViewController {
 
@@ -31,8 +32,10 @@ public class PaketConfigViewController extends ViewController {
     private ColorPicker paketColor;
     private Button addNewPaket;
     private Button backToLagerView;
-    private ComboBox<Color> color;
+    private Button addUnvertraeglichkeit;
+    private ColorPicker unvertraeglichkeiten;
     private ListView<Paket> existingPakets;
+    private ArrayList<Color> collectUnvertraeglichkeiten;
 
     public PaketConfigViewController(Lager hauptLager, ShelfManagerApplication main) {
         this.hauptLager = hauptLager;
@@ -45,12 +48,11 @@ public class PaketConfigViewController extends ViewController {
         this.gewichtField = paketConfigView.getGewichtField();
         this.tragKraftField = paketConfigView.getTragKraftField();
         this.paketColor = paketConfigView.getPaketColor();
-        this.color=paketConfigView.getColor();
         this.addNewPaket = paketConfigView.getAddNewPaket();
         this.backToLagerView = paketConfigView.getBackToLagerView();
-
-
-
+        this.addUnvertraeglichkeit = paketConfigView.getAddUnvertraeglichkeit();
+        this.unvertraeglichkeiten = paketConfigView.getUnvertraeglichkeiten();
+        this.collectUnvertraeglichkeiten = new ArrayList<>();
 
         rootView = this.paketConfigView;
         initialize();
@@ -58,6 +60,8 @@ public class PaketConfigViewController extends ViewController {
 
     @Override
     public void initialize() {
+
+
         addNewPaket.addEventHandler(ActionEvent.ACTION, event -> {
 
             String paketName = nameField.getText();
@@ -66,10 +70,20 @@ public class PaketConfigViewController extends ViewController {
             int breitePaket = Integer.parseInt(breiteField.getText());
             int gewichtPaket = Integer.parseInt(gewichtField.getText());
             int tragKraft = Integer.parseInt(tragKraftField.getText());
-            Color color =paketConfigView.getColor().getValue();
+            Color color = paketConfigView.getPaketColor().getValue();
+
+
             //Paketfarbe hinzufuegen
             //Unvertraeglichkeiten hinzufuegen
-            Paket paketToAdd = new Paket(paketName, hoehePaket, breitePaket,gewichtPaket, tragKraft);
+            Paket paketToAdd = new Paket(paketName, hoehePaket, breitePaket, gewichtPaket, tragKraft, color);
+            for(Color c : collectUnvertraeglichkeiten){
+                paketToAdd.getUnvertraeglichkeiten().add(c);
+
+            }
+
+
+            this.collectUnvertraeglichkeiten.clear();
+
 //            paketToAdd.setName(paketName);
 //            paketToAdd.setHoehe(hoehePaket);
 //            paketToAdd.setBreite(breitePaket);
@@ -94,6 +108,11 @@ public class PaketConfigViewController extends ViewController {
             main.switchScene(Scenes.LAGER_VIEW);
         });
 
+        addUnvertraeglichkeit.addEventHandler(ActionEvent.ACTION, event -> {
+            Color unvertraeglichkeit = paketConfigView.getUnvertraeglichkeiten().getValue();
+            collectUnvertraeglichkeiten.add(unvertraeglichkeit);
+
+        });
 
     }
 

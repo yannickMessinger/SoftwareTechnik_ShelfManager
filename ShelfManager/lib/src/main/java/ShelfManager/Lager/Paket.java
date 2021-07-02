@@ -1,6 +1,8 @@
 package ShelfManager.Lager;
 
-import java.awt.*;
+
+import javafx.scene.paint.Color;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -23,13 +25,14 @@ public class Paket extends Gegenstand{
     /**
      * Konstruktor - Paket
      */
-    public Paket(String paketName, int hoehePaket, int breitePaket, int gewichtPaket, int tragKraft) {
+    public Paket(String paketName, int hoehePaket, int breitePaket, int gewichtPaket, int tragKraft, Color farbe) {
         setName(paketName);
         setHoehe(hoehePaket);
         setBreite(breitePaket);
         setGewicht(gewichtPaket);
         //Farbe noch anpassen!!!
-        this.farbe = new Color(255,255,255);
+        //this.farbe = new Color(255,255,255);
+        this.farbe = farbe;
         setTragkraft(tragKraft);
         this.xPos = 0;
         this.yPos = 0;

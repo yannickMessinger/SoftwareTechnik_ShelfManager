@@ -17,9 +17,10 @@ public class PaketConfigView extends BorderPane {
     private TextField gewichtField;
     private TextField tragKraftField;
     private ColorPicker paketColor;
-    private ComboBox<Color> color ;
+    private ColorPicker unvertraeglichkeiten;
     private Button addNewPaket;
     private Button getBackToLagerView;
+    private Button addUnvertraeglichkeit;
 
 
 
@@ -45,24 +46,20 @@ public class PaketConfigView extends BorderPane {
         Label tragKraft = new Label ("Tragkraft");
         tragKraftField = new TextField();
         //Color picker
+
         Label paketFarbe = new Label("Paketfarbe");
         paketColor = new ColorPicker();
-        color=new ComboBox<>();
-        ComboBox<Rectangle> color = new ComboBox<Rectangle>();
-        color.getItems().addAll(
-                new Rectangle(10, 10, Color.RED),
-                new Rectangle(10, 10, Color.GREEN),
-                new Rectangle(10, 10, Color.BLUE));
 
 
-        Label existPaket = new Label("Unvertr. mit:");
-
+        Label unvertraeglMit = new Label("Unvertr. mit:");
+        unvertraeglichkeiten = new ColorPicker();
 
 
         addNewPaket = new Button("Paket hinzufuegen");
+        addUnvertraeglichkeit = new Button(("Unvertraeglichkeit hinzufuegen"));
         getBackToLagerView = new Button("zurueck");
 
-        inputBox.getChildren().addAll(viewName,name, nameField,hoehe, hoeheField, breite,breiteField,gewicht, gewichtField,paketFarbe,color, tragKraft, tragKraftField, addNewPaket, getBackToLagerView);
+        inputBox.getChildren().addAll(viewName,name, nameField,hoehe, hoeheField, breite,breiteField,gewicht, gewichtField,paketFarbe, paketColor, unvertraeglMit, unvertraeglichkeiten, addUnvertraeglichkeit,  tragKraft, tragKraftField, addNewPaket, getBackToLagerView);
 
         this.setTop(inputBox);
 
@@ -99,11 +96,19 @@ public class PaketConfigView extends BorderPane {
         return addNewPaket;
     }
 
-    public ComboBox<Color> getColor() {
+    /*public ComboBox<Color> getColor() {
         return color;
-    }
+    }*/
 
     public Button getBackToLagerView() {
         return getBackToLagerView;
+    }
+
+    public ColorPicker getUnvertraeglichkeiten() {
+        return unvertraeglichkeiten;
+    }
+
+    public Button getAddUnvertraeglichkeit() {
+        return addUnvertraeglichkeit;
     }
 }

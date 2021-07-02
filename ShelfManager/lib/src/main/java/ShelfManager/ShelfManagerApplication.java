@@ -37,7 +37,7 @@ public class ShelfManagerApplication extends Application {
     @Override
     public void init() {
         hauptLager = new Lager();
-        hauptLager = JSONHandler.loadLager();
+        //hauptLager = JSONHandler.loadLager();
         scenes = new HashMap<>();
         ViewController controller;
 
