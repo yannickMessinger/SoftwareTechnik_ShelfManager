@@ -3,6 +3,7 @@ package ShelfManager.Lager;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.paint.Color;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -17,6 +18,7 @@ public class Lager extends Gegenstand {
     private ObservableList<Regal> observableRegalList;
     //private ArrayList<Paket> paketListe;
     private ObservableList<Paket> observablePaketList;
+    private ObservableList<Paket> obervableFilteredList;
     private ObservableList<Paket> allPakets;
     private SimpleObjectProperty<Paket> aktPaket;
 
@@ -29,7 +31,7 @@ public class Lager extends Gegenstand {
         //this.breite = erfasseBreite();
         //this.regale = new ArrayList<Regal>();
         this.observableRegalList = FXCollections.observableArrayList();
-
+        this.obervableFilteredList = FXCollections.observableArrayList();
         //this.paketListe = new ArrayList<Paket>();
         this.observablePaketList = FXCollections.observableArrayList();
         this.allPakets = FXCollections.observableArrayList();
@@ -53,6 +55,22 @@ public class Lager extends Gegenstand {
     }
 
     //-----METHODEN--------------------------
+
+    public void filterPaketsByColor(Color color){
+
+
+        for(Paket p : this.observablePaketList){
+            if(p.getFarbe() .equals(color)){
+                this.obervableFilteredList.add(p);
+
+            }
+        }
+    }
+
+    public void resetFilterList(){
+        this.obervableFilteredList.clear();
+    }
+
 
 
     /**
@@ -125,6 +143,11 @@ public class Lager extends Gegenstand {
     public ObservableList<Paket> getAllPakets() {
         return allPakets;
     }
+
+    public ObservableList<Paket> getObervableFilteredList(){
+        return obervableFilteredList;
+    }
+
 
     //-----SETTER----------------------------
     public void setHoehe(int hoehe) {
