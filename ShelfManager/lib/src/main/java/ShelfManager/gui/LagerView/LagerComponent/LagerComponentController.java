@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
 
 public class LagerComponentController extends ViewController {
 
@@ -115,7 +116,13 @@ public class LagerComponentController extends ViewController {
                             for (int j = r.getRegalfaecher().size()-1; j >= 0; j--) {
                                 Regalfach rf = r.getRegalfaecher().get(j);
                                 if (rf.getyPos() <= yPos) {
-
+                                    //TODO: ueberpruefen ob Paket hinzugefuegt werden darf und Position bestimmen
+                                    rf.getPakete().add(addedPaket);
+                                    addedPaket.setxPos(r.getStuetzen()[0].getBreite()/2);
+                                    addedPaket.setyPos(rf.getBoden().getyPos() - rf.getBoden().getHoehe()/2 - addedPaket.getHoehe());
+                                    Rectangle paket = new Rectangle(addedPaket.getxPos(), addedPaket.getyPos(), addedPaket.getBreite(), addedPaket.getHoehe());
+                                    paket.setFill(addedPaket.getFarbe());
+                                    regalComponent.getChildren().add(paket);
                                     break;
                                 }
                             }
