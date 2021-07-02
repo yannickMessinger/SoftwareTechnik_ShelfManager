@@ -1,14 +1,10 @@
 package ShelfManager.gui.LagerConfigView;
 
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-
-import java.awt.*;
 
 public class LagerConfigView extends BorderPane {
 
@@ -19,41 +15,19 @@ public class LagerConfigView extends BorderPane {
 
     public LagerConfigView() {
 
-        Label viewName = new Label("Neues Lager");
+        Label viewName = new Label("LagerConfigView");
         this.setTop(viewName);
 
-
-        //height----------------
+        VBox box = new VBox();
         Label hoeheLabel = new Label("Hoehe:");
         this.hoeheTextField = new TextField();
-        VBox hoeheBox = new VBox(hoeheLabel, hoeheTextField);
-
-        //width-----------------
         Label breiteLabel = new Label("Breite:");
         this.breiteTextField = new TextField();
-        VBox breiteBox = new VBox(breiteLabel, breiteTextField);
+        this.submit = new Button("Absenden");
 
-        //button-----------------
-        this.submit = new Button("ok");
-        VBox buttonBox = new VBox(submit);
-
-
-        //fuer Anzeige setzen-------------------------
-        VBox box = new VBox(hoeheBox, breiteBox, buttonBox);
+        box.getChildren().addAll(hoeheLabel, hoeheTextField, breiteLabel, breiteTextField, submit);
         this.setCenter(box);
-
-        //---STYLE-----------------------------------------
-        box.setPadding(new Insets(100));
-        box.setSpacing(20);
-
-        hoeheBox.setSpacing(10);
-        breiteBox.setSpacing(5);
-        buttonBox.setAlignment(Pos.CENTER_RIGHT);
-
-        viewName.setPadding(new Insets(20, 100, 20, 100));
-
-
-
+        this.getStyleClass().addAll("background");
     }
 
     public TextField getHoeheTextField() {

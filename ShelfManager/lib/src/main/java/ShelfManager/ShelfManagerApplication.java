@@ -65,10 +65,13 @@ public class ShelfManagerApplication extends Application {
             Pane root = new Pane();
 
             Scene scene = new Scene(root, 1200, 800);
+            scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
+
             this.primaryStage.setScene(scene);
             this.primaryStage.setTitle("ShelfManager");
 
-            switchScene(Scenes.LAGER_CONFIG_VIEW);
+
+        switchScene(Scenes.LAGER_CONFIG_VIEW);
 
             primaryStage.show();
 
