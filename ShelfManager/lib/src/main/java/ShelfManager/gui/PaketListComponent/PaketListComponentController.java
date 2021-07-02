@@ -5,10 +5,14 @@ import ShelfManager.Lager.Paket;
 import ShelfManager.gui.ViewController;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.util.Callback;
+
+
 
 public class PaketListComponentController extends ViewController {
 
@@ -46,6 +50,22 @@ public class PaketListComponentController extends ViewController {
             uiModel.clear();
             uiModel.addAll(pakete);
             createdPaketsListView.refresh();
+        });
+
+
+
+        createdPaketsListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent click) {
+                Paket aktPaket;
+                if (click.getClickCount() == 2) {
+
+                    aktPaket = createdPaketsListView.getSelectionModel().getSelectedItem();
+                    hauptLager.setAktPaket(aktPaket);
+                    System.out.println("Paket gewählt" + createdPaketsListView.getSelectionModel().getSelectedItem());
+                }
+            }
         });
 
     }

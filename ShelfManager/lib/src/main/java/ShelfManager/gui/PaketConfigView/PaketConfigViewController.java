@@ -83,6 +83,7 @@ public class PaketConfigViewController extends ViewController {
 
 
             this.collectUnvertraeglichkeiten.clear();
+            //hauptLager.setAktPaket(paketToAdd);
 
 //            paketToAdd.setName(paketName);
 //            paketToAdd.setHoehe(hoehePaket);

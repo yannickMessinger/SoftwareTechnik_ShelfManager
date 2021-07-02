@@ -1,5 +1,6 @@
 package ShelfManager.Lager;
 
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -17,6 +18,7 @@ public class Lager extends Gegenstand {
     //private ArrayList<Paket> paketListe;
     private ObservableList<Paket> observablePaketList;
     private ObservableList<Paket> allPakets;
+    private SimpleObjectProperty<Paket> aktPaket;
 
     /**
      * Konstruktor - Lager
@@ -31,6 +33,7 @@ public class Lager extends Gegenstand {
         //this.paketListe = new ArrayList<Paket>();
         this.observablePaketList = FXCollections.observableArrayList();
         this.allPakets = FXCollections.observableArrayList();
+        this.aktPaket = new SimpleObjectProperty<Paket>();
     }
 
     /**
@@ -137,6 +140,15 @@ public class Lager extends Gegenstand {
 //    }
 
 
+    public Paket getAktPaket() {
+        return aktPaket.get();
+    }
 
+    public SimpleObjectProperty<Paket> aktPaketProperty() {
+        return aktPaket;
+    }
 
+    public void setAktPaket(Paket aktPaket) {
+        this.aktPaket.set(aktPaket);
+    }
 }
