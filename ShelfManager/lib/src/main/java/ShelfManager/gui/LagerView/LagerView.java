@@ -2,6 +2,7 @@ package ShelfManager.gui.LagerView;
 
 import ShelfManager.Lager.Lager;
 import ShelfManager.Lager.Paket;
+import ShelfManager.gui.LagerView.LagerComponent.LagerComponentController;
 import ShelfManager.gui.PaketListComponent.PaketListComponentController;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -18,29 +19,33 @@ public class LagerView extends BorderPane {
     private ListView<Paket> createdPaketsListView;
     private Pane centerPane;
     private PaketListComponentController paketListComponentController;
+    private LagerComponentController lagerComponentController;
 
     public LagerView(Lager hauptLager) {
 
-        Label viewName = new Label("LagerView");
+        Label viewName = new Label("Ihr Lager");
         paketListComponentController = new PaketListComponentController(hauptLager);
-        this.setTop(viewName);
+        lagerComponentController = new LagerComponentController(hauptLager);
 
-        this.centerPane = new Pane();
-        centerPane.setStyle("-fx-background-color: rgba(120, 140, 120, 1)");
-        this.setCenter(centerPane);
+        createPacketButton = new Button("neues Paket");
+        HBox centerBox = new HBox(lagerComponentController.getRootView(), createPacketButton);
 
-        createdPaketsListView = new ListView<>();
-
-        this.setRight(paketListComponentController.getRootView());
-
-        HBox box = new HBox();
+        //this.centerPane = new Pane();
+        //createdPaketsListView = new ListView<>();
 
         createShelfButton = new Button("neues Regal");
-        createPacketButton = new Button("neues Paket");
         lageruebersichtButton = new Button("Lageruebersicht");
+        HBox box = new HBox(lageruebersichtButton, createShelfButton);
 
-        box.getChildren().addAll(createShelfButton, createPacketButton, lageruebersichtButton);
+
+
+        //---fuer Anzeige setzen-----
+        this.setTop(viewName);
+        this.setRight(paketListComponentController.getRootView());
+        this.setCenter(centerBox);
         this.setBottom(box);
+
+        //---STYLE----------------------------
 
     }
 
