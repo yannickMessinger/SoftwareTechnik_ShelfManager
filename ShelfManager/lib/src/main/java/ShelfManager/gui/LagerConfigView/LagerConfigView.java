@@ -45,7 +45,7 @@ public class LagerConfigView extends BorderPane {
             box.setSpacing(20);
 
             hoeheBox.setSpacing(10);
-            breiteBox.setSpacing(5);
+            breiteBox.setSpacing(10);
             buttonBox.setAlignment(Pos.CENTER_RIGHT);
 
             viewName.setPadding(new Insets(20, 100, 20, 100));
