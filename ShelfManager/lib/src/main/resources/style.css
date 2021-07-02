@@ -7,7 +7,6 @@
     -fx-font-family: 'Lucida Console", "Courier New", monospace';
     -fx-text-fill:#254E58;
     -fx-font-weight: bold;
-    /*-fx-effect: dropshadow( one-pass-box, green, 8, 0.0, 2, 0 );*/
 }
 .titleLabel{
     -fx-font-size: 15.0 ;
@@ -61,9 +60,25 @@
     -fx-font-size: 20px;
     -fx-text-fill: white;
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );
-
-
 }
+
+.style-button-simple{
+    -fx-background-color: #F7E4F2;
+    -fx-background-radius: 3;
+    -fx-font-family: "Quicksand";
+    -fx-font-size: 12px;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );
+}
+#style-button-simple{
+    -fx-background-color: #825974;
+    -fx-background-radius: 3;
+    -fx-font-family: "Quicksand";
+    -fx-font-size: 12px;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );
+}
+
 
 
 
