@@ -75,7 +75,7 @@ public class ShelfManagerApplication extends Application {
             primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                 @Override
                 public void handle(WindowEvent event) {
-                    JSONHandler.safeLager(hauptLager);
+                    //JSONHandler.safeLager(hauptLager);
                     Platform.exit();
                     System.exit(0);
                 }

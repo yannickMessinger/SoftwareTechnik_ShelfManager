@@ -72,7 +72,6 @@ public class RegalConfigViewController extends ViewController {
                 int stuetzenbreite = Integer.parseInt(stuetzenbreiteTextField.getText());
                 regal = new Regal(hoehe, breite);
                 regal.addStuetzenByInput(stuetzenhoehe, stuetzenbreite);
-                hauptLager.addRegal(regal);
                 hoeheTextField.setText("");
                 breiteTextField.setText("");
                 stuetzenhoeheTextField.setText("");
@@ -104,6 +103,9 @@ public class RegalConfigViewController extends ViewController {
                         regal.getRegalfaecher().add(newRegalfach);
                     }
                 }
+                hauptLager.addRegal(regal);
+                regalConfigView.setCenter(inputBox);
+                main.switchScene(Scenes.LAGER_VIEW);
             }
 
         });
