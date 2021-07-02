@@ -2,10 +2,10 @@ package ShelfManager.gui.PaketConfigView;
 
 import ShelfManager.Lager.Paket;
 import ShelfManager.gui.LagerView.LagerView;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
@@ -26,42 +26,92 @@ public class PaketConfigView extends BorderPane {
 
 
     public PaketConfigView() {
-        VBox inputBox = new VBox();
 
-        Label viewName = new Label("PaketConfigView");
+        Label viewName = new Label("Erstelle ein neues Paket");
 
-
+        //Name---------------------------
         Label name = new Label("Name");
         nameField = new TextField();
+        HBox nameInputBox = new HBox(nameField, new Label("cm"));
+        VBox nameBox = new VBox(name, nameInputBox);
 
+        //Hoehe---------------------------
         Label hoehe = new Label("Hoehe");
         hoeheField = new TextField();
+        HBox hoeheInputBox = new HBox(hoeheField, new Label("cm"));
+        VBox hoeheBox = new VBox(hoehe, hoeheInputBox);
 
+        //Breite---------------------------
         Label breite = new Label("Breite");
         breiteField = new TextField();
+        HBox breiteInputBox = new HBox(breiteField, new Label("cm"));
+        VBox breiteBox = new VBox(breite, breiteInputBox);
 
+        //Gewicht---------------------------
         Label gewicht = new Label("Gewicht");
         gewichtField = new TextField();
+        HBox gewichtInputBox = new HBox(gewichtField, new Label("kg"));
+        VBox gewichtBox = new VBox(gewicht, gewichtInputBox);
 
+        //Tragkraft--------------------------
         Label tragKraft = new Label ("Tragkraft");
         tragKraftField = new TextField();
-        //Color picker
+        HBox tragKraftInputBox = new HBox(tragKraftField, new Label("kg"));
+        VBox tragKraftBox = new VBox(tragKraft, tragKraftInputBox);
 
+        //Farbe------------------------------
         Label paketFarbe = new Label("Paketfarbe");
         paketColor = new ColorPicker();
+        VBox colorBox = new VBox(paketFarbe, paketColor);
 
-
+        //Unvertraeglcihkeiten---------------
         Label unvertraeglMit = new Label("Unvertr. mit:");
         unvertraeglichkeiten = new ColorPicker();
-
-
-        addNewPaket = new Button("Paket hinzufuegen");
         addUnvertraeglichkeit = new Button(("Unvertraeglichkeit hinzufuegen"));
+        VBox unvertraeglichkeitenBox = new VBox(unvertraeglMit, unvertraeglichkeiten, addUnvertraeglichkeit);
+
+        //Buttons----------------------------
+        addNewPaket = new Button("Paket hinzufuegen");
+        Region spacer = new Region();
         getBackToLagerView = new Button("zurueck");
+        HBox buttonBox = new HBox(getBackToLagerView, spacer, addNewPaket);
 
-        inputBox.getChildren().addAll(viewName,name, nameField,hoehe, hoeheField, breite,breiteField,gewicht, gewichtField,paketFarbe, paketColor, unvertraeglMit, unvertraeglichkeiten, addUnvertraeglichkeit,  tragKraft, tragKraftField, addNewPaket, getBackToLagerView);
+        VBox inputBox = new VBox(viewName, nameBox, hoeheBox, breiteBox, gewichtBox, tragKraftBox, colorBox, unvertraeglichkeitenBox, buttonBox);
 
-        this.setTop(inputBox);
+        this.setCenter(inputBox);
+
+        //---STYLE-----------------------------------------
+        inputBox.setPadding(new Insets(100));
+        inputBox.setSpacing(20);
+
+
+        nameInputBox.setSpacing(10);
+        nameInputBox.setHgrow(nameField, Priority.ALWAYS);
+        nameBox.setSpacing(10);
+
+        hoeheInputBox.setSpacing(10);
+        hoeheInputBox.setHgrow(hoeheField, Priority.ALWAYS);
+        hoeheBox.setSpacing(10);
+
+        breiteInputBox.setSpacing(10);
+        breiteInputBox.setHgrow(breiteField, Priority.ALWAYS);
+        breiteBox.setSpacing(10);
+
+        gewichtInputBox.setSpacing(10);
+        gewichtInputBox.setHgrow(gewichtField, Priority.ALWAYS);
+        gewichtBox.setSpacing(10);
+
+        tragKraftInputBox.setSpacing(10);
+        tragKraftInputBox.setHgrow(tragKraftField, Priority.ALWAYS);
+        tragKraftBox.setSpacing(10);
+
+        colorBox.setSpacing(10);
+
+        unvertraeglichkeitenBox.setSpacing(10);
+
+        buttonBox.setSpacing(10);
+        buttonBox.setHgrow(spacer, Priority.ALWAYS);
+
 
 
 
