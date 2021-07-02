@@ -2,6 +2,7 @@ package ShelfManager.gui.LagerView;
 
 import ShelfManager.Lager.Lager;
 import ShelfManager.Lager.Paket;
+import ShelfManager.gui.LagerView.LagerComponent.LagerComponentController;
 import ShelfManager.gui.LagerView.packageDetailComponent.PackageDetailComponentController;
 import ShelfManager.gui.PaketListComponent.PaketListComponentController;
 import javafx.scene.control.Button;
@@ -21,31 +22,31 @@ public class LagerView extends BorderPane {
     private Pane centerPane;
     private PaketListComponentController paketListComponentController;
     private PackageDetailComponentController packageDetailComponentController;
+    private LagerComponentController lagerComponentController;
 
     public LagerView(Lager hauptLager) {
 
-        Label viewName = new Label("LagerView");
+        Label viewName = new Label("Ihr Lager");
         paketListComponentController = new PaketListComponentController(hauptLager);
         packageDetailComponentController = new PackageDetailComponentController(hauptLager);
-        this.setTop(viewName);
+        lagerComponentController = new LagerComponentController(hauptLager);
 
-        this.centerPane = new Pane();
-        centerPane.setStyle("-fx-background-color: rgba(120, 140, 120, 1)");
-        this.setCenter(centerPane);
-
-        createdPaketsListView = new ListView<>();
+        createPacketButton = new Button("neues Paket");
+        HBox centerBox = new HBox(lagerComponentController.getRootView(), createPacketButton);
 
         VBox rightComponents = new VBox(paketListComponentController.getRootView(),packageDetailComponentController.getRootView());
-        this.setRight(rightComponents);
-
-        HBox box = new HBox();
 
         createShelfButton = new Button("neues Regal");
-        createPacketButton = new Button("neues Paket");
         lageruebersichtButton = new Button("Lageruebersicht");
+        HBox box = new HBox(lageruebersichtButton, createShelfButton);
 
-        box.getChildren().addAll(createShelfButton, createPacketButton, lageruebersichtButton);
+        //---fuer Anzeige setzen-----
+        this.setTop(viewName);
         this.setBottom(box);
+        this.setCenter(centerBox);
+        this.setRight(rightComponents);
+
+        //---STYLE----------------------------
 
     }
 

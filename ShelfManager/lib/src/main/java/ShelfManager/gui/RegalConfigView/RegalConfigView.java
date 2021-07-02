@@ -18,8 +18,10 @@ public class RegalConfigView extends BorderPane {
     private Button submit;
     private Button backToLagerView;
     private Button saveRegal;
+    private Label warning;
 
     public RegalConfigView() {
+        this.warning = new Label("");
 
         Label viewName = new Label("RegalConfigView");
         this.setTop(viewName);
@@ -44,12 +46,14 @@ public class RegalConfigView extends BorderPane {
         HBox bottombox = new HBox();
         this.backToLagerView = new Button("zurueck");
         this.saveRegal = new Button("speichern");
-        bottombox.getChildren().addAll(backToLagerView, saveRegal);
+        bottombox.getChildren().addAll(backToLagerView, saveRegal, warning);
         this.setBottom(bottombox);
 
 
 
     }
+
+    public Label getWarning() {return warning;}
 
     public VBox getInputBox() {
         return inputBox;

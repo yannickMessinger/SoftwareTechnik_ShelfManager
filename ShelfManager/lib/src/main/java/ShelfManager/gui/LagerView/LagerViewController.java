@@ -46,9 +46,9 @@ public class LagerViewController extends ViewController {
         this.lageruebersichtButton = lagerView.getLageruebersichtButton();
         this.createdPaketsListView = lagerView.getCreatedPaketsListView();
 
-        this.lagerComponentController = new LagerComponentController(hauptLager);
-        this.lagerComponent = (LagerComponent) lagerComponentController.getRootView();
-        lagerView.setCenter(lagerComponent);
+//        this.lagerComponentController = new LagerComponentController(hauptLager);
+//        this.lagerComponent = (LagerComponent) lagerComponentController.getRootView();
+//        lagerView.setCenter(lagerComponent);
 
         rootView = this.lagerView;
         initialize();
