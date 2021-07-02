@@ -1,3 +1,69 @@
 .background{
-    -fx-background-color: black;
+    -fx-background-color:#DEF2F1;
 }
+
+#title{
+    -fx-font-size: 35.0 ;
+    -fx-font-family: 'Lucida Console", "Courier New", monospace';
+    -fx-text-fill:#254E58;
+    -fx-font-weight: bold;
+    /*-fx-effect: dropshadow( one-pass-box, green, 8, 0.0, 2, 0 );*/
+}
+.titleLabel{
+    -fx-font-size: 15.0 ;
+    -fx-font-family: 'Lucida Console", "Courier New", monospace';
+    -fx-text-fill:#116466;
+    -fx-font-weight: bold;
+}
+
+.textField{
+    -fx-font-family: "Quicksand";
+    -fx-font-size: 18;
+    -fx-padding: 1,1,1,1;
+    -fx-border-color: #644E5B;
+    -fx-border-width: 2;
+    -fx-border-radius: 3;
+    -fx-border: gone;
+    -fx-text-fill: GREY;
+    -fx-background-color: #D1E8E2 ;
+
+
+}
+.textField:focused {
+    -fx-background-color: #a9a9a9 , white ;
+}
+
+
+/*Icons*/
+.add-icon{
+    -fx-background-image: url("/icons/add-icon.svg");
+}
+.back-icon{
+    -fx-background-image: url("/icons/back-icon.svg");
+}
+.overview-icon{
+    -fx-background-image: url("/icons/overview-icon.svg");
+}
+.package-icon{
+    -fx-background-image: url("/icons/package-icon.svg");
+}
+.save-icon{
+    -fx-background-image: url("/icons/save-icon.svg");
+}
+.shelf-icon{
+    -fx-background-image: url("/icons/shelf-icon.svg");
+}
+
+.style-button{
+    -fx-background-color: #644E5B;
+    -fx-background-radius: 30;
+    -fx-font-family: "Quicksand";
+    -fx-font-size: 20px;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );
+
+
+}
+
+
+
