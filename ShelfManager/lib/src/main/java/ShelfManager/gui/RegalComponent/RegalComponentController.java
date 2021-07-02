@@ -72,7 +72,7 @@ public class RegalComponentController extends ViewController {
             bodenline.setStyle("-fx-stroke: rgba(0, 0, 0, 0.4);");
             Dragboard db = bodenline.startDragAndDrop(TransferMode.MOVE);
             ClipboardContent cc = new ClipboardContent();
-            cc.putString("|" + einlegeboden.getHoehe() + "|" + einlegeboden.getTragkraft());
+            cc.putString(String.valueOf(installedEinlegeboeden.indexOf(einlegeboden)));
             db.setContent(cc);
         });
 

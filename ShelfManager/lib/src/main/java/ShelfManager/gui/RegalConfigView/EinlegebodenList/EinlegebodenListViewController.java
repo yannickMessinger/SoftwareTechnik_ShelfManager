@@ -23,7 +23,7 @@ public class EinlegebodenListViewController extends ViewController {
     private ListView<Einlegeboden> einlegebodenList;
     private EinlegebodenListView einlegebodenListView;
 
-    private final ObjectProperty<ListCell<Einlegeboden>> dragSource;
+    //private final ObjectProperty<ListCell<Einlegeboden>> dragSource;
 
 
     public EinlegebodenListViewController(Regal regal) {
@@ -31,7 +31,7 @@ public class EinlegebodenListViewController extends ViewController {
         this.einlegebodenListView = new EinlegebodenListView(regal);
         this.einlegebodenList = einlegebodenListView.getEinlegebodenList();
 
-        this.dragSource = new SimpleObjectProperty<>();
+        //this.dragSource = new SimpleObjectProperty<>();
 
         rootView = einlegebodenListView;
         initialize();
@@ -50,37 +50,19 @@ public class EinlegebodenListViewController extends ViewController {
         einlegebodenList.setCellFactory(new Callback<ListView<Einlegeboden>, ListCell<Einlegeboden>>() {
             @Override
             public ListCell<Einlegeboden> call(ListView<Einlegeboden> param) {
-                ListCell<Einlegeboden> cell = new EinlegebodenCell();
+                EinlegebodenCell cell = new EinlegebodenCell();
 
                 cell.setOnDragDetected(event -> {
                     if (! cell.isEmpty()) {
                         Dragboard db = cell.startDragAndDrop(TransferMode.MOVE);
                         ClipboardContent cc = new ClipboardContent();
-                        cc.putString("|" + cell.getItem().getHoehe() + "|" + cell.getItem().getTragkraft());
+                        cc.putString(String.valueOf(cell.getIndex()));
                         db.setContent(cc);
-                        dragSource.set(cell);
-                    }
-                });
-
-                cell.setOnDragOver(event -> {
-                    Dragboard db = event.getDragboard();
-                    if (db.hasString()) {
-                        event.acceptTransferModes(TransferMode.MOVE);
                     }
                 });
 
                 cell.setOnDragDone(event -> {
                     einlegeboeden.remove(cell.getItem());
-                });
-
-                cell.setOnDragDropped(event -> {
-                    Dragboard db = event.getDragboard();
-                    if (db.hasString()) {
-                        event.setDropCompleted(true);
-                    } else {
-                        event.setDropCompleted(false);
-                    }
-                    event.consume();
                 });
 
                 return cell;

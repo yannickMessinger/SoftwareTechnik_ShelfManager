@@ -2,6 +2,7 @@ package ShelfManager.gui.RegalConfigView;
 
 import ShelfManager.Lager.*;
 import ShelfManager.ShelfManagerApplication;
+import ShelfManager.gui.RegalConfigView.EinlegebodenList.EinlegebodenCell;
 import ShelfManager.gui.RegalConfigView.EinlegebodenList.EinlegebodenListView;
 import ShelfManager.gui.RegalConfigView.EinlegebodenList.EinlegebodenListViewController;
 import ShelfManager.gui.RegalComponent.RegalComponent;
@@ -129,41 +130,40 @@ public class RegalConfigViewController extends ViewController {
         });
 
         regalComponent.setOnDragEntered(event -> {
-                /* the drag-and-drop gesture entered the target */
-                /* show to the user that it is an actual gesture target */
                 if (event.getGestureSource() != regalComponent &&
                         event.getDragboard().hasString()) {
                     regalComponent.setStyle("-fx-background-color: rgba(10, 140, 120, 1)");
                 }
-
                 event.consume();
         });
 
         regalComponent.setOnDragExited(event -> {
-                /* mouse moved away, remove the graphical cues */
             regalComponent.setStyle("-fx-background-color: rgba(120, 140, 120, 1)");
-
-                event.consume();
+            event.consume();
         });
 
         regalComponent.setOnDragDropped(event -> {
-                /* data dropped */
-                /* if there is a string data on dragboard, read it and use it */
                 Dragboard db = event.getDragboard();
                 boolean success = false;
                 if (db.hasString()) {
-                    System.out.println("DROPPED on target: " + db.getString());
-                    int hoehe = Integer.parseInt(db.getString().split("\\|")[1]);
-                    int tragkraft = Integer.parseInt(db.getString().split("\\|")[2]);
+                    System.out.println("DROPPED on target: " + db.getString() + " from " + event.getGestureSource().getClass());
                     int yPos = (int) event.getY();
-                    Einlegeboden addedEinlegeboden = regal.addEinlegeboden(hoehe, tragkraft, yPos);
-                    System.out.println(regal.getInstalledEinlegeboeden().size());
+
+                    Einlegeboden addedEinlegeboden;
+
+                    if (event.getGestureSource().getClass().getName().equals("ShelfManager.gui.RegalConfigView.EinlegebodenList.EinlegebodenCell")) {
+                        addedEinlegeboden = regal.getEinlegeboeden().get(Integer.parseInt(db.getString()));
+                    } else {
+                        addedEinlegeboden = regal.getInstalledEinlegeboeden().get(Integer.parseInt(db.getString()));
+                    }
+
+                    addedEinlegeboden.setyPos(yPos);
+                    regal.installEinlegeboden(addedEinlegeboden);
                     regalComponentController.addEinlegeboden(regal.getInstalledEinlegeboeden(), addedEinlegeboden);
                     success = true;
 
                 }
-                /* let the source know whether the string was successfully
-                 * transferred and used */
+
                 event.setDropCompleted(success);
 
                 event.consume();
@@ -171,10 +171,6 @@ public class RegalConfigViewController extends ViewController {
 
         EinlegebodenListViewController einlegebodenListViewController = new EinlegebodenListViewController(regal);
         EinlegebodenListView einlegebodenListView = (EinlegebodenListView) einlegebodenListViewController.getRootView();
-
-//        VBox testBox = new VBox();
-//        testBox.setStyle("-fx-background-color: rgba( 255, 255, 0,1)");
-//        testBox.getChildren().add(new Button("Holla"));
 
         regalConfigView.setCenter(regalComponent);
         regalConfigView.setRight(einlegebodenListView);

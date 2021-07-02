@@ -106,11 +106,12 @@ public class Regal extends Gegenstand{
         this.stuetzen =  new Stuetze[]{stuetze1, stuetze2};
     }
 
-    public Einlegeboden addEinlegeboden(int hoehe, int tragkraft, int yPos) {
-        Einlegeboden newEinlegeboden = new Einlegeboden(this, hoehe, tragkraft);
-        newEinlegeboden.setyPos(yPos);
-        installedEinlegeboeden.add(newEinlegeboden);
-        return newEinlegeboden;
+    public void installEinlegeboden(Einlegeboden einlegeboden) {
+        installedEinlegeboeden.add(einlegeboden);
+    }
+
+    public Paket addPaketToRegalfach() {
+        return null;
     }
 
 

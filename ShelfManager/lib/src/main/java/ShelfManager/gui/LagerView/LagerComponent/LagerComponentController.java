@@ -1,13 +1,12 @@
 package ShelfManager.gui.LagerView.LagerComponent;
 
-import ShelfManager.Lager.Einlegeboden;
-import ShelfManager.Lager.Lager;
-import ShelfManager.Lager.Regal;
-import ShelfManager.Lager.Stuetze;
+import ShelfManager.Lager.*;
 import ShelfManager.gui.RegalComponent.RegalComponent;
 import ShelfManager.gui.ViewController;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
 import javafx.scene.shape.Line;
 
 public class LagerComponentController extends ViewController {
@@ -79,6 +78,59 @@ public class LagerComponentController extends ViewController {
                     regalComponent.setTranslateX(xVerschiebung);
                     regalComponent.setTranslateY(lager.getHoehe() - r.getHoehe() - r.getStuetzen()[0].getBreite()/2);
                     regalComponent.setStyle("-fx-background-color: rgba(120, 140, 120, 0)");
+
+                    regalComponent.setOnDragOver(event -> {
+                        if (event.getGestureSource() != regalComponent &&
+                                event.getDragboard().hasString()) {
+                            event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+                        }
+
+                        event.consume();
+                    });
+
+                    regalComponent.setOnDragEntered(event -> {
+                        if (event.getGestureSource() != regalComponent &&
+                                event.getDragboard().hasString()) {
+                            regalComponent.setStyle("-fx-background-color: rgba(10, 140, 120, 1)");
+                        }
+
+                        event.consume();
+                    });
+
+                    regalComponent.setOnDragExited(event -> {
+                        regalComponent.setStyle("-fx-background-color: rgba(120, 140, 120, 1)");
+
+                        event.consume();
+                    });
+
+                    regalComponent.setOnDragDropped(event -> {
+                        Dragboard db = event.getDragboard();
+                        boolean success = false;
+                        if (db.hasString()) {
+                            System.out.println("DROPPED on target: " + db.getString());
+                            Paket addedPaket = lager.getObservablePaketList().get(Integer.parseInt(db.getString()));
+                            int yPos = (int) event.getY();
+
+                            //find regalfach
+                            for (int j = r.getRegalfaecher().size()-1; j >= 0; j--) {
+                                Regalfach rf = r.getRegalfaecher().get(j);
+                                if (rf.getyPos() <= yPos) {
+
+                                    break;
+                                }
+                            }
+                            success = true;
+
+                        }
+
+                        event.setDropCompleted(success);
+
+                        event.consume();
+                    });
+
+
+
+
                     addRegalComponent(regalComponent);
                 }
 

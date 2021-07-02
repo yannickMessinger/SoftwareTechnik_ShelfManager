@@ -1,14 +1,19 @@
 package ShelfManager.gui.PaketListComponent;
 
+import ShelfManager.Lager.Einlegeboden;
 import ShelfManager.Lager.Lager;
 import ShelfManager.Lager.Paket;
+import ShelfManager.gui.RegalConfigView.EinlegebodenList.EinlegebodenCell;
 import ShelfManager.gui.ViewController;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
 import javafx.util.Callback;
 
@@ -34,16 +39,34 @@ public class PaketListComponentController extends ViewController {
     @Override
     public void initialize() {
 
-        createdPaketsListView.setCellFactory(new Callback<ListView<Paket>, ListCell<Paket>>() {
-            @Override
-            public ListCell<Paket> call(ListView<Paket> param) {
-                return new PaketCell();
-            }
-        });
-
         ObservableList<Paket> uiModel = createdPaketsListView.getItems();
         ObservableList<Paket> pakete = hauptLager.getObservablePaketList();
         uiModel.addAll(pakete);
+
+        createdPaketsListView.setCellFactory(new Callback<ListView<Paket>, ListCell<Paket>>() {
+            @Override
+            public ListCell<Paket> call(ListView<Paket> param) {
+                PaketCell cell = new PaketCell();
+
+                cell.setOnDragDetected(event -> {
+                    if (! cell.isEmpty()) {
+                        Dragboard db = cell.startDragAndDrop(TransferMode.MOVE);
+                        ClipboardContent cc = new ClipboardContent();
+                        cc.putString(String.valueOf(cell.getIndex()));
+                        db.setContent(cc);
+                    }
+                });
+
+                cell.setOnDragDone(event -> {
+                    pakete.remove(cell.getItem());
+                });
+
+
+                return cell;
+            }
+        });
+
+
 
         pakete.addListener((ListChangeListener<Paket>) change -> {
             System.out.println(change);
