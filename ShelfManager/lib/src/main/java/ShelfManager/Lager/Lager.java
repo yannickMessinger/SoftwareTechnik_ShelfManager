@@ -1,6 +1,7 @@
 package ShelfManager.Lager;
 
 import ShelfManager.Lager.Exceptions.LagerVollException;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,6 +23,7 @@ public class Lager extends Gegenstand {
     private ObservableList<Paket> obervableFilteredList;
     private ObservableList<Paket> allPakets;
     private SimpleObjectProperty<Paket> aktPaket;
+    private SimpleBooleanProperty paketWasDeleted;
 
     /**
      * Konstruktor - Lager
@@ -37,6 +39,8 @@ public class Lager extends Gegenstand {
         this.observablePaketList = FXCollections.observableArrayList();
         this.allPakets = FXCollections.observableArrayList();
         this.aktPaket = new SimpleObjectProperty<Paket>();
+        this.paketWasDeleted = new SimpleBooleanProperty(false);
+
     }
 
     /**
@@ -116,7 +120,22 @@ public class Lager extends Gegenstand {
     }
 
 
+    /**
+     * Entfernt Paket aus der ObservableList
+     * @param p zu löschendes Paket
+     */
 
+    public void removePaketFromList(Paket p){
+        observablePaketList.remove(p);
+    }
+
+    /**
+     * Entfernt Paket aus der allPakets Liste
+     * @param p zu löschendes Paket
+     */
+    public void removePaketFromAllPakets(Paket p){
+        allPakets.remove(p);
+    }
 
     //-----GETTER----------------------------
     public int getHoehe() {
@@ -177,5 +196,18 @@ public class Lager extends Gegenstand {
 
     public void setAktPaket(Paket aktPaket) {
         this.aktPaket.set(aktPaket);
+    }
+
+
+    public boolean isPaketWasDeleted() {
+        return paketWasDeleted.get();
+    }
+
+    public SimpleBooleanProperty getPaketWasDeletedProperty() {
+        return paketWasDeleted;
+    }
+
+    public void setPaketWasDeleted(boolean paketWasDeleted) {
+        this.paketWasDeleted.set(paketWasDeleted);
     }
 }

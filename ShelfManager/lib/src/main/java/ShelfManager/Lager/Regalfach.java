@@ -47,51 +47,67 @@ public class Regalfach extends Gegenstand {
             return false;
         }
 
-
         //Paket hoeher oder breiter als Regalfach
-        if (addedPaket.getHoehe() > this.getHoehe() || addedPaket.getBreite() > this.getBoden().getBreite()) {
+        if (addedPaket.getHoehe() > hoehe || addedPaket.getBreite() > boden.getBreite()) {
             return false;
         }
 
         //wenn aus Regal raussteht
-        if (addedPaket.getxPos() + addedPaket.getBreite() > this.xPos + this.getBoden().getBreite()) {
+        if (addedPaket.getxPos() + addedPaket.getBreite() > xPos + boden.getBreite()) {
+            return false;
+        }
+
+        //wenn Tragfaehigkeit ueberschritten
+        int gesamtgewicht = 0;
+        for (Paket p : pakete) {
+            gesamtgewicht += p.getGewicht();
+        }
+        if (gesamtgewicht + addedPaket.getGewicht() > boden.getTragkraft()) {
             return false;
         }
 
         //wenn leer, dann hinzufuegen
-        if (this.pakete.isEmpty()) {
-            addedPaket.setyPos(this.getBoden().getyPos() - this.getBoden().getHoehe()/2 - addedPaket.getHoehe());
+        if (pakete.isEmpty()) {
+            addedPaket.setyPos(boden.getyPos() - boden.getHoehe()/2 - addedPaket.getHoehe());
             return true;
         }
 
         //wenn bereits Pakete
         //Ueberlappung
-        for (Paket p : this.getPakete()) {
-            if (p.checkOverlapping(addedPaket)) {
-                System.out.println("OVERLAP");
-                return false;
+        for (Paket p : pakete) {
+            if (p != addedPaket) {
+                if (p.checkOverlapping(addedPaket)) {
+                    System.out.println("OVERLAP");
+                    return false;
+                }
             }
         }
 
         //aufeinander Stapeln
         boolean yTransform = true;
         while (yTransform) {
-            for (Paket p : this.getPakete()) {
-                if (p.checkOverlapping(addedPaket)) {
-                    addedPaket.setyPos(p.getyPos() - addedPaket.getHoehe());
-                    yTransform = false;
-                    if (p.overlappingEdges(addedPaket)) {
-                        System.out.println("steht ueber");
-                        return false;
+            for (Paket p : pakete) {
+                if (p != addedPaket) {
+                    if (p.checkOverlapping(addedPaket)) {
+                        addedPaket.setyPos(p.getyPos() - addedPaket.getHoehe());
+                        yTransform = false;
+                        if (p.overlappingEdges(addedPaket)) {
+                            System.out.println("steht ueber");
+                            return false;
+                        }
+                        if (!p.addPaketOnTop(addedPaket)) {
+                            return false;
+                        }
+                        break;
+                    } else {
+                        addedPaket.setyPos(addedPaket.getyPos()+1);
                     }
-                    p.addPaketOnTop(addedPaket);
-                    break;
                 } else {
                     addedPaket.setyPos(addedPaket.getyPos()+1);
                 }
             }
-            if (addedPaket.getyPos() >= this.getBoden().getyPos()) {
-                addedPaket.setyPos(this.getBoden().getyPos() - this.getBoden().getHoehe()/2 - addedPaket.getHoehe());
+            if (addedPaket.getyPos() >= boden.getyPos()) {
+                addedPaket.setyPos(boden.getyPos() - boden.getHoehe()/2 - addedPaket.getHoehe());
                 yTransform = false;
             }
         }
@@ -102,7 +118,13 @@ public class Regalfach extends Gegenstand {
     }
 
     public boolean checkUnvertraeglichkeiten(Paket paket) {
-        for (Paket p : this.getPakete()) {
+
+        for (Paket p : pakete) {
+            for (Color color : p.getUnvertraeglichkeiten()) {
+                if (color == paket.getFarbe()) {
+                    return false;
+                }
+            }
             for (Color c : paket.getUnvertraeglichkeiten()) {
                 if (c == p.getFarbe()) {
                     return false;
@@ -112,12 +134,6 @@ public class Regalfach extends Gegenstand {
         return true;
     }
 
-//    public int calculateYPos(Paket paket) {
-//
-//        for (Paket p : this.getPakete()) {
-//
-//        }
-//    }
 
     //-----GETTER----------------------------
 

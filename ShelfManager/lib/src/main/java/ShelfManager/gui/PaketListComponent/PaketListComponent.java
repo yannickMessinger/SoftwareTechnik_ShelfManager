@@ -16,6 +16,7 @@ public class PaketListComponent extends Pane {
     private ColorPicker filterColor;
     private Button filter;
     private Button showAll;
+    private Button removePacket;
 
 
     public PaketListComponent() {
@@ -28,7 +29,8 @@ public class PaketListComponent extends Pane {
         Label filterLabel = new Label(("Filterfarbe auswaehlen:"));
         filter = new Button("Pakete filtern");
         showAll = new Button("Alle Pakete anzeigen");
-        VBox box = new VBox(createdPaketsListView,filterLabel,filterColor, filter, showAll);
+        removePacket = new Button("Paket loeschen");
+        VBox box = new VBox(createdPaketsListView,filterLabel,filterColor, filter, showAll, removePacket);
 
 
         this.getChildren().addAll(box);
@@ -48,5 +50,9 @@ public class PaketListComponent extends Pane {
 
     public Button getShowAll() {
         return showAll;
+    }
+
+    public Button getRemovePacket(){
+        return removePacket;
     }
 }

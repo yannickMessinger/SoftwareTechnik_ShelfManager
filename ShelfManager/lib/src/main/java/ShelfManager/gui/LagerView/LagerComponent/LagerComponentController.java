@@ -84,6 +84,16 @@ public class LagerComponentController extends ViewController {
                     regalComponent.setTranslateY(lager.getHoehe() - r.getHoehe() - r.getStuetzen()[0].getBreite()/2);
                     regalComponent.setStyle("-fx-background-color: rgba(120, 140, 120, 0)");
 
+                    //Pakete initialisieren
+                    for (Regalfach regalfach : r.getRegalfaecher()) {
+                        for (Paket addedPaket : regalfach.getPakete()) {
+                            Rectangle paket = new Rectangle(addedPaket.getxPos(), addedPaket.getyPos(), addedPaket.getBreite(), addedPaket.getHoehe());
+                            paket.setFill(addedPaket.getFarbe());
+                            addDragAndDropFunctionToPaket(regalfach, addedPaket, paket, regalComponent);
+                            regalComponent.getChildren().add(paket);
+                        }
+                    }
+
                     regalComponent.setOnDragOver(event -> {
                         if (event.getGestureSource() != regalComponent &&
                                 event.getDragboard().hasString()) {
