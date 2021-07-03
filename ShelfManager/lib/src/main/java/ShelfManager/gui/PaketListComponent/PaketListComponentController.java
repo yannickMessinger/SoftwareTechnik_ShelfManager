@@ -92,12 +92,24 @@ public class PaketListComponentController extends ViewController {
         });
 
 
+        createdPaketsListView.setOnMouseClicked(click -> {
+            Paket aktPaket;
+            if (click.getClickCount() == 2) {
+
+                aktPaket = createdPaketsListView.getSelectionModel().getSelectedItem();
+                hauptLager.aktPaketProperty().set(aktPaket);
+            }
+        });
+
+
+
         removePacket.addEventHandler(ActionEvent.ACTION, event ->{
 
             Paket  deletePacket = createdPaketsListView.getSelectionModel().getSelectedItem();
             if(deletePacket != null) {
                hauptLager.removePaketFromList(deletePacket);
                hauptLager.removePaketFromList(deletePacket);
+               hauptLager.setPaketWasDeleted(true);
 
             }
 
@@ -131,7 +143,6 @@ public class PaketListComponentController extends ViewController {
             uiModel.addAll(pakete);
             createdPaketsListView.refresh();
         });
-
 
 
 

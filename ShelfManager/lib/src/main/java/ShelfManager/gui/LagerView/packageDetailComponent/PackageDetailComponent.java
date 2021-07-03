@@ -13,11 +13,12 @@ public class PackageDetailComponent extends Pane {
 
 
     private Rectangle currentPackage;
-    Label currentPackageName;
-    Label currentPackageHoehe;
-    Label currentPackageBreite;
-    Label currentPackageGewicht;
-    Label currentPackageTragkraft;
+    private Label currentPackageName;
+    private Label currentPackageHoehe;
+    private Label currentPackageBreite;
+    private Label currentPackageGewicht;
+    private Label currentPackageTragkraft;
+    private ListView<Color>  unvertraeglichkeiten;
     //Liste bzw. Anzeigemöglichkeit für Unverträglichkeiten hinzufügen
 
     public PackageDetailComponent(){
@@ -25,18 +26,21 @@ public class PackageDetailComponent extends Pane {
         currentPackage = new Rectangle(100,100, Color.color(0,0,0,0));
         HBox rectangleBox = new HBox(currentPackage);
 
+        this.unvertraeglichkeiten = new ListView<Color>();
+
         currentPackageName = new Label("Name");
         currentPackageHoehe = new Label("Hoehe");
         currentPackageBreite = new Label("Breite");
         currentPackageGewicht = new Label("Gewicht");
         currentPackageTragkraft = new Label("Tragkraft");
 
+
         VBox detailLabels = new VBox(currentPackageName, currentPackageHoehe, currentPackageBreite, currentPackageGewicht,currentPackageTragkraft);
         VBox currentPackageInfo = new VBox(rectangleBox, detailLabels);
 
 
 
-        this.getChildren().add(currentPackageInfo);
+        this.getChildren().addAll(currentPackageInfo);
 
 
     }
@@ -68,7 +72,9 @@ public class PackageDetailComponent extends Pane {
         return currentPackageTragkraft;
     }
 
-
+    public ListView<Color> getUnvertraeglichkeiten(){
+        return unvertraeglichkeiten;
+    }
     //-----------------------SETTER
 
 

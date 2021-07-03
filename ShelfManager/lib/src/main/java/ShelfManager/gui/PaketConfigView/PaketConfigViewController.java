@@ -172,6 +172,7 @@ public class PaketConfigViewController extends ViewController {
                 this.collectUnvertraeglichkeiten.clear();
                 hauptLager.addPaketToList(paketToAdd);
                 hauptLager.addPaketToAllPakets(paketToAdd);
+
                 System.out.println("neues Paket angelegt");
 
                 nameField.setText("");
