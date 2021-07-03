@@ -89,6 +89,11 @@ public class Paket extends Gegenstand{
         Point2D l2 = new Point2D(paket.getxPos(), paket.getyPos() + paket.getHoehe());
         Point2D r2 = new Point2D(paket.getxPos() + paket.getBreite(), paket.getyPos() + paket.getHoehe());
 
+//        if (paket.getBreite() <= this.getBreite()) {
+//            paket.setxPos(this.xPos);
+//            return false;
+//        }
+
         if (l2.getX() < l1.getX() || r2.getX() > r1.getX()) {
             return true;
         }

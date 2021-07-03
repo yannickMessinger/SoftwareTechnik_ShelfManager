@@ -39,18 +39,25 @@ public class Regalfach extends Gegenstand {
     }
 
 
-    public boolean tryToAddPaket(Paket addedPaket, int xPos, int yPos) {
-        if (this.pakete.isEmpty()) {
-            addedPaket.setyPos(this.getBoden().getyPos() - this.getBoden().getHoehe()/2 - addedPaket.getHoehe());
-            addedPaket.setxPos(xPos);
-            return true;
-        }
-
+    public boolean tryToAddPaket(Paket addedPaket) {
+        //Paket hoeher oder breiter als Regalfach
         if (addedPaket.getHoehe() > this.getHoehe() || addedPaket.getBreite() > this.getBoden().getBreite()) {
             return false;
         }
 
-        //Option: Paket auf anderem platziert
+        //wenn aus Regal raussteht
+        if (addedPaket.getxPos() + addedPaket.getBreite() > this.xPos + this.getBoden().getBreite()) {
+            return false;
+        }
+
+        //wenn leer, dann hinzufuegen
+        if (this.pakete.isEmpty()) {
+            addedPaket.setyPos(this.getBoden().getyPos() - this.getBoden().getHoehe()/2 - addedPaket.getHoehe());
+            return true;
+        }
+
+        //wenn bereits Pakete
+        //Ueberlappung
         for (Paket p : this.getPakete()) {
             if (p.checkOverlapping(addedPaket)) {
                 System.out.println("OVERLAP");
@@ -58,12 +65,13 @@ public class Regalfach extends Gegenstand {
             }
         }
 
-        boolean calculateFinished = false;
-        while (!calculateFinished) {
+        //aufeinander Stapeln
+        boolean yTransform = true;
+        while (yTransform) {
             for (Paket p : this.getPakete()) {
                 if (p.checkOverlapping(addedPaket)) {
                     addedPaket.setyPos(p.getyPos() - addedPaket.getHoehe());
-                    calculateFinished = true;
+                    yTransform = false;
                     if (p.overlappingEdges(addedPaket)) {
                         System.out.println("steht ueber");
                         return false;
@@ -75,7 +83,7 @@ public class Regalfach extends Gegenstand {
             }
             if (addedPaket.getyPos() >= this.getBoden().getyPos()) {
                 addedPaket.setyPos(this.getBoden().getyPos() - this.getBoden().getHoehe()/2 - addedPaket.getHoehe());
-                calculateFinished = true;
+                yTransform = false;
             }
         }
 

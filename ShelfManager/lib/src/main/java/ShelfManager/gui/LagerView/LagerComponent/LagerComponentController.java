@@ -5,6 +5,7 @@ import ShelfManager.gui.RegalComponent.RegalComponent;
 import ShelfManager.gui.ViewController;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.shape.Line;
@@ -117,29 +118,29 @@ public class LagerComponentController extends ViewController {
                             for (int j = r.getRegalfaecher().size()-1; j >= 0; j--) {
                                 Regalfach rf = r.getRegalfaecher().get(j);
                                 if (rf.getyPos() <= yPos) {
-                                    //TODO: ueberpruefen ob Paket hinzugefuegt werden darf und Position bestimmen
-                                    //rf.getPakete().add(addedPaket);
                                     addedPaket.setxPos(xPos);
                                     addedPaket.setyPos(yPos);
-                                    if (rf.tryToAddPaket(addedPaket, xPos, yPos)) {
-                                        rf.getPakete().add(addedPaket);
-//                                        addedPaket.setxPos(xPos);
-//                                        addedPaket.setyPos(rf.getBoden().getyPos() - rf.getBoden().getHoehe()/2 - addedPaket.getHoehe());
+                                    if (rf.tryToAddPaket(addedPaket)) {
+                                        rf.getPakete().add(addedPaket);;
                                         Rectangle paket = new Rectangle(addedPaket.getxPos(), addedPaket.getyPos(), addedPaket.getBreite(), addedPaket.getHoehe());
                                         paket.setFill(addedPaket.getFarbe());
                                         regalComponent.getChildren().add(paket);
+                                        success = true;
+                                        event.setDropCompleted(success);
+                                        event.consume();
+                                    } else {
+                                        Alert a = new Alert(Alert.AlertType.CONFIRMATION);
+                                        a.setContentText("Das Verschieben hat nicht geklappt");
+                                        a.show();
                                     }
 
                                     break;
                                 }
                             }
-                            success = true;
 
                         }
 
-                        event.setDropCompleted(success);
 
-                        event.consume();
                     });
 
 
