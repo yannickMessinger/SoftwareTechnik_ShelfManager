@@ -106,8 +106,16 @@ public class Paket extends Gegenstand{
 
     }
 
-    public void addPaketOnTop(Paket paket) {
-        this.paketsOnTop.add(paket);
+    public boolean addPaketOnTop(Paket paket) {
+        int gesamtgewicht = 0;
+        for (Paket p : paketsOnTop) {
+            gesamtgewicht += p.getGewicht();
+        }
+        if (gesamtgewicht + paket.getGewicht() <= tragkraft) {
+            this.paketsOnTop.add(paket);
+            return true;
+        }
+        return false;
     }
 
 
