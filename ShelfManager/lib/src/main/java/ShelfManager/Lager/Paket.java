@@ -1,6 +1,7 @@
 package ShelfManager.Lager;
 
 
+import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 
 import java.io.BufferedReader;
@@ -62,6 +63,40 @@ public class Paket extends Gegenstand{
         this.yPos = yPos;
         this.unvertraeglichkeiten = unvertraeglichkeiten;
     }
+
+
+    public boolean checkOverlapping(Paket paket) {
+        Point2D l1 = new Point2D(this.xPos, this.yPos);
+        Point2D r1 = new Point2D(this.xPos + this.breite, this.yPos + this.hoehe);
+        Point2D l2 = new Point2D(paket.getxPos(), paket.getyPos());
+        Point2D r2 = new Point2D(paket.getxPos() + paket.getBreite(), paket.getyPos() + paket.getHoehe());
+
+
+        if (l1.getX() == r1.getX() || l1.getY() == r1.getY() || l2.getX() == r2.getX() || l2.getY() == r2.getY()) { return false; }
+
+        // If one rectangle is on left side of other
+        if (l1.getX() >= r2.getX() || l2.getX() >= r1.getX()) { return false; }
+
+        // If one rectangle is above other
+        if (l1.getY() >= r2.getY() || l2.getY() >= r1.getY()) { return false; }
+
+        return true;
+    }
+
+    public boolean overlappingEdges(Paket paket) {
+        Point2D l1 = new Point2D(this.xPos, this.yPos);
+        Point2D r1 = new Point2D(this.xPos + this.breite, this.yPos);
+        Point2D l2 = new Point2D(paket.getxPos(), paket.getyPos() + paket.getHoehe());
+        Point2D r2 = new Point2D(paket.getxPos() + paket.getBreite(), paket.getyPos() + paket.getHoehe());
+
+        if (l2.getX() < l1.getX() || r2.getX() > r1.getX()) {
+            return true;
+        }
+
+        return false;
+
+    }
+
 
 
 //-----GETTER----------------------------

@@ -38,6 +38,59 @@ public class Regalfach extends Gegenstand {
         this.yPos = yPos;
     }
 
+
+    public boolean tryToAddPaket(Paket addedPaket, int xPos, int yPos) {
+        if (this.pakete.isEmpty()) {
+            addedPaket.setyPos(this.getBoden().getyPos() - this.getBoden().getHoehe()/2 - addedPaket.getHoehe());
+            addedPaket.setxPos(xPos);
+            return true;
+        }
+
+        if (addedPaket.getHoehe() > this.getHoehe() || addedPaket.getBreite() > this.getBoden().getBreite()) {
+            return false;
+        }
+
+        //Option: Paket auf anderem platziert
+        for (Paket p : this.getPakete()) {
+            if (p.checkOverlapping(addedPaket)) {
+                System.out.println("OVERLAP");
+                return false;
+            }
+        }
+
+        boolean calculateFinished = false;
+        while (!calculateFinished) {
+            for (Paket p : this.getPakete()) {
+                if (p.checkOverlapping(addedPaket)) {
+                    addedPaket.setyPos(p.getyPos() - addedPaket.getHoehe());
+                    calculateFinished = true;
+                    if (p.overlappingEdges(addedPaket)) {
+                        System.out.println("steht ueber");
+                        return false;
+                    }
+                    break;
+                } else {
+                    addedPaket.setyPos(addedPaket.getyPos()+1);
+                }
+            }
+            if (addedPaket.getyPos() >= this.getBoden().getyPos()) {
+                addedPaket.setyPos(this.getBoden().getyPos() - this.getBoden().getHoehe()/2 - addedPaket.getHoehe());
+                calculateFinished = true;
+            }
+        }
+
+        return true;
+
+        //Option:
+    }
+
+//    public int calculateYPos(Paket paket) {
+//
+//        for (Paket p : this.getPakete()) {
+//
+//        }
+//    }
+
     //-----GETTER----------------------------
 
     public Einlegeboden getBoden() {
