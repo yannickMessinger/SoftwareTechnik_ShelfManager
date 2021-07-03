@@ -1,5 +1,7 @@
 package ShelfManager.Lager;
 
+import javafx.scene.paint.Color;
+
 import java.util.ArrayList;
 
 public class Regalfach extends Gegenstand {
@@ -40,6 +42,12 @@ public class Regalfach extends Gegenstand {
 
 
     public boolean tryToAddPaket(Paket addedPaket) {
+
+        if (!checkUnvertraeglichkeiten(addedPaket)) {
+            return false;
+        }
+
+
         //Paket hoeher oder breiter als Regalfach
         if (addedPaket.getHoehe() > this.getHoehe() || addedPaket.getBreite() > this.getBoden().getBreite()) {
             return false;
@@ -90,6 +98,17 @@ public class Regalfach extends Gegenstand {
         return true;
 
         //Option:
+    }
+
+    public boolean checkUnvertraeglichkeiten(Paket paket) {
+        for (Paket p : this.getPakete()) {
+            for (Color c : paket.getUnvertraeglichkeiten()) {
+                if (c == p.getFarbe()) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
 //    public int calculateYPos(Paket paket) {
