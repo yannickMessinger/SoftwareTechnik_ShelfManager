@@ -82,7 +82,8 @@ public class PackageDetailComponentController extends ViewController {
             currentPackageGewicht.setText("Paketgewicht: " );
             currentPackageTragkraft.setText("Pakettragkraft: ");
             hauptLager.setPaketWasDeleted(false);
-
+            unvertraeglichkeitenFromView.getItems().clear();
+            unvertraeglichkeitenFromView.refresh();
         });
 
         unvertraeglichkeitenFromView.setCellFactory(
