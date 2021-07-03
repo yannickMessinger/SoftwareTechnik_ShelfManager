@@ -29,6 +29,7 @@ public class RegalConfigViewController extends ViewController {
     private ShelfManagerApplication main;
     private RegalConfigView regalConfigView;
     private Regal regal;
+    private final int METERTOCENTIMETER = 100;
 
     private VBox inputBox;
     private TextField hoeheTextField;
@@ -70,10 +71,10 @@ public class RegalConfigViewController extends ViewController {
         submit.addEventHandler(ActionEvent.ACTION, event -> {
 
             try {
-                int hoehe = Integer.parseInt(hoeheTextField.getText());
-                int breite = Integer.parseInt(breiteTextField.getText());
-                int stuetzenhoehe = Integer.parseInt(stuetzenhoeheTextField.getText());
-                int stuetzenbreite = Integer.parseInt(stuetzenbreiteTextField.getText());
+                int hoehe = Integer.parseInt(hoeheTextField.getText()) * METERTOCENTIMETER ;
+                int breite = Integer.parseInt(breiteTextField.getText()) * METERTOCENTIMETER;
+                int stuetzenhoehe = Integer.parseInt(stuetzenhoeheTextField.getText()) * METERTOCENTIMETER;
+                int stuetzenbreite = Integer.parseInt(stuetzenbreiteTextField.getText()) * METERTOCENTIMETER;
                 regal = new Regal(hoehe, breite);
                 regal.addStuetzenByInput(stuetzenhoehe, stuetzenbreite);
                 hoeheTextField.setText("");
