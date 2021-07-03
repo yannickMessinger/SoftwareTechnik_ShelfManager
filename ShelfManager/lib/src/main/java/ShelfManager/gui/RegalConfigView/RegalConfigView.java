@@ -27,7 +27,7 @@ public class RegalConfigView extends BorderPane {
     private Label breiteWarning;
     private Label sHoeheWarning;
     private Label sBreiteWarning;
-
+    private Label einlegeboedenWarning;
 
 
     public RegalConfigView() {
@@ -39,6 +39,7 @@ public class RegalConfigView extends BorderPane {
         this.breiteWarning = new Label("");
         this.sHoeheWarning = new Label("");
         this.sBreiteWarning = new Label("");
+        this.einlegeboedenWarning = new Label("");
 
         //Hoehe------------
         Label hoeheLabel = new Label("Regalhoehe:");
@@ -66,14 +67,15 @@ public class RegalConfigView extends BorderPane {
 
         //Einlegeboeden Button---------------------
         this.submit = new Button("Einlegeboeden hinzufuegen");
+        VBox submitBox = new VBox(submit, einlegeboedenWarning);
 
         //Input------------------------------------
         inputBox = new VBox(hoeheBox, breiteBox, sHoeheBox, sBreiteBox);
 
         //Buttons
-        this.backToLagerView = new Button("zurueck");
-        this.saveRegal = new Button("speichern");
-        HBox bottombox = new HBox(backToLagerView, saveRegal);
+        this.backToLagerView = new Button();
+        this.saveRegal = new Button();
+        HBox bottombox = new HBox(backToLagerView, saveRegal, submitBox);
 
         //setzen fuer Anzeige--------
         this.setTop(viewName);
@@ -95,6 +97,35 @@ public class RegalConfigView extends BorderPane {
         hoeheInputBox.setHgrow(hoeheTextField, Priority.ALWAYS);
         hoeheBox.setSpacing(10);
         hoeheWarning.getStyleClass().add("warning");
+
+        //Breite---------------------------
+        breiteTextField.getStyleClass().add("textField");
+        breiteLabel.getStyleClass().add("titleLabel");
+        //breiteField.setMaxWidth(600);
+        breiteInputBox.setSpacing(10);
+        breiteInputBox.setHgrow(breiteTextField, Priority.ALWAYS);
+        breiteBox.setSpacing(10);
+        breiteWarning.getStyleClass().add("warning");
+
+        //SHoehe----------------------------
+        stuetzenhoeheTextField.getStyleClass().add("textField");
+        stuetzenhoeheLabel.getStyleClass().add("titleLabel");
+        sHoeheInputBox.setSpacing(10);
+        sHoeheInputBox.setHgrow(stuetzenhoeheTextField, Priority.ALWAYS);
+        sHoeheBox.setSpacing(10);
+        sHoeheWarning.getStyleClass().add("warning");
+
+        //SBreite---------------------------
+        stuetzenbreiteTextField.getStyleClass().add("textField");
+        stuetzenbreiteLabel.getStyleClass().add("titleLabel");
+        sBreiteInputBox.setSpacing(10);
+        sBreiteInputBox.setHgrow(stuetzenhoeheTextField, Priority.ALWAYS);
+        sBreiteBox.setSpacing(10);
+        sBreiteWarning.getStyleClass().add("warning");
+
+        //Buttons---------------------------
+        backToLagerView.getStyleClass().addAll("back-icon", "icon-button");
+        saveRegal.getStyleClass().addAll("save-icon", "icon-button");
 
     }
 
@@ -147,5 +178,9 @@ public class RegalConfigView extends BorderPane {
 
     public Label getsBreiteWarning() {
         return sBreiteWarning;
+    }
+
+    public Label getEinlegeboedenWarning() {
+        return einlegeboedenWarning;
     }
 }
