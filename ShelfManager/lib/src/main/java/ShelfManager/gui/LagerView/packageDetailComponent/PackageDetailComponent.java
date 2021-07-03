@@ -18,7 +18,9 @@ public class PackageDetailComponent extends Pane {
     private Label currentPackageBreite;
     private Label currentPackageGewicht;
     private Label currentPackageTragkraft;
+    private Label currentUnvertraeglichkeiten;
     private ListView<Color>  unvertraeglichkeiten;
+
     //Liste bzw. Anzeigemöglichkeit für Unverträglichkeiten hinzufügen
 
     public PackageDetailComponent(){
@@ -33,11 +35,16 @@ public class PackageDetailComponent extends Pane {
         currentPackageBreite = new Label("Breite");
         currentPackageGewicht = new Label("Gewicht");
         currentPackageTragkraft = new Label("Tragkraft");
+        currentUnvertraeglichkeiten = new Label("Unvertraeglichkeiten:");
+
 
 
         VBox detailLabels = new VBox(currentPackageName, currentPackageHoehe, currentPackageBreite, currentPackageGewicht,currentPackageTragkraft);
-        VBox currentPackageInfo = new VBox(rectangleBox, detailLabels);
+        VBox listBox = new VBox(currentUnvertraeglichkeiten, unvertraeglichkeiten);
+        listBox.setPrefHeight(40);
+        VBox currentPackageInfo = new VBox(rectangleBox, detailLabels,listBox);
 
+        //Unverträglichkeitenliste noch in VBox packen, passt aber nicht vom Layout!
 
 
         this.getChildren().addAll(currentPackageInfo);
