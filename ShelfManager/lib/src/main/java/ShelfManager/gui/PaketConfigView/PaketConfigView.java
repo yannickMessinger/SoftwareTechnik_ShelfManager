@@ -21,6 +21,8 @@ public class PaketConfigView extends BorderPane {
     private Button addNewPaket;
     private Button getBackToLagerView;
     private Button addUnvertraeglichkeit;
+    private Button removeUnvertraeglichkeit;
+    private ListView<Color> unvertraeglichkeitenList;
 
     //Warnings----
     private Label nameWarning;
@@ -90,9 +92,13 @@ public class PaketConfigView extends BorderPane {
 
         //Unvertraeglcihkeiten---------------
         Label unvertraeglMit = new Label("Unvertr. mit:");
+        Label aktUnvertraeglichkeiten = new Label("akuelle Unvertr.: ");
         unvertraeglichkeiten = new ColorPicker();
         addUnvertraeglichkeit = new Button(("Unvertraeglichkeit hinzufuegen"));
-        HBox unvertraeglichkeitenBox = new HBox( unvertraeglichkeiten, addUnvertraeglichkeit);
+        removeUnvertraeglichkeit = new Button("Unvertraeg. loeschen");
+        HBox unvertraeglichkeitenBox = new HBox( unvertraeglichkeiten, addUnvertraeglichkeit, removeUnvertraeglichkeit);
+        Rectangle unverT1, unverT2, unverT3, unverT4, unverT5;
+        HBox showAktUnvertraeglichkeiten = new HBox(aktUnvertraeglichkeiten,unvertraeglichkeitenList = new ListView<Color>());
         HBox unvertraeglichkeitenBoxAll = new HBox(unvertraeglMit,unvertraeglichkeitenBox);
 
         //Buttons----------------------------
@@ -102,7 +108,7 @@ public class PaketConfigView extends BorderPane {
         getBackToLagerView = new Button();
         HBox buttonBox = new HBox(getBackToLagerView, spacer, addNewPaket);
 
-        VBox inputBox = new VBox(viewName, nameBox, hoeheBox, breiteBox, gewichtBox, tragKraftBox, colorBox, unvertraeglichkeitenBoxAll, buttonBox);
+        VBox inputBox = new VBox(viewName, nameBox, hoeheBox, breiteBox, gewichtBox, tragKraftBox, colorBox, unvertraeglichkeitenBoxAll, showAktUnvertraeglichkeiten, buttonBox);
         this.setCenter(inputBox);
 
 
@@ -206,6 +212,12 @@ public class PaketConfigView extends BorderPane {
 
     public Button getAddNewPaket() {
         return addNewPaket;
+    }
+
+    public Button getRemoveUnvertraeglichkeit(){return removeUnvertraeglichkeit;}
+
+    public ListView<Color> getUnvertraeglichkeitenList() {
+        return unvertraeglichkeitenList;
     }
 
     /*public ComboBox<Color> getColor() {

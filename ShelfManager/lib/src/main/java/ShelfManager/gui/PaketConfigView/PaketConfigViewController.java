@@ -5,13 +5,18 @@ import ShelfManager.Lager.Paket;
 import ShelfManager.ShelfManagerApplication;
 import ShelfManager.gui.Scenes;
 import ShelfManager.gui.ViewController;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.*;
 
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -36,7 +41,10 @@ public class PaketConfigViewController extends ViewController {
     private Button addUnvertraeglichkeit;
     private ColorPicker unvertraeglichkeiten;
     private ListView<Paket> existingPakets;
-    private ArrayList<Color> collectUnvertraeglichkeiten;
+    private ObservableList<Color> collectUnvertraeglichkeiten;
+    private ListView<Color> unvertraeglichkeitenList;
+    private Button removeUnvertraeglichkeit;
+
 
     //Warnings----
     private Label nameWarning;
@@ -67,7 +75,10 @@ public class PaketConfigViewController extends ViewController {
         this.backToLagerView = paketConfigView.getBackToLagerView();
         this.addUnvertraeglichkeit = paketConfigView.getAddUnvertraeglichkeit();
         this.unvertraeglichkeiten = paketConfigView.getUnvertraeglichkeiten();
-        this.collectUnvertraeglichkeiten = new ArrayList<>();
+        this.collectUnvertraeglichkeiten = FXCollections.observableArrayList();
+        this.unvertraeglichkeitenList = paketConfigView.getUnvertraeglichkeitenList();
+        this.removeUnvertraeglichkeit = paketConfigView.getRemoveUnvertraeglichkeit();
+
 
         rootView = this.paketConfigView;
         initialize();
@@ -75,6 +86,9 @@ public class PaketConfigViewController extends ViewController {
 
     @Override
     public void initialize() {
+
+
+
 
 
         addNewPaket.addEventHandler(ActionEvent.ACTION, event -> {
@@ -154,6 +168,7 @@ public class PaketConfigViewController extends ViewController {
                     paketToAdd.getUnvertraeglichkeiten().add(c);
                 }
 
+
                 this.collectUnvertraeglichkeiten.clear();
                 hauptLager.addPaketToList(paketToAdd);
                 hauptLager.addPaketToAllPakets(paketToAdd);
@@ -175,11 +190,49 @@ public class PaketConfigViewController extends ViewController {
             main.switchScene(Scenes.LAGER_VIEW);
         });
 
+
+
+
+
         addUnvertraeglichkeit.addEventHandler(ActionEvent.ACTION, event -> {
             Color unvertraeglichkeit = paketConfigView.getUnvertraeglichkeiten().getValue();
             collectUnvertraeglichkeiten.add(unvertraeglichkeit);
 
+
+
+
         });
+
+        collectUnvertraeglichkeiten.addListener(new ListChangeListener<Color>() {
+            @Override
+            public void onChanged(Change<? extends Color> c) {
+                unvertraeglichkeitenList.getItems().clear();
+                unvertraeglichkeitenList.getItems().addAll(collectUnvertraeglichkeiten);
+            }
+        });
+
+        unvertraeglichkeitenList.setCellFactory(
+
+                new Callback<ListView<Color>, ListCell<Color>>() {
+                    @Override
+                    public ListCell<Color> call(ListView<Color> v) {
+                        return new UnvertraeglichkeitCell();
+                    }
+                });
+
+
+
+        removeUnvertraeglichkeit.addEventHandler(ActionEvent.ACTION, event ->{
+
+            Color  aktUnvertraeglichkeit = unvertraeglichkeitenList.getSelectionModel().getSelectedItem();
+            if(aktUnvertraeglichkeit != null) {
+                collectUnvertraeglichkeiten.remove(aktUnvertraeglichkeit);
+            }
+
+        });
+
+
+
 
     }
 
