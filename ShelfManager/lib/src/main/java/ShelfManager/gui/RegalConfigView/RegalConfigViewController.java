@@ -3,14 +3,12 @@ package ShelfManager.gui.RegalConfigView;
 import ShelfManager.Lager.*;
 import ShelfManager.Lager.Exceptions.LagerVollException;
 import ShelfManager.ShelfManagerApplication;
-import ShelfManager.gui.RegalConfigView.EinlegebodenList.EinlegebodenCell;
 import ShelfManager.gui.RegalConfigView.EinlegebodenList.EinlegebodenListView;
 import ShelfManager.gui.RegalConfigView.EinlegebodenList.EinlegebodenListViewController;
 import ShelfManager.gui.RegalComponent.RegalComponent;
 import ShelfManager.gui.RegalComponent.RegalComponentController;
 import ShelfManager.gui.Scenes;
 import ShelfManager.gui.ViewController;
-import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -20,7 +18,6 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Comparator;
 
