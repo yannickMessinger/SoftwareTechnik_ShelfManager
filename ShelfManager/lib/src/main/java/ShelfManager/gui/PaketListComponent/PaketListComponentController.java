@@ -43,13 +43,10 @@ public class PaketListComponentController extends ViewController {
         this.filterColor = paketListComponent.getFilterColor();
         this.showFilterPakets = paketListComponent.getFilter();
         this.showAll = paketListComponent.getShowAll();
-
         rootView = this.paketListComponent;
         initialize();
 
     }
-
-
 
     @Override
     public void initialize() {
@@ -90,13 +87,6 @@ public class PaketListComponentController extends ViewController {
             }
         });
 
-
-
-
-
-
-
-
         pakete.addListener((ListChangeListener<Paket>) change -> {
             System.out.println(change);
             uiModel.clear();
@@ -121,10 +111,6 @@ public class PaketListComponentController extends ViewController {
             uiModel.addAll(pakete);
             createdPaketsListView.refresh();
         });
-
-
-
-
 
 
         createdPaketsListView.setOnMouseClicked(new EventHandler<MouseEvent>() {

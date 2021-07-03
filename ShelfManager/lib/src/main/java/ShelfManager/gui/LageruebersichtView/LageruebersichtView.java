@@ -2,6 +2,7 @@ package ShelfManager.gui.LageruebersichtView;
 
 import ShelfManager.Lager.Lager;
 import ShelfManager.Lager.Paket;
+import ShelfManager.gui.PaketListComponent.PaketListComponent;
 import ShelfManager.gui.PaketListComponent.PaketListComponentController;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -14,9 +15,9 @@ import javafx.util.Callback;
 
 import java.util.ArrayList;
 
-public class LageruebersichtView extends BorderPane {
+public class LageruebersichtView<paketListComponent> extends BorderPane {
 
-    private ComboBox filterBox;
+
     private Button backToLagerView;
     private Button speicheren;
     private ListView<Paket> paketlistView;
@@ -27,24 +28,13 @@ public class LageruebersichtView extends BorderPane {
         paketListComponentController = new PaketListComponentController(hauptLager);
         paketlistView = new ListView<>();
 
+
         //Titel
         Label viewName = new Label("LageruebersichtView");
 
-        //FilterFarbe
-        this.filterBox = new ComboBox();
-        this.filterBox.getItems().addAll(
-                "Alle",
-                new Rectangle(15, 15, Color.RED),
-                new Rectangle(15, 15, Color.GREEN),
-                new Rectangle(15, 15, Color.BLUE));
-        filterBox.setPromptText("Frabe auswaelen");
-
 
         //FilterName
-        Label filterName = new Label("Filter");
-        HBox filter = new HBox();
-        filter.getChildren().addAll(filterName, filterBox);
-        filter.setSpacing(10);
+        Label ViewInfo = new Label("Lagerbestand als PDF-Datei speicheren ");
 
 
         //Button
@@ -59,7 +49,7 @@ public class LageruebersichtView extends BorderPane {
 
 
         //Position
-        VBox inputBox = new VBox(viewName, filter, paketListBox);
+        VBox inputBox = new VBox(viewName, ViewInfo, paketListBox);
         this.setCenter(inputBox);
         this.setBottom(buttonBox);
 
@@ -76,9 +66,9 @@ public class LageruebersichtView extends BorderPane {
         //viewName
         viewName.setId("title");
 
-        //Filter
-        filterName.getStyleClass().add("titleLabel");
-        filterBox.getStyleClass().add("style-button-simple");
+
+
+        ViewInfo.getStyleClass().add("titleLabel");
 
 
         //Buttons---------------------------
@@ -91,9 +81,6 @@ public class LageruebersichtView extends BorderPane {
 
     }
 
-    public ComboBox getFilterBox() {
-        return filterBox;
-    }
 
     public Button getBackToLagerView() {
         return backToLagerView;
@@ -103,7 +90,7 @@ public class LageruebersichtView extends BorderPane {
         return speicheren;
     }
 
-    public ListView<Paket> getPaketlistView() {
-        return paketlistView;
-    }
+    public ListView<Paket> getPaketlistView() { return paketlistView; }
+
+
 }
