@@ -5,11 +5,13 @@ import ShelfManager.Lager.Regal;
 import ShelfManager.Lager.Stuetze;
 import ShelfManager.gui.ViewController;
 import javafx.collections.ObservableList;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Line;
+import javafx.scene.transform.Transform;
 
 public class RegalComponentController extends ViewController {
 
@@ -74,6 +76,17 @@ public class RegalComponentController extends ViewController {
             ClipboardContent cc = new ClipboardContent();
             cc.putString(String.valueOf(installedEinlegeboeden.indexOf(einlegeboden)));
             db.setContent(cc);
+
+            //Einlegeboden DragView
+            Line line = new Line();
+            line.setStartX(0);
+            line.setStartY(einlegeboden.getyPos());
+            line.setEndX(regal.getBreite());
+            line.setEndY(einlegeboden.getyPos());
+            line.setStrokeWidth(einlegeboden.getHoehe());
+            SnapshotParameters snapshotParameters = new SnapshotParameters();
+            snapshotParameters.setTransform(Transform.scale(2,2));
+            db.setDragView(line.snapshot(snapshotParameters, null), 0, 0);
         });
 
         bodenline.setOnDragDone(event -> {

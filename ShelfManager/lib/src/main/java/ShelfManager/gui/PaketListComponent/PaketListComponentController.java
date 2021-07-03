@@ -9,6 +9,7 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ListCell;
@@ -19,6 +20,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.transform.Transform;
 import javafx.util.Callback;
 
 
@@ -66,11 +69,20 @@ public class PaketListComponentController extends ViewController {
                         ClipboardContent cc = new ClipboardContent();
                         cc.putString(String.valueOf(cell.getIndex()));
                         db.setContent(cc);
+
+                        Rectangle rectangle = new Rectangle(cell.getItem().getBreite(), cell.getItem().getHoehe(), cell.getItem().getFarbe());
+                        SnapshotParameters snapshotParameters = new SnapshotParameters();
+                        snapshotParameters.setTransform(Transform.scale(2,2));
+//                        db.setDragView(rectangle.snapshot(snapshotParameters, null), event.getX(), event.getY());
+                        db.setDragView(rectangle.snapshot(snapshotParameters, null), 0, 0);
                     }
                 });
 
                 cell.setOnDragDone(event -> {
-                    pakete.remove(cell.getItem());
+                    if (event.getTransferMode() == TransferMode.MOVE) {
+                        pakete.remove(cell.getItem());
+                    }
+                    event.consume();
                 });
 
 

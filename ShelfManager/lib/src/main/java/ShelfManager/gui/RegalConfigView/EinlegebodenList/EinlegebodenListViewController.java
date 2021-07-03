@@ -8,12 +8,16 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.transform.Transform;
 import javafx.util.Callback;
 
 public class EinlegebodenListViewController extends ViewController {
@@ -58,11 +62,25 @@ public class EinlegebodenListViewController extends ViewController {
                         ClipboardContent cc = new ClipboardContent();
                         cc.putString(String.valueOf(cell.getIndex()));
                         db.setContent(cc);
+
+                        //Einlegeboden DragView
+                        Line line = new Line();
+                        line.setStartX(0);
+                        line.setStartY(cell.getItem().getyPos());
+                        line.setEndX(regal.getBreite());
+                        line.setEndY(cell.getItem().getyPos());
+                        line.setStrokeWidth(cell.getItem().getHoehe());
+                        SnapshotParameters snapshotParameters = new SnapshotParameters();
+                        snapshotParameters.setTransform(Transform.scale(2,2));
+                        db.setDragView(line.snapshot(snapshotParameters, null), event.getX(), event.getY());
                     }
                 });
 
                 cell.setOnDragDone(event -> {
-                    einlegeboeden.remove(cell.getItem());
+                    if (event.getTransferMode() == TransferMode.MOVE) {
+                        einlegeboeden.remove(cell.getItem());
+                    }
+                    event.consume();
                 });
 
                 return cell;
