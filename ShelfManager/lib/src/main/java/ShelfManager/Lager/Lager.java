@@ -1,5 +1,6 @@
 package ShelfManager.Lager;
 
+import ShelfManager.Lager.Exceptions.LagerVollException;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -78,10 +79,13 @@ public class Lager extends Gegenstand {
      * ob das gewuenschte Regal in das Lager passt
      * @param regalToAdd
      */
-    public void addRegal(Regal regalToAdd) {
+    public void addRegal(Regal regalToAdd) throws LagerVollException {
         int verfuegbarerPlatz = breite;
         for (Regal r: observableRegalList) {
             verfuegbarerPlatz = verfuegbarerPlatz - r.getBreite();
+        }
+        if( verfuegbarerPlatz <= 0) {
+            throw  new LagerVollException();
         }
 
         if (regalToAdd.getHoehe() <= hoehe && regalToAdd.getBreite() <= verfuegbarerPlatz){
