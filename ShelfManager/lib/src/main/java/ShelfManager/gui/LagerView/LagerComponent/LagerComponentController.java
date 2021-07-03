@@ -5,11 +5,14 @@ import ShelfManager.gui.RegalComponent.RegalComponent;
 import ShelfManager.gui.ViewController;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Alert;
+import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.transform.Transform;
 
 public class LagerComponentController extends ViewController {
 
@@ -100,7 +103,7 @@ public class LagerComponentController extends ViewController {
                     });
 
                     regalComponent.setOnDragExited(event -> {
-                        regalComponent.setStyle("-fx-background-color: rgba(120, 140, 120, 1)");
+                        regalComponent.setStyle("-fx-background-color: rgba(120, 140, 120, 0)");
 
                         event.consume();
                     });
@@ -110,20 +113,39 @@ public class LagerComponentController extends ViewController {
                         boolean success = false;
                         if (db.hasString()) {
                             System.out.println("DROPPED on target: " + db.getString());
-                            Paket addedPaket = lager.getObservablePaketList().get(Integer.parseInt(db.getString()));
+
+                            Paket addedPaket;
+                            if (event.getGestureSource().getClass().getName().equals("ShelfManager.gui.PaketListComponent.PaketCell")) {
+                                addedPaket = lager.getObservablePaketList().get(Integer.parseInt(db.getString()));
+                            } else {
+                                addedPaket = lager.getAllPakets().get(Integer.parseInt(db.getString()));
+                            }
+
                             int yPos = (int) event.getY();
                             int xPos = (int) event.getX();
 
                             //find regalfach
                             for (int j = r.getRegalfaecher().size()-1; j >= 0; j--) {
                                 Regalfach rf = r.getRegalfaecher().get(j);
+
+                                if (j == r.getRegalfaecher().size()-1) {
+                                    if (rf.getBoden().getyPos() <= yPos) {
+                                        Alert a = new Alert(Alert.AlertType.CONFIRMATION);
+                                        a.setContentText("Das Verschieben hat nicht geklappt");
+                                        a.show();
+                                        break;
+                                    }
+                                }
+
                                 if (rf.getyPos() <= yPos) {
                                     addedPaket.setxPos(xPos);
                                     addedPaket.setyPos(yPos);
                                     if (rf.tryToAddPaket(addedPaket)) {
                                         rf.getPakete().add(addedPaket);
+                                        lager.getAllPakets().add(addedPaket);
                                         Rectangle paket = new Rectangle(addedPaket.getxPos(), addedPaket.getyPos(), addedPaket.getBreite(), addedPaket.getHoehe());
                                         paket.setFill(addedPaket.getFarbe());
+                                        addDragAndDropFunctionToPaket(rf, addedPaket, paket, regalComponent);
                                         regalComponent.getChildren().add(paket);
                                         success = true;
                                         event.setDropCompleted(success);
@@ -143,9 +165,6 @@ public class LagerComponentController extends ViewController {
 
                     });
 
-
-
-
                     addRegalComponent(regalComponent);
                 }
 
@@ -157,4 +176,29 @@ public class LagerComponentController extends ViewController {
         lagerComponent.getChildren().add(regalComponent);
     }
 
+    public void addDragAndDropFunctionToPaket(Regalfach rf, Paket addedPaket, Rectangle paket, RegalComponent regalComponent) {
+        //TODO: erstmal nur ein Paket (Stapel nicht berücksichtigt)
+
+        paket.setOnDragDetected(event -> {
+            if (addedPaket!=null) {
+                Dragboard db = paket.startDragAndDrop(TransferMode.MOVE);
+                ClipboardContent cc = new ClipboardContent();
+                cc.putString(String.valueOf(lager.getAllPakets().indexOf(addedPaket)));
+                db.setContent(cc);
+
+                Rectangle rectangle = new Rectangle(addedPaket.getBreite(), addedPaket.getHoehe(), addedPaket.getFarbe());
+                SnapshotParameters snapshotParameters = new SnapshotParameters();
+                snapshotParameters.setTransform(Transform.scale(2,2));
+                db.setDragView(rectangle.snapshot(snapshotParameters, null), 0, 0);
+            }
+        });
+
+        paket.setOnDragDone(event -> {
+            if (event.getTransferMode() == TransferMode.MOVE) {
+                rf.getPakete().remove(addedPaket);
+                regalComponent.getChildren().remove(paket);
+            }
+            event.consume();
+        });
+    }
 }
