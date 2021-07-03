@@ -91,7 +91,8 @@ public class RegalConfigViewController extends ViewController {
                 } else if (Integer.parseInt(hoeheTextField.getText()) > hauptLager.getHoehe()){
                     hoeheWarning.setText("Das Regal ist zu hoch für das Lager");
                 } else {
-                    hoehe = Integer.parseInt(hoeheTextField.getText()) * METERTOCENTIMETER ;
+                    //hoehe = Integer.parseInt(hoeheTextField.getText()) * METERTOCENTIMETER ;
+                    hoehe = Integer.parseInt(hoeheTextField.getText());
                     hoeheWarning.setText("");
                 }
 
@@ -102,7 +103,8 @@ public class RegalConfigViewController extends ViewController {
                     //Hier vllt schon auf übrigen Platz im Lager testen?????
                    breiteWarning.setText("Das Regal ist zu breit für das Lager");
                 } else {
-                    breite = Integer.parseInt(breiteTextField.getText()) * METERTOCENTIMETER;
+                    //breite = Integer.parseInt(breiteTextField.getText()) * METERTOCENTIMETER;
+                    breite = Integer.parseInt(breiteTextField.getText());
                     breiteWarning.setText("");
                 }
 
@@ -112,7 +114,8 @@ public class RegalConfigViewController extends ViewController {
                 } else if (Integer.parseInt(stuetzenbreiteTextField.getText()) > hauptLager.getHoehe()){
                     sHoeheWarning.setText("Die Stütze ist zu hoch für das Lager");
                 } else {
-                    stuetzenhoehe = Integer.parseInt(breiteTextField.getText()) * METERTOCENTIMETER;
+                    //stuetzenhoehe = Integer.parseInt(breiteTextField.getText()) * METERTOCENTIMETER;
+                    stuetzenhoehe = Integer.parseInt(breiteTextField.getText());
                     sHoeheWarning.setText("");
                 }
 
@@ -122,7 +125,8 @@ public class RegalConfigViewController extends ViewController {
                 } else if (Integer.parseInt(stuetzenbreiteTextField.getText()) > Integer.parseInt(breiteTextField.getText())){
                     sBreiteWarning.setText("Die Stütze ist Breiter als das Regal, das ist Unsinn");
                 } else {
-                    stuetzenbreite = Integer.parseInt(breiteTextField.getText()) * METERTOCENTIMETER;
+                    //stuetzenbreite = Integer.parseInt(breiteTextField.getText()) * METERTOCENTIMETER;
+                    stuetzenbreite = Integer.parseInt(breiteTextField.getText());
                     sBreiteWarning.setText("");
                 }
 
