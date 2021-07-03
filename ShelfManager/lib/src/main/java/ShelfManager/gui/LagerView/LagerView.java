@@ -31,13 +31,16 @@ public class LagerView extends BorderPane {
         packageDetailComponentController = new PackageDetailComponentController(hauptLager);
         lagerComponentController = new LagerComponentController(hauptLager);
 
-        createPacketButton = new Button("neues Paket");
+        createPacketButton = new Button();
+        createPacketButton.getStyleClass().addAll("package-icon", "icon-button");
         HBox centerBox = new HBox(lagerComponentController.getRootView(), createPacketButton);
 
         VBox rightComponents = new VBox(paketListComponentController.getRootView(),packageDetailComponentController.getRootView());
 
-        createShelfButton = new Button("neues Regal");
-        lageruebersichtButton = new Button("Lageruebersicht");
+        createShelfButton = new Button();
+        createShelfButton.getStyleClass().addAll("shelf-icon", "icon-button");
+        lageruebersichtButton = new Button();
+        lageruebersichtButton.getStyleClass().addAll("overview-icon", "icon-button");
         HBox box = new HBox(lageruebersichtButton, createShelfButton);
 
         //---fuer Anzeige setzen-----

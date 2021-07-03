@@ -99,8 +99,6 @@ public class PaketConfigView extends BorderPane {
         paketColorBox.setPadding(new Insets(0, 0, 5, 24));
 
 
-
-
         //Unvertraeglcihkeiten---------------
         Label unvertraeglMit = new Label("Unvertr. mit:");
         unvertraeglMit.getStyleClass().add("titleLabel");
@@ -115,14 +113,13 @@ public class PaketConfigView extends BorderPane {
         unvertraeglichkeitenBox.setPadding(new Insets(0, 0, 5, 20));
 
 
-
-
-
         //Buttons----------------------------
-        addNewPaket = new Button("Paket hinzufuegen");
+        addNewPaket = new Button();
+        addNewPaket.getStyleClass().addAll("add-icon", "icon-button");
         Region spacer = new Region();
 
-        getBackToLagerView = new Button("zurueck");
+        getBackToLagerView = new Button();
+        getBackToLagerView.getStyleClass().addAll("back-icon", "icon-button");
         HBox buttonBox = new HBox(getBackToLagerView, spacer, addNewPaket);
 
         VBox inputBox = new VBox(viewName, nameBox, hoeheBox, breiteBox, gewichtBox, tragKraftBox, colorBox, unvertraeglichkeitenBoxAll, buttonBox);
@@ -131,7 +128,6 @@ public class PaketConfigView extends BorderPane {
         //---STYLE-----------------------------------------
         inputBox.setPadding(new Insets(60));
         inputBox.setSpacing(20);
-
 
         nameInputBox.setSpacing(10);
         nameInputBox.setHgrow(nameField, Priority.ALWAYS);
@@ -159,7 +155,6 @@ public class PaketConfigView extends BorderPane {
 
         buttonBox.setSpacing(10);
         buttonBox.setHgrow(spacer, Priority.ALWAYS);
-
 
 
         this.getStyleClass().addAll("background");
