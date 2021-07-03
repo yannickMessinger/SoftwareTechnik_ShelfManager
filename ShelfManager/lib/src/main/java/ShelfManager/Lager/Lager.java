@@ -116,7 +116,22 @@ public class Lager extends Gegenstand {
     }
 
 
+    /**
+     * Entfernt Paket aus der ObservableList
+     * @param p zu löschendes Paket
+     */
 
+    public void removePaketFromList(Paket p){
+        observablePaketList.remove(p);
+    }
+
+    /**
+     * Entfernt Paket aus der allPakets Liste
+     * @param p zu löschendes Paket
+     */
+    public void removePaketFromAllPakets(Paket p){
+        allPakets.remove(p);
+    }
 
     //-----GETTER----------------------------
     public int getHoehe() {

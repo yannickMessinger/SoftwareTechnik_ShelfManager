@@ -34,6 +34,7 @@ public class PaketListComponentController extends ViewController {
     private Lager hauptLager;
     private Button showFilterPakets;
     private Button showAll;
+    private Button removePacket;
 
 
     public PaketListComponentController(Lager hauptLager) {
@@ -43,7 +44,7 @@ public class PaketListComponentController extends ViewController {
         this.filterColor = paketListComponent.getFilterColor();
         this.showFilterPakets = paketListComponent.getFilter();
         this.showAll = paketListComponent.getShowAll();
-
+        this.removePacket = paketListComponent.getRemovePacket();
         rootView = this.paketListComponent;
         initialize();
 
@@ -91,7 +92,16 @@ public class PaketListComponentController extends ViewController {
         });
 
 
+        removePacket.addEventHandler(ActionEvent.ACTION, event ->{
 
+            Paket  deletePacket = createdPaketsListView.getSelectionModel().getSelectedItem();
+            if(deletePacket != null) {
+               hauptLager.removePaketFromList(deletePacket);
+               hauptLager.removePaketFromList(deletePacket);
+
+            }
+
+        });
 
 
 
@@ -127,19 +137,10 @@ public class PaketListComponentController extends ViewController {
 
 
 
-        createdPaketsListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
-            @Override
-            public void handle(MouseEvent click) {
-                Paket aktPaket;
-                if (click.getClickCount() == 2) {
 
-                    aktPaket = createdPaketsListView.getSelectionModel().getSelectedItem();
-                    hauptLager.setAktPaket(aktPaket);
-                    System.out.println("Paket gewählt" + createdPaketsListView.getSelectionModel().getSelectedItem());
-                }
-            }
-        });
+
+
 
     }
 

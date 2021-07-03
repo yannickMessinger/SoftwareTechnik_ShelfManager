@@ -194,6 +194,9 @@ public class PaketConfigViewController extends ViewController {
 
 
 
+
+
+
         addUnvertraeglichkeit.addEventHandler(ActionEvent.ACTION, event -> {
             Color unvertraeglichkeit = paketConfigView.getUnvertraeglichkeiten().getValue();
             collectUnvertraeglichkeiten.add(unvertraeglichkeit);
