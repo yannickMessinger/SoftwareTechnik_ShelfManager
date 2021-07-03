@@ -21,6 +21,7 @@ public class Paket extends Gegenstand{
     private int xPos;
     private int yPos;
     private ArrayList<Color> unvertraeglichkeiten;
+    private ArrayList<Paket> paketsOnTop;
 
 
     /**
@@ -38,6 +39,7 @@ public class Paket extends Gegenstand{
         this.xPos = 0;
         this.yPos = 0;
         this.unvertraeglichkeiten = new ArrayList<>();
+        this.paketsOnTop = new ArrayList<>();
     }
 
     /**
@@ -62,6 +64,8 @@ public class Paket extends Gegenstand{
         this.xPos = xPos;
         this.yPos = yPos;
         this.unvertraeglichkeiten = unvertraeglichkeiten;
+        // TODO:
+        //this.paketsOnTop = paketsOnTop;
     }
 
 
@@ -100,6 +104,10 @@ public class Paket extends Gegenstand{
 
         return false;
 
+    }
+
+    public void addPaketOnTop(Paket paket) {
+        this.paketsOnTop.add(paket);
     }
 
 

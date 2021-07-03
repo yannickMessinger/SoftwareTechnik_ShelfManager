@@ -84,6 +84,7 @@ public class Regalfach extends Gegenstand {
                         System.out.println("steht ueber");
                         return false;
                     }
+                    p.addPaketOnTop(addedPaket);
                     break;
                 } else {
                     addedPaket.setyPos(addedPaket.getyPos()+1);

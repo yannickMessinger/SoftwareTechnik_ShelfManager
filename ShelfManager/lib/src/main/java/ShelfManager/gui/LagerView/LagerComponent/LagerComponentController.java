@@ -121,7 +121,7 @@ public class LagerComponentController extends ViewController {
                                     addedPaket.setxPos(xPos);
                                     addedPaket.setyPos(yPos);
                                     if (rf.tryToAddPaket(addedPaket)) {
-                                        rf.getPakete().add(addedPaket);;
+                                        rf.getPakete().add(addedPaket);
                                         Rectangle paket = new Rectangle(addedPaket.getxPos(), addedPaket.getyPos(), addedPaket.getBreite(), addedPaket.getHoehe());
                                         paket.setFill(addedPaket.getFarbe());
                                         regalComponent.getChildren().add(paket);

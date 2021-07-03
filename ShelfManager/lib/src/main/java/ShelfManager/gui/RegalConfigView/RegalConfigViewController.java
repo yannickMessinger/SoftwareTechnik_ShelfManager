@@ -115,7 +115,7 @@ public class RegalConfigViewController extends ViewController {
                     sHoeheWarning.setText("Die Stütze ist zu hoch für das Lager");
                 } else {
                     //stuetzenhoehe = Integer.parseInt(breiteTextField.getText()) * METERTOCENTIMETER;
-                    stuetzenhoehe = Integer.parseInt(breiteTextField.getText());
+                    stuetzenhoehe = Integer.parseInt(stuetzenhoeheTextField.getText());
                     sHoeheWarning.setText("");
                 }
 
