@@ -1,6 +1,7 @@
 package ShelfManager.gui.RegalConfigView;
 
 import ShelfManager.Lager.*;
+import ShelfManager.Lager.Exceptions.LagerVollException;
 import ShelfManager.ShelfManagerApplication;
 import ShelfManager.gui.RegalConfigView.EinlegebodenList.EinlegebodenCell;
 import ShelfManager.gui.RegalConfigView.EinlegebodenList.EinlegebodenListView;
@@ -39,14 +40,18 @@ public class RegalConfigViewController extends ViewController {
     private Button submit;
     private Button backToLagerView;
     private Button saveRegal;
-    private Label warning;
+
+    //Warnings----
+    private Label hoeheWarning;
+    private Label breiteWarning;
+    private Label sHoeheWarning;
+    private Label sBreiteWarning;
 
     public RegalConfigViewController(Lager hauptLager, ShelfManagerApplication main) {
         this.hauptLager = hauptLager;
         this.main = main;
         this.regalConfigView = new RegalConfigView();
 
-        this.warning = regalConfigView.getWarning();
         this.inputBox = regalConfigView.getInputBox();
         this.hoeheTextField = regalConfigView.getHoeheTextField();
         this.breiteTextField = regalConfigView.getBreiteTextField();
@@ -91,7 +96,7 @@ public class RegalConfigViewController extends ViewController {
 
         saveRegal.addEventHandler(ActionEvent.ACTION, event -> {
             if (regal.getInstalledEinlegeboeden().isEmpty()) {
-                warning.setText("Das Regal kann ohne Einlegeboeden doch nicht stehen! :(");
+                //warning.setText("Das Regal kann ohne Einlegeboeden doch nicht stehen! :(");
             } else {
                 if (regal != null) {
                     // Regalfächer berechnen
@@ -110,7 +115,11 @@ public class RegalConfigViewController extends ViewController {
                             regal.getRegalfaecher().add(newRegalfach);
                         }
                     }
-                    hauptLager.addRegal(regal);
+                    try {
+                        hauptLager.addRegal(regal);
+                    } catch (LagerVollException e) {
+                        e.printStackTrace();
+                    }
                     regalConfigView.setCenter(inputBox);
                     main.switchScene(Scenes.LAGER_VIEW);
                 }
