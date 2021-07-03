@@ -35,7 +35,7 @@ public class PaketConfigView extends BorderPane {
     public PaketConfigView() {
 
         Label viewName = new Label("Erstelle ein neues Paket");
-        viewName.setId("title");
+
 
         //Warnings----
         nameWarning = new Label("");
@@ -109,9 +109,11 @@ public class PaketConfigView extends BorderPane {
         //-------------------------------------------------------------------
         //---------------------------STYLE-----------------------------------
         //-------------------------------------------------------------------
-        inputBox.setPadding(new Insets(60));
-        inputBox.setSpacing(20);
+        inputBox.setPadding(new Insets(40));
+        inputBox.setSpacing(10);
 
+        //Name---------------------------
+        viewName.setId("title");
 
         //Name---------------------------
         nameField.getStyleClass().add("textField");
@@ -161,6 +163,7 @@ public class PaketConfigView extends BorderPane {
         //Farbe---------------------------
         paketFarbe.getStyleClass().add("titleLabel");
         colorBox.setSpacing(10);
+        paketColorBox.setPadding(new Insets(0, 0, 5, 24));
 
         //Unverträglichkeiten---------------
         addUnvertraeglichkeit.setId("style-button-simple");

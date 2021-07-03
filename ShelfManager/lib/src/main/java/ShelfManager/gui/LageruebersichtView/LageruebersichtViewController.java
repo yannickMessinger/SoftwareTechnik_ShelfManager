@@ -9,6 +9,7 @@ import ShelfManager.gui.ViewController;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
@@ -88,8 +89,11 @@ public class LageruebersichtViewController extends ViewController {
             paketlistView.refresh();
         });*/
 
-        
-        
+
+        filterBox.setOnAction((Event ev) -> {
+
+        });
+
         //Lagerübersicht speicheren 
 
 
