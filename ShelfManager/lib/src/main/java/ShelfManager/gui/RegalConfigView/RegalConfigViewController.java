@@ -43,11 +43,20 @@ public class RegalConfigViewController extends ViewController {
     private Label breiteWarning;
     private Label sHoeheWarning;
     private Label sBreiteWarning;
+    private Label einlegeboedenWarning;
+
 
     public RegalConfigViewController(Lager hauptLager, ShelfManagerApplication main) {
         this.hauptLager = hauptLager;
         this.main = main;
         this.regalConfigView = new RegalConfigView();
+
+        //Warnings----
+        hoeheWarning = regalConfigView.getHoeheWarning();
+        breiteWarning = regalConfigView.getBreiteWarning();
+        sHoeheWarning = regalConfigView.getsHoeheWarning();
+        sBreiteWarning = regalConfigView.getsBreiteWarning();
+        einlegeboedenWarning = regalConfigView.getEinlegeboedenWarning();
 
         this.inputBox = regalConfigView.getInputBox();
         this.hoeheTextField = regalConfigView.getHoeheTextField();
@@ -71,29 +80,67 @@ public class RegalConfigViewController extends ViewController {
         });
 
         submit.addEventHandler(ActionEvent.ACTION, event -> {
+            int hoehe = 0;
+            int breite = 0;
+            int stuetzenhoehe = 0;
+            int stuetzenbreite = 0;
 
-            try {
-                int hoehe = Integer.parseInt(hoeheTextField.getText()) * METERTOCENTIMETER ;
-                int breite = Integer.parseInt(breiteTextField.getText()) * METERTOCENTIMETER;
-                int stuetzenhoehe = Integer.parseInt(stuetzenhoeheTextField.getText()) * METERTOCENTIMETER;
-                int stuetzenbreite = Integer.parseInt(stuetzenbreiteTextField.getText()) * METERTOCENTIMETER;
-                regal = new Regal(hoehe, breite);
-                regal.addStuetzenByInput(stuetzenhoehe, stuetzenbreite);
-                hoeheTextField.setText("");
-                breiteTextField.setText("");
-                stuetzenhoeheTextField.setText("");
-                stuetzenbreiteTextField.setText("");
+                //Hohe---------------------------
+                if (hoeheTextField.getText().equals("") || Integer.parseInt(hoeheTextField.getText()) < 1) {
+                    hoeheWarning.setText("Die Regalhoehe darf nicht 0 sein");
+                } else if (Integer.parseInt(hoeheTextField.getText()) > hauptLager.getHoehe()){
+                    hoeheWarning.setText("Das Regal ist zu hoch für das Lager");
+                } else {
+                    hoehe = Integer.parseInt(hoeheTextField.getText()) * METERTOCENTIMETER ;
+                    hoeheWarning.setText("");
+                }
 
-                showRegal(regal);
+                //Breite--------------------------
+                if (breiteTextField.getText().equals("") || Integer.parseInt(breiteTextField.getText()) < 1) {
+                    breiteWarning.setText("Die Regalbreite darf nicht 0 sein");
+                } else if (Integer.parseInt(breiteTextField.getText()) > hauptLager.getBreite()){
+                    //Hier vllt schon auf übrigen Platz im Lager testen?????
+                   breiteWarning.setText("Das Regal ist zu breit für das Lager");
+                } else {
+                    breite = Integer.parseInt(breiteTextField.getText()) * METERTOCENTIMETER;
+                    breiteWarning.setText("");
+                }
 
-            } catch(NumberFormatException n) {
-                System.out.println("keine Buchstaben erlaubt!");
-            }
+                //SHohe---------------------------
+                if (stuetzenhoeheTextField.getText().equals("") || Integer.parseInt(stuetzenhoeheTextField.getText()) < Integer.parseInt(hoeheTextField.getText())) {
+                    sHoeheWarning.setText("Die Stuetze muss mindestens so hoch sein, wie das Regal");
+                } else if (Integer.parseInt(stuetzenbreiteTextField.getText()) > hauptLager.getHoehe()){
+                    sHoeheWarning.setText("Die Stütze ist zu hoch für das Lager");
+                } else {
+                    stuetzenhoehe = Integer.parseInt(breiteTextField.getText()) * METERTOCENTIMETER;
+                    sHoeheWarning.setText("");
+                }
+
+                //SBreite-------------------------
+                if (stuetzenbreiteTextField.getText().equals("") || Integer.parseInt(stuetzenbreiteTextField.getText()) < 1) {
+                    sBreiteWarning.setText("Die Stuetzenbreite darf nicht 0 sein");
+                } else if (Integer.parseInt(stuetzenbreiteTextField.getText()) > Integer.parseInt(breiteTextField.getText())){
+                    sBreiteWarning.setText("Die Stütze ist Breiter als das Regal, das ist Unsinn");
+                } else {
+                    stuetzenbreite = Integer.parseInt(breiteTextField.getText()) * METERTOCENTIMETER;
+                    sBreiteWarning.setText("");
+                }
+
+                if (hoehe > 0 && breite > 0 && stuetzenhoehe > 0 && stuetzenbreite > 0) {
+                    regal = new Regal(hoehe, breite);
+                    regal.addStuetzenByInput(stuetzenhoehe, stuetzenbreite);
+                    hoeheTextField.setText("");
+                    breiteTextField.setText("");
+                    stuetzenhoeheTextField.setText("");
+                    stuetzenbreiteTextField.setText("");
+                    showRegal(regal);
+                }
+
         });
 
         saveRegal.addEventHandler(ActionEvent.ACTION, event -> {
             if (regal.getInstalledEinlegeboeden().isEmpty()) {
-                //warning.setText("Das Regal kann ohne Einlegeboeden doch nicht stehen! :(");
+                einlegeboedenWarning.setText("Das Regal kann ohne Einlegeboeden doch nicht stehen! :(");
             } else {
                 if (regal != null) {
                     // Regalfächer berechnen
