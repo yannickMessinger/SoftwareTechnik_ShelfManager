@@ -17,6 +17,7 @@ public class LagerConfigViewController extends ViewController {
     private Button submit;
     private Lager hauptLager;
     private ShelfManagerApplication main;
+    private final int METERTOCENTIMETER = 100;
 
     public LagerConfigViewController(Lager hauptLager, ShelfManagerApplication main) {
         this.main = main;
@@ -37,8 +38,8 @@ public class LagerConfigViewController extends ViewController {
         submit.addEventHandler(ActionEvent.ACTION, event -> {
 
             try {
-                int hoehe = Integer.parseInt(hoeheTextField.getText());
-                int breite = Integer.parseInt(breiteTextField.getText());
+                int hoehe = Integer.parseInt(hoeheTextField.getText()) * METERTOCENTIMETER;
+                int breite = Integer.parseInt(breiteTextField.getText()) * METERTOCENTIMETER;
                 hauptLager.setHoehe(hoehe);
                 hauptLager.setBreite(breite);
                 System.out.println("Lagerparameter gesetzt. Höhe: " + hoehe + " Breite: " + breite);
