@@ -32,6 +32,9 @@
     -fx-background-color: #a9a9a9 , white ;
 }
 
+.warning {
+    -fx-text-fill:RED;
+}
 
 /*Icons*/
 .add-icon{

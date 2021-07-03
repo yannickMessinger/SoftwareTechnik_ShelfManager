@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -37,10 +38,24 @@ public class PaketConfigViewController extends ViewController {
     private ListView<Paket> existingPakets;
     private ArrayList<Color> collectUnvertraeglichkeiten;
 
+    //Warnings----
+    private Label nameWarning;
+    private Label hoeheWarning;
+    private Label breiteWarning;
+    private Label gewichtWarning;
+    private Label tragKraftWarning;
+
     public PaketConfigViewController(Lager hauptLager, ShelfManagerApplication main) {
         this.hauptLager = hauptLager;
         this.main = main;
         this.paketConfigView = new PaketConfigView();
+
+        ////Warnings----
+        this.nameWarning = paketConfigView.getNameWarning();
+        this.hoeheWarning = paketConfigView.getHoeheWarning();
+        this.breiteWarning = paketConfigView.getBreiteWarning();
+        this.gewichtWarning = paketConfigView.getGewichtWarning();
+        this.tragKraftWarning = paketConfigView.getTragKraftWarning();
 
         this.nameField = paketConfigView.getNameField();
         this.hoeheField = paketConfigView.getHoeheField();
@@ -63,45 +78,96 @@ public class PaketConfigViewController extends ViewController {
 
 
         addNewPaket.addEventHandler(ActionEvent.ACTION, event -> {
+            String paketName = "";
+            int hoehePaket = 0;
+            int breitePaket = 0;
+            int gewichtPaket = 0;
+            int tragKraft = -1;
 
-            String paketName = nameField.getText();
-            System.out.println(paketName);
-            int hoehePaket = Integer.parseInt(hoeheField.getText());
-            int breitePaket = Integer.parseInt(breiteField.getText());
-            int gewichtPaket = Integer.parseInt(gewichtField.getText());
-            int tragKraft = Integer.parseInt(tragKraftField.getText());
-            Color color = paketConfigView.getPaketColor().getValue();
-
-
-            //Paketfarbe hinzufuegen
-            //Unvertraeglichkeiten hinzufuegen
-            Paket paketToAdd = new Paket(paketName, hoehePaket, breitePaket, gewichtPaket, tragKraft, color);
-            for(Color c : collectUnvertraeglichkeiten){
-                paketToAdd.getUnvertraeglichkeiten().add(c);
+            //uberpruefe, ob Feld leer ist oder Name schon existiert
+            if(nameField.getText().equals("")) {
+                nameWarning.setText("Der Paketname darf nicht leer sein");
+            } else {
+                if (hauptLager.getAllPakets().size() > 1) {
+                    for(Paket p : hauptLager.getAllPakets()) {
+                        if (p.getPaketName().equals(nameField.getText())) {
+                            nameWarning.setText("Der Paketname existiert bereits");
+                        } else {
+                            paketName = nameField.getText();
+                            System.out.println(paketName);
+                            nameWarning.setText("");
+                        }
+                    }
+                } else {
+                    paketName = nameField.getText();
+                    System.out.println(paketName);
+                    nameWarning.setText("");
+                }
 
             }
 
+            //ueberpruefe Hoehe-----------
+            if(hoeheField.getText().equals("") || Integer.parseInt(hoeheField.getText()) < 1 ){
+                hoeheWarning.setText("Die Hoehe darf nich <= 0 sein");
+            } else {
+                hoehePaket = Integer.parseInt(hoeheField.getText());
+                hoeheWarning.setText("");
+            }
 
-            this.collectUnvertraeglichkeiten.clear();
-            //hauptLager.setAktPaket(paketToAdd);
+            //ueberpruefe Breite-----------
+            if(breiteField.getText().equals("") || Integer.parseInt(breiteField.getText()) < 1) {
+                breiteWarning.setText("Die Breite darf nicht <= 0 sein");
+            } else {
+                breitePaket = Integer.parseInt(breiteField.getText());
+                breiteWarning.setText("");
+            }
 
-//            paketToAdd.setName(paketName);
-//            paketToAdd.setHoehe(hoehePaket);
-//            paketToAdd.setBreite(breitePaket);
-//            paketToAdd.setGewicht(gewichtPaket);
-//            paketToAdd.setTragkraft(tragKraft);
+            //ueberpruefe Gewicht-----------
+            if(gewichtField.getText().equals("") || Integer.parseInt(gewichtField.getText()) < 1) {
+                gewichtWarning.setText("Das Gewicht darf nich <= 0 sein");
+            } else {
+                gewichtPaket = Integer.parseInt(gewichtField.getText());
+                gewichtWarning.setText("");
+            }
 
-            hauptLager.addPaketToList(paketToAdd);
-            hauptLager.addPaketToAllPakets(paketToAdd);
-            System.out.println("neues Paket angelegt");
+            //ueberpruefe Tragkraft-----------
+            if(tragKraftField.getText().equals("")) {
+                tragKraftWarning.setText("Trage bitte zuerst eine Tragkraft ein");
+            } else if(Integer.parseInt(tragKraftField.getText()) < 0) {
+                tragKraftWarning.setText("Die Tragkraft darf nicht negativ sein");
+            } else {
+                tragKraft = Integer.parseInt(tragKraftField.getText());
+                tragKraftWarning.setText("");
+            }
 
 
-            nameField.setText("");
-            hoeheField.setText("");
-            breiteField.setText("");
-            gewichtField.setText("");
-            tragKraftField.setText("");
-            main.switchScene(Scenes.LAGER_VIEW);
+            //Paketfarbe hinzufuegen
+            Color color = paketConfigView.getPaketColor().getValue();
+
+
+            //Paket wird nur erzeugt, wenn alle Eingaben ok sind
+            if (!paketName.equals("") && hoehePaket >= 1 && breitePaket >=1 && gewichtPaket >= 1 && tragKraft >= 0) {
+                Paket paketToAdd = new Paket(paketName, hoehePaket, breitePaket, gewichtPaket, tragKraft, color);
+
+                //Unvertraeglichkeiten hinzufuegen
+                for(Color c : collectUnvertraeglichkeiten){
+                    paketToAdd.getUnvertraeglichkeiten().add(c);
+                }
+
+                this.collectUnvertraeglichkeiten.clear();
+                hauptLager.addPaketToList(paketToAdd);
+                hauptLager.addPaketToAllPakets(paketToAdd);
+                System.out.println("neues Paket angelegt");
+
+                nameField.setText("");
+                hoeheField.setText("");
+                breiteField.setText("");
+                gewichtField.setText("");
+                tragKraftField.setText("");
+                main.switchScene(Scenes.LAGER_VIEW);
+            }
+
+
 
         });
 

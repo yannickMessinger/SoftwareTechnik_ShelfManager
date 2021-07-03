@@ -22,6 +22,13 @@ public class PaketConfigView extends BorderPane {
     private Button getBackToLagerView;
     private Button addUnvertraeglichkeit;
 
+    //Warnings----
+    private Label nameWarning;
+    private Label hoeheWarning;
+    private Label breiteWarning;
+    private Label gewichtWarning;
+    private Label tragKraftWarning;
+
 
 
 
@@ -30,129 +37,141 @@ public class PaketConfigView extends BorderPane {
         Label viewName = new Label("Erstelle ein neues Paket");
         viewName.setId("title");
 
+        //Warnings----
+        nameWarning = new Label("");
+        hoeheWarning = new Label("");
+        breiteWarning = new Label("");
+        gewichtWarning = new Label("");
+        tragKraftWarning = new Label("");
 
 
         //Name---------------------------
         Label name = new Label("Name");
-        name.getStyleClass().add("titleLabel");
-
         nameField = new TextField();
-        nameField.getStyleClass().add("textField");
-        nameField.setMaxWidth(600);
         nameField.setPromptText("Bitte Name eingeben");
         HBox nameInputBox = new HBox(nameField);
-        VBox nameBox = new VBox(name, nameInputBox);
+        VBox nameBox = new VBox(name, nameInputBox, nameWarning);
 
         //Hoehe---------------------------
         Label hoehe = new Label("Hoehe");
-        hoehe.getStyleClass().add("titleLabel");
-
         hoeheField = new TextField();
-        hoeheField.getStyleClass().add("textField");
-        hoeheField.setMaxWidth(600);
         hoeheField.setPromptText("Bitte Zahl eingeben");
         HBox hoeheInputBox = new HBox(hoeheField, new Label("cm"));
-        VBox hoeheBox = new VBox(hoehe, hoeheInputBox);
+        VBox hoeheBox = new VBox(hoehe, hoeheInputBox, hoeheWarning);
 
         //Breite---------------------------
         Label breite = new Label("Breite");
-        breite.getStyleClass().add("titleLabel");
-
         breiteField = new TextField();
-        breiteField.getStyleClass().add("textField");
-        breiteField.setMaxWidth(600);
         breiteField.setPromptText("Bitte Zahl eingeben");
         HBox breiteInputBox = new HBox(breiteField, new Label("cm"));
-        VBox breiteBox = new VBox(breite, breiteInputBox);
+        VBox breiteBox = new VBox(breite, breiteInputBox, breiteWarning);
 
         //Gewicht---------------------------
         Label gewicht = new Label("Gewicht");
-        gewicht.getStyleClass().add("titleLabel");
-
-
         gewichtField = new TextField();
-        gewichtField.getStyleClass().add("textField");
-        gewichtField.setMaxWidth(600);
         gewichtField.setPromptText("Bitte Zahl eingeben");
         HBox gewichtInputBox = new HBox(gewichtField, new Label("kg"));
-        VBox gewichtBox = new VBox(gewicht, gewichtInputBox);
+        VBox gewichtBox = new VBox(gewicht, gewichtInputBox, gewichtWarning);
 
         //Tragkraft--------------------------
         Label tragKraft = new Label ("Tragkraft");
-        tragKraft.getStyleClass().add("titleLabel");
-
         tragKraftField = new TextField();
-        tragKraftField.getStyleClass().add("textField");
-        tragKraftField.setMaxWidth(600);
         tragKraftField.setPromptText("Bitte Zahl eingeben");
         HBox tragKraftInputBox = new HBox(tragKraftField, new Label("kg"));
-        VBox tragKraftBox = new VBox(tragKraft, tragKraftInputBox);
+        VBox tragKraftBox = new VBox(tragKraft, tragKraftInputBox, tragKraftWarning);
 
         //Farbe------------------------------
         Label paketFarbe = new Label("Paketfarbe");
-        paketFarbe.getStyleClass().add("titleLabel");
-
         paketColor = new ColorPicker();
         HBox paketColorBox = new HBox( paketColor);
         paketColor.getStyleClass().add("style-button-simple");
         HBox colorBox = new HBox(paketFarbe, paketColorBox);
         paketColorBox.setPadding(new Insets(0, 0, 5, 24));
 
-
         //Unvertraeglcihkeiten---------------
         Label unvertraeglMit = new Label("Unvertr. mit:");
-        unvertraeglMit.getStyleClass().add("titleLabel");
-
-
         unvertraeglichkeiten = new ColorPicker();
-        unvertraeglichkeiten.getStyleClass().add("style-button-simple");
         addUnvertraeglichkeit = new Button(("Unvertraeglichkeit hinzufuegen"));
-        addUnvertraeglichkeit.setId("style-button-simple");
         HBox unvertraeglichkeitenBox = new HBox( unvertraeglichkeiten, addUnvertraeglichkeit);
         HBox unvertraeglichkeitenBoxAll = new HBox(unvertraeglMit,unvertraeglichkeitenBox);
-        unvertraeglichkeitenBox.setPadding(new Insets(0, 0, 5, 20));
-
 
         //Buttons----------------------------
         addNewPaket = new Button();
-        addNewPaket.getStyleClass().addAll("add-icon", "icon-button");
         Region spacer = new Region();
 
         getBackToLagerView = new Button();
-        getBackToLagerView.getStyleClass().addAll("back-icon", "icon-button");
         HBox buttonBox = new HBox(getBackToLagerView, spacer, addNewPaket);
 
         VBox inputBox = new VBox(viewName, nameBox, hoeheBox, breiteBox, gewichtBox, tragKraftBox, colorBox, unvertraeglichkeitenBoxAll, buttonBox);
         this.setCenter(inputBox);
 
-        //---STYLE-----------------------------------------
+
+        //-------------------------------------------------------------------
+        //---------------------------STYLE-----------------------------------
+        //-------------------------------------------------------------------
         inputBox.setPadding(new Insets(60));
         inputBox.setSpacing(20);
 
+
+        //Name---------------------------
+        nameField.getStyleClass().add("textField");
+        name.getStyleClass().add("titleLabel");
+        //nameField.setMaxWidth(600);
         nameInputBox.setSpacing(10);
         nameInputBox.setHgrow(nameField, Priority.ALWAYS);
         nameBox.setSpacing(10);
+        nameWarning.getStyleClass().add("warning");
 
+        //Hoehe---------------------------
+        hoeheField.getStyleClass().add("textField");
+        hoehe.getStyleClass().add("titleLabel");
+        //hoeheField.setMaxWidth(600);
         hoeheInputBox.setSpacing(10);
         hoeheInputBox.setHgrow(hoeheField, Priority.ALWAYS);
         hoeheBox.setSpacing(10);
+        hoeheWarning.getStyleClass().add("warning");
 
+        //Breite---------------------------
+        breiteField.getStyleClass().add("textField");
+        breite.getStyleClass().add("titleLabel");
+        //breiteField.setMaxWidth(600);
         breiteInputBox.setSpacing(10);
         breiteInputBox.setHgrow(breiteField, Priority.ALWAYS);
         breiteBox.setSpacing(10);
+        breiteWarning.getStyleClass().add("warning");
 
+        //Gewicht---------------------------
+        gewicht.getStyleClass().add("titleLabel");
+        gewichtField.getStyleClass().add("textField");
+        //gewichtField.setMaxWidth(600);
         gewichtInputBox.setSpacing(10);
         gewichtInputBox.setHgrow(gewichtField, Priority.ALWAYS);
         gewichtBox.setSpacing(10);
+        gewichtWarning.getStyleClass().add("warning");
 
+        //Tragkraft---------------------------
+        tragKraftField.getStyleClass().add("textField");
+        tragKraft.getStyleClass().add("titleLabel");
+        //tragKraftField.setMaxWidth(600);
         tragKraftInputBox.setSpacing(10);
         tragKraftInputBox.setHgrow(tragKraftField, Priority.ALWAYS);
         tragKraftBox.setSpacing(10);
+        tragKraftWarning.getStyleClass().add("warning");
 
+        //Farbe---------------------------
+        paketFarbe.getStyleClass().add("titleLabel");
         colorBox.setSpacing(10);
 
+        //Unverträglichkeiten---------------
+        addUnvertraeglichkeit.setId("style-button-simple");
+        unvertraeglichkeitenBox.setPadding(new Insets(0, 0, 5, 20));
+        unvertraeglMit.getStyleClass().add("titleLabel");
         unvertraeglichkeitenBox.setSpacing(10);
+        unvertraeglichkeiten.getStyleClass().add("style-button-simple");
 
+        //Buttons---------------------------
+        addNewPaket.getStyleClass().addAll("add-icon", "icon-button");
+        getBackToLagerView.getStyleClass().addAll("back-icon", "icon-button");
         buttonBox.setSpacing(10);
         buttonBox.setHgrow(spacer, Priority.ALWAYS);
 
@@ -203,5 +222,27 @@ public class PaketConfigView extends BorderPane {
 
     public Button getAddUnvertraeglichkeit() {
         return addUnvertraeglichkeit;
+    }
+
+    //Getter for Warnings----
+
+    public Label getNameWarning() {
+        return nameWarning;
+    }
+
+    public Label getHoeheWarning() {
+        return hoeheWarning;
+    }
+
+    public Label getBreiteWarning() {
+        return breiteWarning;
+    }
+
+    public Label getGewichtWarning() {
+        return gewichtWarning;
+    }
+
+    public Label getTragKraftWarning() {
+        return tragKraftWarning;
     }
 }
