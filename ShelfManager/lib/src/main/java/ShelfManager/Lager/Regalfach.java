@@ -67,9 +67,11 @@ public class Regalfach extends Gegenstand {
         //wenn bereits Pakete
         //Ueberlappung
         for (Paket p : this.getPakete()) {
-            if (p.checkOverlapping(addedPaket)) {
-                System.out.println("OVERLAP");
-                return false;
+            if (p != addedPaket) {
+                if (p.checkOverlapping(addedPaket)) {
+                    System.out.println("OVERLAP");
+                    return false;
+                }
             }
         }
 
@@ -77,15 +79,19 @@ public class Regalfach extends Gegenstand {
         boolean yTransform = true;
         while (yTransform) {
             for (Paket p : this.getPakete()) {
-                if (p.checkOverlapping(addedPaket)) {
-                    addedPaket.setyPos(p.getyPos() - addedPaket.getHoehe());
-                    yTransform = false;
-                    if (p.overlappingEdges(addedPaket)) {
-                        System.out.println("steht ueber");
-                        return false;
+                if (p != addedPaket) {
+                    if (p.checkOverlapping(addedPaket)) {
+                        addedPaket.setyPos(p.getyPos() - addedPaket.getHoehe());
+                        yTransform = false;
+                        if (p.overlappingEdges(addedPaket)) {
+                            System.out.println("steht ueber");
+                            return false;
+                        }
+                        p.addPaketOnTop(addedPaket);
+                        break;
+                    } else {
+                        addedPaket.setyPos(addedPaket.getyPos()+1);
                     }
-                    p.addPaketOnTop(addedPaket);
-                    break;
                 } else {
                     addedPaket.setyPos(addedPaket.getyPos()+1);
                 }
@@ -102,7 +108,13 @@ public class Regalfach extends Gegenstand {
     }
 
     public boolean checkUnvertraeglichkeiten(Paket paket) {
+
         for (Paket p : this.getPakete()) {
+            for (Color color : p.getUnvertraeglichkeiten()) {
+                if (color == paket.getFarbe()) {
+                    return false;
+                }
+            }
             for (Color c : paket.getUnvertraeglichkeiten()) {
                 if (c == p.getFarbe()) {
                     return false;
