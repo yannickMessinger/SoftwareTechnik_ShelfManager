@@ -7,9 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Callback;
@@ -22,45 +20,74 @@ public class LageruebersichtView extends BorderPane {
     private Button backToLagerView;
     private Button speicheren;
     private ListView<Paket> paketlistView;
-    private PaketListComponentController paketListComponentController;   //
+    private PaketListComponentController paketListComponentController;
 
 
     public LageruebersichtView(Lager hauptLager) {
-
-        Label viewName = new Label("LageruebersichtView");
-        Label filterName = new Label("Filter");
-
         paketListComponentController = new PaketListComponentController(hauptLager);
         paketlistView = new ListView<>();
-        this.backToLagerView = new Button("zurueck");
-        this.speicheren= new Button("speichern");
+
+        //Titel
+        Label viewName = new Label("LageruebersichtView");
+
+        //FilterFarbe
         this.filterBox = new ComboBox();
-
-
-        VBox centerBox = new VBox();
-        HBox  filter = new HBox();
-
-
-        // TODO: Farben aus Logik verwenden
         this.filterBox.getItems().addAll(
-            "Alle",
-                new Rectangle(10, 10, Color.RED),
-                new Rectangle(10, 10, Color.GREEN),
-                new Rectangle(10, 10, Color.BLUE));
+                "Alle",
+                new Rectangle(15, 15, Color.RED),
+                new Rectangle(15, 15, Color.GREEN),
+                new Rectangle(15, 15, Color.BLUE));
+        filterBox.setPromptText("Frabe auswaelen");
 
 
-        filter.getChildren().addAll(filterName,filterBox);
+        //FilterName
+        Label filterName = new Label("Filter");
+        HBox filter = new HBox();
+        filter.getChildren().addAll(filterName, filterBox);
         filter.setSpacing(10);
 
-        centerBox.getChildren().addAll( filter,paketListComponentController.getRootView(),speicheren);
-        centerBox.setSpacing(10);
-        centerBox.setAlignment(Pos.TOP_CENTER);
-        centerBox.setPadding(new Insets(6, 0, 0, 0));
 
-        this.setTop(viewName);
-        this.setCenter(centerBox);
-        this.setBottom(backToLagerView);
-        this.setPadding(new Insets(6));
+        //Button
+        backToLagerView = new Button();
+        Region spacer = new Region();
+        speicheren = new Button();
+        HBox buttonBox = new HBox(backToLagerView, spacer, speicheren);
+
+        //PaketListe View
+        VBox paketListBox = new VBox();
+        paketListBox.getChildren().addAll(paketListComponentController.getRootView());
+
+
+        //Position
+        VBox inputBox = new VBox(viewName, filter, paketListBox);
+        this.setCenter(inputBox);
+        this.setBottom(buttonBox);
+
+
+        //-------------------------------------------------------------------
+        //---------------------------STYLE-----------------------------------
+        //-------------------------------------------------------------------
+
+        this.setPadding(new Insets(20));
+        this.getStyleClass().addAll("background");
+        inputBox.setPadding(new Insets(10, 20, 0, 20));
+        inputBox.setSpacing(20);
+
+        //viewName
+        viewName.setId("title");
+
+        //Filter
+        filterName.getStyleClass().add("titleLabel");
+        filterBox.getStyleClass().add("style-button-simple");
+
+
+        //Buttons---------------------------
+        speicheren.getStyleClass().addAll("overview-icon", "icon-button");
+        backToLagerView.getStyleClass().addAll("back-icon", "icon-button");
+        buttonBox.setSpacing(10);
+        buttonBox.setHgrow(spacer, Priority.ALWAYS);
+        buttonBox.setPadding(new Insets(20));
+
 
     }
 
