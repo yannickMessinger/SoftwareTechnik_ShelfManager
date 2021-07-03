@@ -126,7 +126,7 @@ public class RegalConfigViewController extends ViewController {
                     sBreiteWarning.setText("Die Stütze ist Breiter als das Regal, das ist Unsinn");
                 } else {
                     //stuetzenbreite = Integer.parseInt(breiteTextField.getText()) * METERTOCENTIMETER;
-                    stuetzenbreite = Integer.parseInt(breiteTextField.getText());
+                    stuetzenbreite = Integer.parseInt(stuetzenbreiteTextField.getText());
                     sBreiteWarning.setText("");
                 }
 
