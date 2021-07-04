@@ -339,6 +339,7 @@ public class LagerComponentController extends ViewController {
                     lager.getAllPakets().remove(addedPaket);
                     lager.getObervableFilteredList().remove(addedPaket);
                     updatedLagerComponent(lager.getObservableRegalList());
+
                 }
             } else {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "Paket kann nicht geloescht werden, da andere darauf stehen", ButtonType.OK);
