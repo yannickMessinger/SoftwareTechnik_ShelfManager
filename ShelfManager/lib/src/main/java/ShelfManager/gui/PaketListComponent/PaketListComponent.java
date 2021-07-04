@@ -54,7 +54,7 @@ public class PaketListComponent extends Pane {
         //---------------------------STYLE-----------------------------------
 
         this.setStyle("-fx-background-color: rgba(120, 140, 120, 1)");
-        this.setPadding(new Insets(0,5,5,5));
+        this.setPadding(new Insets(0,5,0,5));
 
         //Name
         listenName.setId("titleLabel");
@@ -69,7 +69,7 @@ public class PaketListComponent extends Pane {
         //FilterButton
         filter.setId("style-button-simple");
         showAll.setId("style-button-simple");
-        FilterButton.setPadding(new Insets(5,0,5,0));
+        FilterButton.setPadding(new Insets(5,0,0,0));
 
         //Loeschen
         removePacket.setId("style-button-simple");

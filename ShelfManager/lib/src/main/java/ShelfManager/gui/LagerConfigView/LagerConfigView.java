@@ -27,7 +27,7 @@ public class LagerConfigView extends BorderPane {
 
 
         Label viewName = new Label("Neues Lager");
-        viewName.setId("title");
+
         VBox titelBox = new VBox(viewName);
 
 
@@ -55,12 +55,15 @@ public class LagerConfigView extends BorderPane {
         VBox box = new VBox(hoeheBox, breiteBox, buttonBox);
         this.setCenter(box);
 
+
         //------------------------------------------------
         //---------------------STYLE----------------------
         titelBox.setAlignment(Pos.TOP_CENTER);
         viewName.setPadding(new Insets(20, 100, 20, 100));
         box.setPadding(new Insets(100));
         box.setSpacing(20);
+
+        viewName.setId("title");
 
         //Hoehe
         hoeheLabel.getStyleClass().add("titleLabel");
