@@ -196,6 +196,8 @@ public class RegalConfigViewController extends ViewController {
                     }
                     try {
                         hauptLager.addRegal(regal);
+                        submit.setVisible(true);
+                        saveRegal.setVisible(false);
                         einlegeboedenWarning.setText("");
                     } catch (LagerVollException e) {
                         e.printStackTrace();

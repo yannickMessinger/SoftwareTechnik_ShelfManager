@@ -46,7 +46,7 @@ public class LagerView extends BorderPane {
         createShelfButton = new Button();
         createShelfButton.setTooltip(new Tooltip("neues Regal anlegen"));
         lageruebersichtButton = new Button();
-        HBox buttonBox = new HBox(lageruebersichtButton, createShelfButton);
+        HBox buttonBox = new HBox(createShelfButton, lageruebersichtButton);
         lageruebersichtButton.setTooltip(new Tooltip("Lagerbestand-Liste speichern"));
 
 
@@ -73,7 +73,9 @@ public class LagerView extends BorderPane {
         createShelfButton.getStyleClass().addAll("shelf-icon", "icon-button");
         lageruebersichtButton.getStyleClass().addAll("overview-icon", "icon-button");
         createPacketButton.getStyleClass().addAll("package-icon", "icon-button");
-        buttonBox.setAlignment(Pos.CENTER);
+        buttonBox.setSpacing(40);
+        buttonBox.setPadding(new Insets(20, 0, 0, 0));
+
 
 
     }
