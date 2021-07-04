@@ -6,9 +6,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.text.TextAlignment;
 
 public class LagerConfigView extends BorderPane {
@@ -31,25 +29,20 @@ public class LagerConfigView extends BorderPane {
         Label viewName = new Label("Neues Lager");
         viewName.setId("title");
         VBox titelBox = new VBox(viewName);
-        titelBox.setAlignment(Pos.TOP_CENTER);
-        viewName.setPadding(new Insets(40, 0, 20, 0));
-        this.setTop(titelBox);
 
 
         //height----------------
         Label hoeheLabel = new Label("Hoehe:");
         this.hoeheTextField = new TextField();
-        VBox hoeheBox = new VBox(hoeheLabel, hoeheTextField,hoeheWarning);
-        hoeheBox.setAlignment(Pos.CENTER);
-
+        HBox hoeheInputBox = new HBox(hoeheTextField, new Label("m"));
+        VBox hoeheBox = new VBox(hoeheLabel, hoeheInputBox, hoeheWarning);
 
 
         //Breite-----------------
         Label breiteLabel = new Label("Breite:");
         this.breiteTextField = new TextField();
-        VBox breiteBox = new VBox(breiteLabel, breiteTextField,breiteWarning);
-        breiteBox.setAlignment(Pos.CENTER);
-
+        HBox breiteInputBox = new HBox(breiteTextField, new Label("m"));
+        VBox breiteBox = new VBox(breiteLabel, breiteInputBox, breiteWarning);
 
         //button-----------------
         this.submit = new Button("ok");
@@ -58,35 +51,42 @@ public class LagerConfigView extends BorderPane {
         submit.getClass().getResourceAsStream("save-icon");
 
         //fuer Anzeige setzen-------------------------
+        this.setTop(titelBox);
         VBox box = new VBox(hoeheBox, breiteBox, buttonBox);
         this.setCenter(box);
 
-        //---STYLE-----------------------------------------
+        //------------------------------------------------
+        //---------------------STYLE----------------------
+        titelBox.setAlignment(Pos.TOP_CENTER);
+        viewName.setPadding(new Insets(20, 100, 20, 100));
         box.setPadding(new Insets(100));
         box.setSpacing(20);
 
         //Hoehe
         hoeheLabel.getStyleClass().add("titleLabel");
+        hoeheInputBox.setSpacing(10);
+        hoeheInputBox.setMaxWidth(500);
+        breiteInputBox.setHgrow(hoeheTextField, Priority.ALWAYS);
         hoeheTextField.getStyleClass().add("textField");
         hoeheTextField.setPromptText("Bitte Zahl eingeben");
-        hoeheTextField.setMaxWidth(500);
         hoeheWarning.getStyleClass().add("warning");
+        hoeheBox.setSpacing(10);
+        hoeheBox.setAlignment(Pos.CENTER);
 
-        //Breit
+        //Breite
         breiteLabel.getStyleClass().add("titleLabel");
+        breiteInputBox.setSpacing(10);
+        breiteInputBox.setMaxWidth(500);
+        breiteInputBox.setHgrow(breiteTextField, Priority.ALWAYS);
         breiteTextField.getStyleClass().add("textField");
-        breiteTextField.setMaxWidth(500);
         breiteTextField.setPromptText("Bitte Zahl eingeben");
         breiteWarning.getStyleClass().add("warning");
-
-
-        hoeheBox.setSpacing(10);
         breiteBox.setSpacing(5);
+        breiteBox.setAlignment(Pos.CENTER);
+
+        //Button
         buttonBox.setAlignment(Pos.CENTER_RIGHT);
 
-        //height----------------
-
-        viewName.setPadding(new Insets(20, 100, 20, 100));
 
         this.getStyleClass().addAll("background");
     }
