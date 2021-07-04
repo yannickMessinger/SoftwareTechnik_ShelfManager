@@ -2,13 +2,17 @@ package ShelfManager.gui.LageruebersichtView;
 
 import ShelfManager.Lager.Lager;
 import ShelfManager.Lager.Paket;
+import ShelfManager.Lager.Regal;
+import ShelfManager.Lager.Regalfach;
 import ShelfManager.ShelfManagerApplication;
-import ShelfManager.gui.PaketListComponent.PaketCell;
+import ShelfManager.gui.PaketConfigView.UnvertraeglichkeitCell;
 import ShelfManager.gui.PaketListComponent.PaketListComponent;
 import ShelfManager.gui.PaketListComponent.PaketListComponentController;
 import ShelfManager.gui.Scenes;
 import ShelfManager.gui.ViewController;
 
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -22,6 +26,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.Window;
@@ -41,7 +46,8 @@ public class LageruebersichtViewController extends ViewController {
     private LageruebersichtView lageruebersichtView;
     private Stage stage;
     private Button backToLagerView;
-    private ListView<Paket> paketlistView;
+    private ObservableList<Paket> allPacketsFromLager;
+    private ListView<Paket> paketListForView;
     private Button speicheren;
     private PaketListComponent paketListComponent;
 
@@ -51,8 +57,9 @@ public class LageruebersichtViewController extends ViewController {
         this.main = main;
         this.lageruebersichtView = new LageruebersichtView(hauptLager);
         this.backToLagerView = lageruebersichtView.getBackToLagerView();
-        this.paketlistView = lageruebersichtView.getPaketlistView();
+        this.paketListForView = lageruebersichtView.getPaketlistView();
         this.speicheren = lageruebersichtView.getSpeicheren();
+        this.allPacketsFromLager= hauptLager.getAllPakets();
 
 
         rootView = lageruebersichtView;
@@ -61,6 +68,17 @@ public class LageruebersichtViewController extends ViewController {
 
     @Override
     public void initialize() {
+
+        allPacketsFromLager.addListener(new ListChangeListener<Paket>() {
+            @Override
+            public void onChanged(Change<? extends Paket> c) {
+
+            }
+        });
+
+
+
+
 
 
         //Durch Print als pdf speicheren
