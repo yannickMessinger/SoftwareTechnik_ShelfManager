@@ -4,8 +4,10 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Tooltip;
-import javafx.scene.layout.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
 
 public class RegalConfigView extends BorderPane {
@@ -31,7 +33,7 @@ public class RegalConfigView extends BorderPane {
     public RegalConfigView() {
 
         Label viewName = new Label("EIN NEUES REGAL ERSTELLEN");
-        viewName.getStyleClass().add("title");
+        viewName.setId("title");
 
         //Warnings----
         this.hoeheWarning = new Label("");
@@ -65,19 +67,16 @@ public class RegalConfigView extends BorderPane {
         VBox sBreiteBox = new VBox(stuetzenbreiteLabel, sBreiteInputBox, sBreiteWarning);
 
         //Einlegeboeden Button---------------------
-        this.submit = new Button("Einlegeboeden hinzufuegen");  //kommt hier ein Icon Button
+        this.submit = new Button("Einlegeboeden hinzufuegen");
         VBox submitBox = new VBox(submit, einlegeboedenWarning);
 
         //Input------------------------------------
         inputBox = new VBox(hoeheBox, breiteBox, sHoeheBox, sBreiteBox);
-        inputBox.setPadding(new Insets(30, 20, 20, 10));;
+
         //Buttons
         this.backToLagerView = new Button();
-        backToLagerView.setTooltip(new Tooltip("Zurueck"));
         this.saveRegal = new Button();
-        saveRegal.setTooltip(new Tooltip("Save"));
-        HBox bottombox = new HBox(backToLagerView, saveRegal,submitBox);
-        bottombox.setSpacing(700);
+        HBox bottombox = new HBox(backToLagerView, saveRegal, submitBox);
 
         //setzen fuer Anzeige--------
         this.setTop(viewName);
@@ -88,10 +87,9 @@ public class RegalConfigView extends BorderPane {
         //-------------------------------------------------------------------
         //---------------------------STYLE-----------------------------------
         //-------------------------------------------------------------------
-        this.setPadding(new Insets(30));
+        this.setPadding(new Insets(60, 0, 60 ,60));
         inputBox.setSpacing(20);
-        this.getStyleClass().addAll("background");
-
+        inputBox.setPadding(new Insets(0, 60, 0, 0));
 
         //Hoehe---------------------------
         hoeheTextField.getStyleClass().add("textField");
@@ -123,14 +121,15 @@ public class RegalConfigView extends BorderPane {
         stuetzenbreiteTextField.getStyleClass().add("textField");
         stuetzenbreiteLabel.getStyleClass().add("titleLabel");
         sBreiteInputBox.setSpacing(10);
-        sBreiteInputBox.setHgrow(stuetzenhoeheTextField, Priority.ALWAYS);
+        sBreiteInputBox.setHgrow(stuetzenbreiteTextField, Priority.ALWAYS);
         sBreiteBox.setSpacing(10);
         sBreiteWarning.getStyleClass().add("warning");
 
         //Buttons---------------------------
         backToLagerView.getStyleClass().addAll("back-icon", "icon-button");
         saveRegal.getStyleClass().addAll("save-icon", "icon-button");
-
+        saveRegal.setVisible(false);
+        submit.setVisible(true);
     }
 
 

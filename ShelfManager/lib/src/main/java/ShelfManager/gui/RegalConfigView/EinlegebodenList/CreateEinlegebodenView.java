@@ -1,5 +1,6 @@
 package ShelfManager.gui.RegalConfigView.EinlegebodenList;
 
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -34,6 +35,7 @@ public class CreateEinlegebodenView extends VBox {
         //---setzen-----------------------------
         this.getChildren().addAll(hoeheLabel, hoeheInput, tragkraftLabel, tragkraftInput, addEinlegeboden);
         this.setSpacing(10);
+        this.setPadding(new Insets(20));
         this.getStyleClass().addAll("background");
     }
 

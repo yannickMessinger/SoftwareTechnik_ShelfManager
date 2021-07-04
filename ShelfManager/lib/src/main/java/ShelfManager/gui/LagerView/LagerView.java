@@ -46,21 +46,19 @@ public class LagerView extends BorderPane {
         createShelfButton = new Button();
         createShelfButton.setTooltip(new Tooltip("neues Regal anlegen"));
         lageruebersichtButton = new Button();
-        HBox Buttonbox = new HBox(lageruebersichtButton, createShelfButton);
+        HBox buttonBox = new HBox(lageruebersichtButton, createShelfButton);
         lageruebersichtButton.setTooltip(new Tooltip("Lagerbestand-Liste speichern"));
-        Buttonbox.setPadding(new Insets(10,400,20,400));
-        Buttonbox.setSpacing(30);
 
 
         //---fuer Anzeige setzen-----
         this.setTop(viewName);
-        this.setBottom(Buttonbox);
+        this.setBottom(buttonBox);
         this.setCenter(centerBox);
         this.setRight(rightComponents);
 
         //---STYLE----------------------------
         this.getStyleClass().addAll("background");
-        this.setPadding(new Insets(20, 0, 20 ,20));
+        this.setPadding(new Insets(60, 0, 60 ,60));
         viewName.setId("title");
 
         centerBox.setSpacing(20);
@@ -68,7 +66,6 @@ public class LagerView extends BorderPane {
         HBox.setHgrow(centerBox, Priority.ALWAYS);
         packetButtonBox.setAlignment(Pos.CENTER);
         packetButtonBox.setPadding(new Insets(20, 50, 20, 20));
-        packetButtonBox.setStyle("-fx-background-color: rgba(50, 255, 150, 1)");
 
         rightComponents.setSpacing(10);
 
@@ -76,6 +73,8 @@ public class LagerView extends BorderPane {
         createShelfButton.getStyleClass().addAll("shelf-icon", "icon-button");
         lageruebersichtButton.getStyleClass().addAll("overview-icon", "icon-button");
         createPacketButton.getStyleClass().addAll("package-icon", "icon-button");
+        buttonBox.setAlignment(Pos.CENTER);
+
 
     }
 
