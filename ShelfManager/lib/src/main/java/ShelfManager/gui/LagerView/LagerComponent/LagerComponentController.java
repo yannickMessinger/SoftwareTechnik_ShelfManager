@@ -336,6 +336,8 @@ public class LagerComponentController extends ViewController {
                     if (addedPaket.getPaketBelow() != null) {
                         addedPaket.getPaketBelow().getPaketsOnTop().remove(addedPaket);
                     }
+                    lager.getAllPakets().remove(addedPaket);
+                    lager.getObervableFilteredList().remove(addedPaket);
                     updatedLagerComponent(lager.getObservableRegalList());
                 }
             } else {
