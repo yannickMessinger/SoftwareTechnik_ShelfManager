@@ -7,18 +7,16 @@ import javafx.scene.shape.Line;
 
 public class RegalComponent extends Pane {
 
-    private Label regalName;
     private Line stuetzeLeft;
     private Line stuetzeRight;
 
     public RegalComponent() {
 
         this.setStyle("-fx-background-color: rgba(120, 140, 120, 1)");
-        this.regalName = new Label("Regal");
         this.stuetzeLeft = new Line();
         this.stuetzeRight = new Line();
 
-        this.getChildren().addAll(regalName, stuetzeLeft, stuetzeRight);
+        this.getChildren().addAll(stuetzeLeft, stuetzeRight);
 
     }
 
