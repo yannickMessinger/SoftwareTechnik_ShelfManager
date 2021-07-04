@@ -7,12 +7,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.util.Callback;
@@ -22,7 +20,6 @@ public class PaketListComponentController extends ViewController {
 
     private PaketListComponent paketListComponent;
     private ListView<Paket> createdPaketsListView;
-    //private ColorPicker filterColor;
     private Lager hauptLager;
     private Button showFilterPakets;
     private Button showAll;
@@ -34,7 +31,6 @@ public class PaketListComponentController extends ViewController {
         paketListComponent = new PaketListComponent();
         this.hauptLager = hauptLager;
         this.createdPaketsListView = paketListComponent.getCreatedPaketsListView();
-        //this.filterColor = paketListComponent.getFilterColor();
         this.showFilterPakets = paketListComponent.getFilter();
         this.showAll = paketListComponent.getShowAll();
         this.colorFilter = paketListComponent.getColorFilter();
@@ -56,22 +52,12 @@ public class PaketListComponentController extends ViewController {
         uiModel.addAll(pakete);
 
         ObservableList<Color> paketfarben = FXCollections.observableArrayList();
-        colorFilter.setCellFactory(new Callback<ListView<Color>, ListCell<Color>>() {
-            @Override
-            public ListCell<Color> call(ListView<Color> param) {
-                return new ColorCell();
-            }
-        });
 
+        colorFilter.setCellFactory((Callback<ListView<Color>, ListCell<Color>>) param -> new ColorCell());
 
-
-
-        createdPaketsListView.setCellFactory(new Callback<ListView<Paket>, ListCell<Paket>>() {
-            @Override
-            public ListCell<Paket> call(ListView<Paket> param) {
-                PaketCell cell = new PaketCell();
-                return cell;
-            }
+        createdPaketsListView.setCellFactory(param -> {
+            PaketCell cell = new PaketCell();
+            return cell;
         });
 
         pakete.addListener((ListChangeListener<Paket>) change -> {
@@ -99,15 +85,6 @@ public class PaketListComponentController extends ViewController {
             hauptLager.resetFilterList();
         });
 
-//        showFilterPakets.addEventHandler(ActionEvent.ACTION, event -> {
-//            System.out.println("Filter aktiviert");
-//            Color color = paketListComponent.getFilterColor().getValue();
-//            hauptLager.filterPaketsByColor(color);
-//            uiModel.clear();
-//            uiModel.addAll(hauptLager.getObervableFilteredList());
-//            createdPaketsListView.refresh();
-//            hauptLager.resetFilterList();
-//        });
 
 
         showAll.addEventHandler(ActionEvent.ACTION, event -> {
@@ -116,17 +93,13 @@ public class PaketListComponentController extends ViewController {
             createdPaketsListView.refresh();
         });
 
-        createdPaketsListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        createdPaketsListView.setOnMouseClicked(click -> {
+            Paket aktPaket;
+            if (click.getClickCount() == 2) {
 
-            @Override
-            public void handle(MouseEvent click) {
-                Paket aktPaket;
-                if (click.getClickCount() == 2) {
-
-                    aktPaket = createdPaketsListView.getSelectionModel().getSelectedItem();
-                    hauptLager.setAktPaket(aktPaket);
-                    System.out.println("Paket gewählt" + createdPaketsListView.getSelectionModel().getSelectedItem());
-                }
+                aktPaket = createdPaketsListView.getSelectionModel().getSelectedItem();
+                hauptLager.setAktPaket(aktPaket);
+                System.out.println("Paket gewählt" + createdPaketsListView.getSelectionModel().getSelectedItem());
             }
         });
 

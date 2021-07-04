@@ -5,19 +5,16 @@ import ShelfManager.gui.RegalComponent.RegalComponent;
 import ShelfManager.gui.ViewController;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.scene.Node;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
-import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Transform;
 
-import java.util.ArrayList;
 
 public class LagerComponentController extends ViewController {
 
@@ -36,12 +33,7 @@ public class LagerComponentController extends ViewController {
     public void initialize() {
         ObservableList<Regal> regale = lager.getObservableRegalList();
         updatedLagerComponent(regale);
-        regale.addListener(new ListChangeListener<Regal>() {
-            @Override
-            public void onChanged(Change<? extends Regal> c) {
-                updatedLagerComponent(lager.getObservableRegalList());
-            }
-        });
+        regale.addListener((ListChangeListener<Regal>) c -> updatedLagerComponent(lager.getObservableRegalList()));
     }
 
     public void updatedLagerComponent(ObservableList<Regal> regale) {

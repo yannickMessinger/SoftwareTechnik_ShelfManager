@@ -4,8 +4,6 @@ import ShelfManager.Lager.Lager;
 import ShelfManager.ShelfManagerApplication;
 import ShelfManager.gui.Scenes;
 import ShelfManager.gui.ViewController;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;

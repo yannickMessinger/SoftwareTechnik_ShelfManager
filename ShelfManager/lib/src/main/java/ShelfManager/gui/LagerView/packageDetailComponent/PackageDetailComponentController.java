@@ -1,23 +1,18 @@
 package ShelfManager.gui.LagerView.packageDetailComponent;
 
 import ShelfManager.Lager.Lager;
-import ShelfManager.Lager.Paket;
-import ShelfManager.ShelfManagerApplication;
+
 import ShelfManager.gui.PaketConfigView.UnvertraeglichkeitCell;
 import ShelfManager.gui.ViewController;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.util.Callback;
+
 
 public class PackageDetailComponentController extends ViewController {
 
@@ -93,43 +88,27 @@ public class PackageDetailComponentController extends ViewController {
 
         unvertraeglichkeitenFromView.setCellFactory(
 
-                new Callback<ListView<Color>, ListCell<Color>>() {
-                    @Override
-                    public ListCell<Color> call(ListView<Color> v) {
-                        return new UnvertraeglichkeitCell();
-                    }
-                });
+                v -> new UnvertraeglichkeitCell());
 
 
-        observableUnvertraeglichkeiten.addListener(new ListChangeListener<Color>() {
-            @Override
-            public void onChanged(Change<? extends Color> c) {
+        observableUnvertraeglichkeiten.addListener((ListChangeListener<Color>) c -> {
 
-                unvertraeglichkeitenFromView.getItems().clear();
-                unvertraeglichkeitenFromView.getItems().addAll(observableUnvertraeglichkeiten);
-                unvertraeglichkeitenFromView.refresh();
-            }
+            unvertraeglichkeitenFromView.getItems().clear();
+            unvertraeglichkeitenFromView.getItems().addAll(observableUnvertraeglichkeiten);
+            unvertraeglichkeitenFromView.refresh();
         });
 
         gefahrgutListFromview.setCellFactory(
 
-                new Callback<ListView<String>, ListCell<String>>() {
-                    @Override
-                    public ListCell<String> call(ListView<String> v) {
-                        return new GefahrgutCell();
-                    }
-                });
+                v -> new GefahrgutCell());
 
 
-      observableGefahrgut.addListener(new ListChangeListener<String>() {
-            @Override
-            public void onChanged(Change<? extends String> s) {
+      observableGefahrgut.addListener((ListChangeListener<String>) s -> {
 
-                gefahrgutListFromview.getItems().clear();
-                gefahrgutListFromview.getItems().addAll(observableGefahrgut);
-                gefahrgutListFromview.refresh();
-            }
-        });
+          gefahrgutListFromview.getItems().clear();
+          gefahrgutListFromview.getItems().addAll(observableGefahrgut);
+          gefahrgutListFromview.refresh();
+      });
 
 
 

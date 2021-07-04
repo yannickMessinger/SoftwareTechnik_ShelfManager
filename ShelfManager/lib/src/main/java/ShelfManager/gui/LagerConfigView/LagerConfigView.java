@@ -1,13 +1,13 @@
 package ShelfManager.gui.LagerConfigView;
 
-import javafx.geometry.HPos;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
-import javafx.scene.text.TextAlignment;
+
 
 public class LagerConfigView extends BorderPane {
 

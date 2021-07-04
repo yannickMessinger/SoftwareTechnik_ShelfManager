@@ -5,16 +5,10 @@ import ShelfManager.Lager.Paket;
 
 
 import ShelfManager.gui.LageruebersichtView.PaketListComponent.PaketListComponentController;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import javafx.util.Callback;
 
-import java.util.ArrayList;
 
 public class LageruebersichtView<paketListComponent> extends BorderPane {
 

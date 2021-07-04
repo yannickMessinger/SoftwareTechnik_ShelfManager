@@ -1,6 +1,6 @@
 package ShelfManager.gui.LagerView.packageDetailComponent;
 
-import ShelfManager.Lager.Paket;
+
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -47,13 +47,13 @@ public class PackageDetailComponent extends VBox {
 
         //Unvertraeglichkeiten------------------
         currentUnvertraeglichkeiten = new Label("Unvertraeglichkeiten:");
-        this.unvertraeglichkeiten = new ListView<Color>();
+        this.unvertraeglichkeiten = new ListView<>();
         VBox listBox = new VBox(currentUnvertraeglichkeiten, unvertraeglichkeiten);
 
 
         //Gefahrgut----------------------------
         currentGefahrgut = new Label("Gefahrgut: ");
-        this.gefahrgutList = new ListView<String>();
+        this.gefahrgutList = new ListView<>();
         VBox listGefahrBox = new VBox(currentGefahrgut, gefahrgutList );
 
 
