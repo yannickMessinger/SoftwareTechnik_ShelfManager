@@ -1,8 +1,5 @@
 package ShelfManager.Lager;
 
-import ShelfManager.Lager.Exceptions.LagerVollException;
-import ShelfManager.Lager.Exceptions.PaketZuGrossException;
-import ShelfManager.Lager.Exceptions.RegalfachTraglastExceededException;
 import javafx.scene.paint.Color;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -75,28 +72,6 @@ public class RegalfachTest {
         Assertions.assertFalse(testRegalfach.checkUnvertraeglichkeiten(testPaket2));
     }
 
-
-
-    //Exceptions----------------------
-    @Test
-    @DisplayName("tryToAddPaket() wirft RefalfachVollException, wenn die Traglast des Regalfachs ueberschritten wurde")
-    public void testeRegalfachVoll() {
-        Assertions.assertThrows(RegalfachTraglastExceededException.class, () ->{
-            for(int i = 0; i < 3; i++) {
-                Paket testPaket = new Paket("testPaket"+i, 10, 10, 100, Color.RED, 20, 10, 10, new ArrayList<Color>());
-                testRegalfach.tryToAddPaket(testPaket);
-            }
-        });
-    }
-
-    @Test
-    @DisplayName("tryToAddPaket() wirft PaketZuGrossException, wenn das Paket nicht in das Regalfach passt")
-    public void testePaketZuGross() {
-        Assertions.assertThrows(PaketZuGrossException.class, () ->{
-            Paket testPaket = new Paket("testPaket", 200, 100, 100, Color.RED, 20, 10, 10, new ArrayList<Color>());
-            testRegalfach.tryToAddPaket(testPaket);
-        });
-    }
 
 
 
