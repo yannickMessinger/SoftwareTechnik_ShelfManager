@@ -65,7 +65,7 @@
 
 .icon-button {
     -fx-background-color: #644E5B;
-	-fx-max-height: 35;
+    -fx-max-height: 35;
     -fx-min-height: 35;
     -fx-max-width: 35;
     -fx-min-width: 35;
@@ -98,6 +98,20 @@
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );
 }
 
+#Box-Border{
+    -fx-border-style: solid inside;
+    -fx-border-width: 4;
+    -fx-border-insets: 5;
+    -fx-border-radius: 3;
+    -fx-border-color: #644E5B;
+
+}
+.Tooltip{
+
+    -fx-font: normal bold 4 Quicksand;
+    -fx-base: #AE3522;
+    -fx-text-fill: #F7E4F2;
+}
 
 
 

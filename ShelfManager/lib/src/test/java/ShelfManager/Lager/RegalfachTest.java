@@ -52,6 +52,29 @@ public class RegalfachTest {
         Assertions.assertFalse(testRegalfach.tryToAddPaket(testPaket));
     }
 
+    @Test
+    @DisplayName("tryToAddPaket() gibt false zurueck, wenn es bei bestehenden Paketen Unvertraeglichkeiten gibt")
+    public void testeBestehendePaketeUnvertraeglichMitNeuemPaket() {
+        //TODO: Position bereucksichtigen wegen Stapel etc...
+        Paket testPaket1 = new Paket("testPaket", 5, 50, 100, Color.RED, 20, 10, 5, new ArrayList<Color>());
+        testPaket1.getUnvertraeglichkeiten().add(Color.BLUE);
+        testRegalfach.getPakete().add(testPaket1);
+        Paket testPaket2 = new Paket("testPaket", 5, 50, 100, Color.BLUE, 20, 10, 10, new ArrayList<Color>());
+        Assertions.assertFalse(testRegalfach.checkUnvertraeglichkeiten(testPaket2));
+    }
+
+    @Test
+    @DisplayName("tryToAddPaket() gibt false zurueck, wenn es beim neuen Paket Unvertraeglichkeiten gibt")
+    public void testeNeuesPaketUnvertraeglichMitBestehendenPaketen() {
+        //TODO: Position bereucksichtigen wegen Stapel etc...
+        Paket testPaket1 = new Paket("testPaket", 5, 50, 100, Color.RED, 20, 10, 5, new ArrayList<Color>());
+        testRegalfach.getPakete().add(testPaket1);
+        Paket testPaket2 = new Paket("testPaket", 5, 50, 100, Color.BLUE, 20, 10, 10, new ArrayList<Color>());
+        testPaket2.getUnvertraeglichkeiten().add(Color.RED);
+
+        Assertions.assertFalse(testRegalfach.checkUnvertraeglichkeiten(testPaket2));
+    }
+
 
 
     //Exceptions----------------------
