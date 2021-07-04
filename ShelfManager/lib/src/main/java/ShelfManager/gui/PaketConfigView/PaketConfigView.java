@@ -42,7 +42,7 @@ public class PaketConfigView extends BorderPane {
 
     public PaketConfigView() {
 
-        Label viewName = new Label("ERSTELLE EIN NEUES PAKET");
+        Label viewName = new Label("ERSTELLE EIN NEUES PAKET ");
 
 
         //Warnings----

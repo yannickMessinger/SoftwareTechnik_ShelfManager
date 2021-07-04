@@ -57,6 +57,7 @@ public class LagerConfigView extends BorderPane {
 
         //------------------------------------------------
         //---------------------STYLE----------------------
+
         titelBox.setAlignment(Pos.TOP_CENTER);
         viewName.setPadding(new Insets(20, 100, 20, 100));
         box.setPadding(new Insets(100));

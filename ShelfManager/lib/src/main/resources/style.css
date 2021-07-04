@@ -118,15 +118,6 @@
     -fx-text-fill: white;
 }
 
-
-/*
-#Box-Border{
-    -fx-border-style: solid inside;
-    -fx-border-width: 4;
-    -fx-border-insets: 5;
-    -fx-border-radius: 3;
-}
-*/
 .Tooltip{
     -fx-font: normal bold 4 Quicksand;
     -fx-base: #AE3522;
@@ -153,7 +144,6 @@
 
 
 }
-
 
 
 /*COMBOBOX------------*/
