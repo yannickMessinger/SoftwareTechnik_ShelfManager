@@ -15,7 +15,6 @@ public class RegalComponent extends Pane {
         this.setStyle("-fx-background-color: rgba(120, 140, 120, 1)");
         this.stuetzeLeft = new Line();
         this.stuetzeRight = new Line();
-
         this.getChildren().addAll(stuetzeLeft, stuetzeRight);
 
     }
