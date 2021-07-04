@@ -85,7 +85,7 @@ public class LagerComponentController extends ViewController {
             }
 
             //int yVerschiebung = lager.getHoehe() - r.getHoehe() - r.getStuetzen()[0].getBreite() / 2;
-            int yVerschiebung = (int) lagerComponent.getHeight() - r.getHoehe();
+            int yVerschiebung = (int) lagerComponent.getHeight() - r.getHoehe() -25;
 
             r.setxPos(xVerschiebung);
             r.setyPos(yVerschiebung);
