@@ -32,7 +32,6 @@ public class RegalConfigViewController extends ViewController {
     private VBox inputBox;
     private TextField hoeheTextField;
     private TextField breiteTextField;
-    private TextField stuetzenhoeheTextField;
     private TextField stuetzenbreiteTextField;
     private Button submit;
     private Button backToLagerView;
@@ -41,7 +40,6 @@ public class RegalConfigViewController extends ViewController {
     //Warnings----
     private Label hoeheWarning;
     private Label breiteWarning;
-    private Label sHoeheWarning;
     private Label sBreiteWarning;
     private Label einlegeboedenWarning;
 
@@ -54,14 +52,12 @@ public class RegalConfigViewController extends ViewController {
         //Warnings----
         hoeheWarning = regalConfigView.getHoeheWarning();
         breiteWarning = regalConfigView.getBreiteWarning();
-        sHoeheWarning = regalConfigView.getsHoeheWarning();
         sBreiteWarning = regalConfigView.getsBreiteWarning();
         einlegeboedenWarning = regalConfigView.getEinlegeboedenWarning();
 
         this.inputBox = regalConfigView.getInputBox();
         this.hoeheTextField = regalConfigView.getHoeheTextField();
         this.breiteTextField = regalConfigView.getBreiteTextField();
-        this.stuetzenhoeheTextField = regalConfigView.getStuetzenhoeheTextField();
         this.stuetzenbreiteTextField = regalConfigView.getStuetzenbreiteTextField();
         this.submit = regalConfigView.getSubmit();
         this.backToLagerView = regalConfigView.getBackToLagerView();
@@ -105,6 +101,7 @@ public class RegalConfigViewController extends ViewController {
                 } else {
 
                     hoehe = Integer.parseInt(hoeheTextField.getText());
+                    stuetzenhoehe = Integer.parseInt(hoeheTextField.getText());
                     hoeheWarning.setText("");
                 }
 
@@ -127,20 +124,6 @@ public class RegalConfigViewController extends ViewController {
                     breiteWarning.setText("");
                 }
 
-                //SHohe---------------------------
-                if (stuetzenhoeheTextField.getText().equals("")) {
-                    sHoeheWarning.setText("Die Stuetze darf nicht leer sein");}
-                else if (!stuetzenhoeheTextField.getText().matches("\\d+")) {
-                    sHoeheWarning.setText("keine Buchstaben erlaubt");
-                } else if(Integer.parseInt(stuetzenhoeheTextField.getText()) < hoehe){
-                    sHoeheWarning.setText("Die Stuetze muss mindestens so hoch sein, wie das Regal");
-                } else if (Integer.parseInt(stuetzenhoeheTextField.getText()) > hauptLager.getHoehe()){
-                    sHoeheWarning.setText("Die Stütze ist zu hoch für das Lager");
-                } else {
-                    stuetzenhoehe = Integer.parseInt(stuetzenhoeheTextField.getText());
-                    sHoeheWarning.setText("");
-                }
-
                 //SBreite-------------------------
                 if (stuetzenbreiteTextField.getText().equals("")) {
                     sBreiteWarning.setText("Die Stuetzenbreite darf nicht leer");
@@ -160,7 +143,6 @@ public class RegalConfigViewController extends ViewController {
                     regal.addStuetzenByInput(stuetzenhoehe, stuetzenbreite);
                     hoeheTextField.setText("");
                     breiteTextField.setText("");
-                    stuetzenhoeheTextField.setText("");
                     stuetzenbreiteTextField.setText("");
                     showRegal(regal);
                 }

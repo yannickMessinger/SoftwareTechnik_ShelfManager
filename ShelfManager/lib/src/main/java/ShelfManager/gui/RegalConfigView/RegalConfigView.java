@@ -15,7 +15,6 @@ public class RegalConfigView extends BorderPane {
     private VBox inputBox;
     private TextField hoeheTextField;
     private TextField breiteTextField;
-    private TextField stuetzenhoeheTextField;
     private TextField stuetzenbreiteTextField;
     private Button submit;
     private Button backToLagerView;
@@ -25,7 +24,6 @@ public class RegalConfigView extends BorderPane {
     //Warnings----
     private Label hoeheWarning;
     private Label breiteWarning;
-    private Label sHoeheWarning;
     private Label sBreiteWarning;
     private Label einlegeboedenWarning;
 
@@ -38,7 +36,6 @@ public class RegalConfigView extends BorderPane {
         //Warnings----
         this.hoeheWarning = new Label("");
         this.breiteWarning = new Label("");
-        this.sHoeheWarning = new Label("");
         this.sBreiteWarning = new Label("");
         this.einlegeboedenWarning = new Label("");
 
@@ -54,12 +51,6 @@ public class RegalConfigView extends BorderPane {
         HBox breiteInputBox = new HBox(breiteTextField, new Label("cm"));
         VBox breiteBox = new VBox(breiteLabel, breiteInputBox, breiteWarning);
 
-        //Stuetzenhoehe-------------
-        Label stuetzenhoeheLabel = new Label("Stuetzenhoehe:");
-        this.stuetzenhoeheTextField = new TextField();
-        HBox sHoeheInputBox = new HBox(stuetzenhoeheTextField, new Label("cm"));
-        VBox sHoeheBox = new VBox(stuetzenhoeheLabel, sHoeheInputBox, sHoeheWarning);
-
         //Stuetzenbreite------------
         Label stuetzenbreiteLabel = new Label("Stuetzenbreite:");
         this.stuetzenbreiteTextField = new TextField();
@@ -71,7 +62,7 @@ public class RegalConfigView extends BorderPane {
         VBox submitBox = new VBox(submit, einlegeboedenWarning);
 
         //Input------------------------------------
-        inputBox = new VBox(hoeheBox, breiteBox, sHoeheBox, sBreiteBox);
+        inputBox = new VBox(hoeheBox, breiteBox, sBreiteBox);
 
         //Buttons
         this.backToLagerView = new Button();
@@ -109,14 +100,6 @@ public class RegalConfigView extends BorderPane {
         breiteBox.setSpacing(10);
         breiteWarning.getStyleClass().add("warning");
 
-        //SHoehe----------------------------
-        stuetzenhoeheTextField.getStyleClass().add("textField");
-        stuetzenhoeheLabel.getStyleClass().add("titleLabel");
-        sHoeheInputBox.setSpacing(10);
-        sHoeheInputBox.setHgrow(stuetzenhoeheTextField, Priority.ALWAYS);
-        sHoeheBox.setSpacing(10);
-        sHoeheWarning.getStyleClass().add("warning");
-
         //SBreite---------------------------
         stuetzenbreiteTextField.getStyleClass().add("textField");
         stuetzenbreiteLabel.getStyleClass().add("titleLabel");
@@ -145,10 +128,6 @@ public class RegalConfigView extends BorderPane {
         return breiteTextField;
     }
 
-    public TextField getStuetzenhoeheTextField() {
-        return stuetzenhoeheTextField;
-    }
-
     public TextField getStuetzenbreiteTextField() {
         return stuetzenbreiteTextField;
     }
@@ -173,10 +152,6 @@ public class RegalConfigView extends BorderPane {
 
     public Label getBreiteWarning() {
         return breiteWarning;
-    }
-
-    public Label getsHoeheWarning() {
-        return sHoeheWarning;
     }
 
     public Label getsBreiteWarning() {
