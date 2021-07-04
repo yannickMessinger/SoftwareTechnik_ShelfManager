@@ -213,7 +213,7 @@ public class RegalConfigViewController extends ViewController {
 
         RegalComponentController regalComponentController = new RegalComponentController(regal);
         RegalComponent regalComponent = (RegalComponent) regalComponentController.getRootView();
-        submit.setVisible(false);
+        // submit.setVisible(true);
         // DRAG and DROP target-settings
 
         regalComponent.setOnDragOver(event -> {
