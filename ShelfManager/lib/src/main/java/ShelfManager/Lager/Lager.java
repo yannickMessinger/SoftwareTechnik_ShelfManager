@@ -101,6 +101,7 @@ public class Lager {
                 System.out.println("Das Regal ist zu hoch.");
             } else if (regalToAdd.getBreite() > verfuegbarerPlatz) {
                 System.out.println("Das Regal ist zu breit.");
+                throw  new LagerVollException();
             }
 
         }

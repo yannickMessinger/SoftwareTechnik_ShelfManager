@@ -10,9 +10,7 @@ import ShelfManager.gui.RegalComponent.RegalComponentController;
 import ShelfManager.gui.Scenes;
 import ShelfManager.gui.ViewController;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
@@ -176,6 +174,8 @@ public class RegalConfigViewController extends ViewController {
                         saveRegal.setVisible(false);
                         einlegeboedenWarning.setText("");
                     } catch (LagerVollException e) {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Das Regal passt nicht ins Lager", ButtonType.OK);
+                        alert.show();
                         e.printStackTrace();
                     }
                     regalConfigView.setCenter(inputBox);
