@@ -33,6 +33,7 @@ public class RegalConfigView extends BorderPane {
     public RegalConfigView() {
 
         Label viewName = new Label("Ein neues Regal erstellen");
+        viewName.setId("title");
 
         //Warnings----
         this.hoeheWarning = new Label("");

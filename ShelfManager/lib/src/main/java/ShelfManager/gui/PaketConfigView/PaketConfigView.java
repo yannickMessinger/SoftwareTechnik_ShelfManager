@@ -115,8 +115,8 @@ public class PaketConfigView extends BorderPane {
         //-------------------------------------------------------------------
         //---------------------------STYLE-----------------------------------
         //-------------------------------------------------------------------
-        inputBox.setPadding(new Insets(40));
-        inputBox.setSpacing(10);
+        inputBox.setPadding(new Insets(20));
+        inputBox.setSpacing(8);
 
         //Name---------------------------
         viewName.setId("title");
@@ -169,14 +169,16 @@ public class PaketConfigView extends BorderPane {
         //Farbe---------------------------
         paketFarbe.getStyleClass().add("titleLabel");
         colorBox.setSpacing(10);
-        paketColorBox.setPadding(new Insets(0, 0, 5, 24));
+        paketColorBox.setPadding(new Insets(0, 0, 0, 24));
 
         //Unverträglichkeiten---------------
         addUnvertraeglichkeit.setId("style-button-simple");
-        unvertraeglichkeitenBox.setPadding(new Insets(0, 0, 5, 20));
+        unvertraeglichkeitenBox.setPadding(new Insets(0, 0, 0, 20));
         unvertraeglMit.getStyleClass().add("titleLabel");
+        aktUnvertraeglichkeiten.getStyleClass().add("titleLabel");
         unvertraeglichkeitenBox.setSpacing(10);
         unvertraeglichkeiten.getStyleClass().add("style-button-simple");
+        removeUnvertraeglichkeit.setId("style-button-simple");
 
         //Buttons---------------------------
         addNewPaket.getStyleClass().addAll("add-icon", "icon-button");

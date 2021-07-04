@@ -1,6 +1,7 @@
 package ShelfManager.gui.PaketListComponent;
 
 import ShelfManager.Lager.Paket;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
@@ -22,18 +23,58 @@ public class PaketListComponent extends Pane {
     public PaketListComponent() {
 
 
-        this.setStyle("-fx-background-color: rgba(120, 140, 120, 1)");
+
+        //Name
         this.listenName = new Label("PAKETE");
+
+
+        //List
         createdPaketsListView = new ListView<>();
-        filterColor = new ColorPicker();
+
+
+        //Filter
         Label filterLabel = new Label(("Filterfarbe auswaehlen:"));
+        filterColor = new ColorPicker();
+
+
+        //FilterButton
         filter = new Button("Pakete filtern");
         showAll = new Button("Alle Pakete anzeigen");
+        HBox FilterButton = new HBox(filter,showAll);
+        FilterButton.setSpacing(8);
+
+
+        //Loeschen
         removePacket = new Button("Paket loeschen");
-        VBox box = new VBox(createdPaketsListView,filterLabel,filterColor, filter, showAll, removePacket);
 
-
+        VBox box = new VBox(listenName,createdPaketsListView,filterLabel,filterColor, FilterButton, removePacket);
         this.getChildren().addAll(box);
+
+
+        //---------------------------STYLE-----------------------------------
+
+        this.setStyle("-fx-background-color: rgba(120, 140, 120, 1)");
+        this.setPadding(new Insets(0,5,5,5));
+
+        //Name
+        listenName.setId("titleLabel");
+
+
+        //Filter
+        filterLabel.setId("titleLabel");
+        filterColor.getStyleClass().add("style-button-simple");
+
+
+
+        //FilterButton
+        filter.setId("style-button-simple");
+        showAll.setId("style-button-simple");
+        FilterButton.setPadding(new Insets(5,0,5,0));
+
+        //Loeschen
+        removePacket.setId("style-button-simple");
+        removePacket.setStyle("-fx-background-color: #F43131;");
+
     }
 
     public ListView<Paket> getCreatedPaketsListView() {

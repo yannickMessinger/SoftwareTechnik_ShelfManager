@@ -15,6 +15,13 @@
     -fx-font-weight: bold;
 }
 
+#titleLabel{
+    -fx-font-size: 15.0 ;
+    -fx-font-family: 'Lucida Console", "Courier New", monospace';
+    -fx-text-fill:#DEF2F1;
+    -fx-font-weight: bold;
+}
+
 .textField{
     -fx-font-family: "Quicksand";
     -fx-font-size: 18;

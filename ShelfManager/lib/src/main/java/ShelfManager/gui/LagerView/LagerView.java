@@ -27,6 +27,7 @@ public class LagerView extends BorderPane {
     public LagerView(Lager hauptLager) {
 
         Label viewName = new Label("Ihr Lager");
+
         paketListComponentController = new PaketListComponentController(hauptLager);
         packageDetailComponentController = new PackageDetailComponentController(hauptLager);
         lagerComponentController = new LagerComponentController(hauptLager);
