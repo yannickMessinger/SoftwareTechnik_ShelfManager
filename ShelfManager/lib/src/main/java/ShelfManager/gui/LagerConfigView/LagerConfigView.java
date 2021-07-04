@@ -16,9 +16,17 @@ public class LagerConfigView extends BorderPane {
     private TextField hoeheTextField;
     private TextField breiteTextField;
 
+    private Label hoeheWarning;
+    private Label breiteWarning;
+
     private Button submit;
 
     public LagerConfigView() {
+
+        //Warnings----
+        hoeheWarning = new Label("");
+        breiteWarning = new Label("");
+
 
         Label viewName = new Label("Neues Lager");
         viewName.setId("title");
@@ -30,24 +38,18 @@ public class LagerConfigView extends BorderPane {
 
         //height----------------
         Label hoeheLabel = new Label("Hoehe:");
-        hoeheLabel.getStyleClass().add("titleLabel");
         this.hoeheTextField = new TextField();
-        hoeheTextField.getStyleClass().add("textField");
-        hoeheTextField.setMaxWidth(400);
-        hoeheTextField.setPromptText("Bitte Zahl eingeben");
-
-        VBox hoeheBox = new VBox(hoeheLabel, hoeheTextField);
+        VBox hoeheBox = new VBox(hoeheLabel, hoeheTextField,hoeheWarning);
         hoeheBox.setAlignment(Pos.CENTER);
 
-        //width-----------------
+
+
+        //Breite-----------------
         Label breiteLabel = new Label("Breite:");
-        breiteLabel.getStyleClass().add("titleLabel");
         this.breiteTextField = new TextField();
-        breiteTextField.getStyleClass().add("textField");
-        breiteTextField.setMaxWidth(400);
-        breiteTextField.setPromptText("Bitte Zahl eingeben");
-        VBox breiteBox = new VBox(breiteLabel, breiteTextField);
+        VBox breiteBox = new VBox(breiteLabel, breiteTextField,breiteWarning);
         breiteBox.setAlignment(Pos.CENTER);
+
 
         //button-----------------
         this.submit = new Button("ok");
@@ -62,6 +64,21 @@ public class LagerConfigView extends BorderPane {
         //---STYLE-----------------------------------------
         box.setPadding(new Insets(100));
         box.setSpacing(20);
+
+        //Hoehe
+        hoeheLabel.getStyleClass().add("titleLabel");
+        hoeheTextField.getStyleClass().add("textField");
+        hoeheTextField.setPromptText("Bitte Zahl eingeben");
+        hoeheTextField.setMaxWidth(500);
+        hoeheWarning.getStyleClass().add("warning");
+
+        //Breit
+        breiteLabel.getStyleClass().add("titleLabel");
+        breiteTextField.getStyleClass().add("textField");
+        breiteTextField.setMaxWidth(500);
+        breiteTextField.setPromptText("Bitte Zahl eingeben");
+        breiteWarning.getStyleClass().add("warning");
+
 
         hoeheBox.setSpacing(10);
         breiteBox.setSpacing(5);
@@ -84,5 +101,13 @@ public class LagerConfigView extends BorderPane {
 
     public Button getSubmit() {
         return submit;
+    }
+
+    public Label getHoeheWarning() {
+        return hoeheWarning;
+    }
+
+    public Label getBreiteWarning() {
+        return breiteWarning;
     }
 }

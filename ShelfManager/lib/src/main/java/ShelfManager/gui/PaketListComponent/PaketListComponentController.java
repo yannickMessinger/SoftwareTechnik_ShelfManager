@@ -90,13 +90,6 @@ public class PaketListComponentController extends ViewController {
             }
         });
 
-
-
-
-
-
-
-
         pakete.addListener((ListChangeListener<Paket>) change -> {
             System.out.println(change);
             uiModel.clear();
