@@ -156,6 +156,19 @@ public class Lager extends Gegenstand {
 //        return paketListe;
 //    }
 
+    public Regalfach findPaket(Paket paket) {
+        for (Regal r : observableRegalList) {
+            for (Regalfach rf : r.getRegalfaecher()) {
+                for (Paket p : rf.getPakete()) {
+                    if (p == paket) {
+                        return rf;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
 
     public ObservableList<Regal> getObservableRegalList() {
         return observableRegalList;

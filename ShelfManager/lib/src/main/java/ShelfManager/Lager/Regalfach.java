@@ -132,15 +132,33 @@ public class Regalfach extends Gegenstand {
             return false;
         }
 
-        for (Paket p : paketStack) {
-            if (!tryToAddPaket(p)) {
-                return false;
-            } else {
-                getPakete().add(p);
-            }
+
+
+//        for (Paket p : paketStack) {
+//            if (!tryToAddPaket(p)) {
+//                return false;
+//            }
+////            } else {
+////                getPakete().add(p);
+////            }
+//        }
+        int gesamtgewicht = 0;
+        for (Paket p : pakete) {
+            gesamtgewicht += p.getGewicht();
         }
 
+        for (Paket p : paketStack) {
+            if (!checkUnvertraeglichkeiten(p)) {
+                return false;
+            }
 
+            //wenn Tragfaehigkeit ueberschritten
+            if (gesamtgewicht + p.getGewicht() > boden.getTragkraft()) {
+                return false;
+            }
+
+
+        }
 
         return true;
     }

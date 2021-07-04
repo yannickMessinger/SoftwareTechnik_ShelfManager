@@ -112,6 +112,13 @@ public class Paket extends Gegenstand{
     }
 
     public boolean addPaketOnTop(Paket paket) {
+
+        for (Paket p : paketsOnTop) {
+            if (p == paket) {
+                return true;
+            }
+        }
+
         int gesamtgewicht = 0;
         for (Paket p : paketsOnTop) {
             gesamtgewicht += p.getGewicht();
