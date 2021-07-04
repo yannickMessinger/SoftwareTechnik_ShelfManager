@@ -34,7 +34,7 @@ public class PaketListComponentController extends ViewController {
     private Button showFilterPakets;
     private Button showAll;
     private ComboBox colorFilter;
-
+    private Button removePacket;
 
 
     public PaketListComponentController(Lager hauptLager) {
@@ -45,7 +45,7 @@ public class PaketListComponentController extends ViewController {
         this.showFilterPakets = paketListComponent.getFilter();
         this.showAll = paketListComponent.getShowAll();
         this.colorFilter = paketListComponent.getColorFilter();
-
+        this.removePacket = paketListComponent.getRemovePacket();
         rootView = this.paketListComponent;
         initialize();
 
@@ -65,6 +65,16 @@ public class PaketListComponentController extends ViewController {
             @Override
             public ListCell<Color> call(ListView<Color> param) {
                 return new ColorCell();
+            }
+        });
+
+        removePacket.addEventHandler(ActionEvent.ACTION, event -> {
+            Paket aktPaket =  createdPaketsListView.getSelectionModel().getSelectedItem();
+            if(aktPaket != null) {
+
+                hauptLager.removePaketFromList(aktPaket);
+                hauptLager.removePaketFromAllPakets(aktPaket);
+                hauptLager.setPaketWasDeleted(true);
             }
         });
 
@@ -159,6 +169,8 @@ public class PaketListComponentController extends ViewController {
         });
 
     }
+
+
 
     public Pane getRootView () {
         return rootView;

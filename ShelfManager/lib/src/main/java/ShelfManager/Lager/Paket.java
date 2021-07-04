@@ -70,6 +70,7 @@ public class Paket extends Gegenstand{
         this.unvertraeglichkeiten = unvertraeglichkeiten;
         // TODO:
         //this.paketsOnTop = paketsOnTop;
+        //this.gefahrgutListe = gefahrgutListe
     }
 
 

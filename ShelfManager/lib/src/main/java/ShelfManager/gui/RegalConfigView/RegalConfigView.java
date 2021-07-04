@@ -184,4 +184,5 @@ public class RegalConfigView extends BorderPane {
     public Label getEinlegeboedenWarning() {
         return einlegeboedenWarning;
     }
+
 }

@@ -191,6 +191,7 @@ public class PaketConfigViewController extends ViewController {
 
                 this.collectUnvertraeglichkeiten.clear();
                 this.collectGefahrgut.clear();
+                paketConfigView.deactivateGefahrgutInput();
                 hauptLager.addPaketToList(paketToAdd);
                 hauptLager.addPaketToAllPakets(paketToAdd);
 
@@ -209,6 +210,7 @@ public class PaketConfigViewController extends ViewController {
         });
 
         backToLagerView.addEventHandler(ActionEvent.ACTION, event -> {
+            paketConfigView.deactivateGefahrgutInput();
             main.switchScene(Scenes.LAGER_VIEW);
         });
 
@@ -280,7 +282,7 @@ public class PaketConfigViewController extends ViewController {
                 String aktGefahrgut = aktGefahrgut = gefahrgutList.getSelectionModel().getSelectedItem();
                 if (click.getClickCount() == 2) {
 
-                    if(aktGefahrgut != null) {
+                    if(aktGefahrgut != null && !aktGefahrgut.equals("")) {
                         aktGefahrgut = gefahrgutList.getSelectionModel().getSelectedItem();
                         System.out.println("Gefahrgut gewählt" + gefahrgutList.getSelectionModel().getSelectedItem());
                     }
@@ -300,8 +302,10 @@ public class PaketConfigViewController extends ViewController {
 
         addGefahrgut.addEventHandler(ActionEvent.ACTION, event -> {
             String input = paketConfigView.getOptionalGefahrgut().getText();
-            this.collectGefahrgut.add(input);
-            paketConfigView.getOptionalGefahrgut().setText("");
+            if(!input.equals("")) {
+                this.collectGefahrgut.add(input);
+                paketConfigView.getOptionalGefahrgut().setText("");
+            }
 
         });
 

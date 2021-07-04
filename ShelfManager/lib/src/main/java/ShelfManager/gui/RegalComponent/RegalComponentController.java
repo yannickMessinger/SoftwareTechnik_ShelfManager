@@ -6,6 +6,7 @@ import ShelfManager.Lager.Stuetze;
 import ShelfManager.gui.ViewController;
 import javafx.collections.ObservableList;
 import javafx.scene.SnapshotParameters;
+import javafx.scene.control.Label;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
@@ -22,6 +23,9 @@ public class RegalComponentController extends ViewController {
     private Regal regal;
     private Stuetze regalStuetzeLeft;
     private Stuetze regalStuetzeRight;
+
+    private Label hoeheWarning;
+    private Label breiteWarning;
 
     public RegalComponentController(Regal regal) {
 
@@ -40,6 +44,8 @@ public class RegalComponentController extends ViewController {
 
     @Override
     public void initialize() {
+
+
 
         regalComponent.setMaxWidth(regal.getBreite());
         regalComponent.setMaxHeight(regal.getHoehe());

@@ -74,6 +74,8 @@ public class RegalConfigViewController extends ViewController {
 
     @Override
     public void initialize() {
+        submit.setVisible(true);
+
         backToLagerView.addEventHandler(ActionEvent.ACTION, event -> {
             regalConfigView.setCenter(inputBox);
             main.switchScene(Scenes.LAGER_VIEW);
@@ -86,43 +88,72 @@ public class RegalConfigViewController extends ViewController {
             int stuetzenbreite = 0;
 
                 //Hohe---------------------------
-                if (hoeheTextField.getText().equals("") || Integer.parseInt(hoeheTextField.getText()) < 1) {
+                if (hoeheTextField.getText().equals("")) {
+                    hoeheWarning.setText("Das Feld darf nicht leer sein!");
+
+                } else if (!hoeheTextField.getText().matches("\\d+")) {
+                        hoeheWarning.setText("keine Buchstaben erlaubt");
+
+                }else if(Integer.parseInt(hoeheTextField.getText()) < 1){
                     hoeheWarning.setText("Die Regalhoehe darf nicht 0 sein");
-                } else if (Integer.parseInt(hoeheTextField.getText()) > hauptLager.getHoehe()){
+                }
+                else if (Integer.parseInt(hoeheTextField.getText()) > hauptLager.getHoehe()){
                     hoeheWarning.setText("Das Regal ist zu hoch für das Lager");
                 } else {
-                    //hoehe = Integer.parseInt(hoeheTextField.getText()) * METERTOCENTIMETER ;
+
                     hoehe = Integer.parseInt(hoeheTextField.getText());
                     hoeheWarning.setText("");
                 }
 
                 //Breite--------------------------
-                if (breiteTextField.getText().equals("") || Integer.parseInt(breiteTextField.getText()) < 1) {
+                if (breiteTextField.getText().equals("")) {
+                    breiteWarning.setText("Die Regalbreite darf nicht leer sein");
+
+                } else if (!breiteTextField.getText().matches("\\d+")) {
+                    breiteWarning.setText("keine Buchstaben erlaubt");
+
+                } else if(Integer.parseInt(breiteTextField.getText()) < 1){
                     breiteWarning.setText("Die Regalbreite darf nicht 0 sein");
-                } else if (Integer.parseInt(breiteTextField.getText()) > hauptLager.getBreite()){
-                    //Hier vllt schon auf übrigen Platz im Lager testen?????
+                }
+                else if (Integer.parseInt(breiteTextField.getText()) > hauptLager.getBreite()){
+
                    breiteWarning.setText("Das Regal ist zu breit für das Lager");
                 } else {
-                    //breite = Integer.parseInt(breiteTextField.getText()) * METERTOCENTIMETER;
+
                     breite = Integer.parseInt(breiteTextField.getText());
                     breiteWarning.setText("");
                 }
 
                 //SHohe---------------------------
-                if (stuetzenhoeheTextField.getText().equals("") || Integer.parseInt(stuetzenhoeheTextField.getText()) < Integer.parseInt(hoeheTextField.getText())) {
+                if (stuetzenhoeheTextField.getText().equals("")) {
+                    sHoeheWarning.setText("Die Stuetze darf nicht leer sein");}
+
+                else if (!stuetzenhoeheTextField.getText().matches("\\d+")) {
+                    sHoeheWarning.setText("keine Buchstaben erlaubt");
+
+                }else if(Integer.parseInt(stuetzenhoeheTextField.getText()) < Integer.parseInt(hoeheTextField.getText())){
                     sHoeheWarning.setText("Die Stuetze muss mindestens so hoch sein, wie das Regal");
-                } else if (Integer.parseInt(stuetzenbreiteTextField.getText()) > hauptLager.getHoehe()){
+                }
+
+                else if (Integer.parseInt(stuetzenbreiteTextField.getText()) > hauptLager.getHoehe()){
                     sHoeheWarning.setText("Die Stütze ist zu hoch für das Lager");
                 } else {
-                    //stuetzenhoehe = Integer.parseInt(breiteTextField.getText()) * METERTOCENTIMETER;
+
                     stuetzenhoehe = Integer.parseInt(stuetzenhoeheTextField.getText());
                     sHoeheWarning.setText("");
                 }
 
                 //SBreite-------------------------
-                if (stuetzenbreiteTextField.getText().equals("") || Integer.parseInt(stuetzenbreiteTextField.getText()) < 1) {
+                if (stuetzenbreiteTextField.getText().equals("")) {
+                    sBreiteWarning.setText("Die Stuetzenbreite darf nicht leer");}
+
+                else if (!stuetzenbreiteTextField.getText().matches("\\d+")) {
+                    sBreiteWarning.setText("keine Buchstaben erlaubt");
+
+                } else if(Integer.parseInt(stuetzenbreiteTextField.getText()) < 1){
                     sBreiteWarning.setText("Die Stuetzenbreite darf nicht 0 sein");
-                } else if (Integer.parseInt(stuetzenbreiteTextField.getText()) > Integer.parseInt(breiteTextField.getText())){
+                }
+                else if (Integer.parseInt(stuetzenbreiteTextField.getText()) > Integer.parseInt(breiteTextField.getText())){
                     sBreiteWarning.setText("Die Stütze ist Breiter als das Regal, das ist Unsinn");
                 } else {
                     //stuetzenbreite = Integer.parseInt(breiteTextField.getText()) * METERTOCENTIMETER;
@@ -165,6 +196,7 @@ public class RegalConfigViewController extends ViewController {
                     }
                     try {
                         hauptLager.addRegal(regal);
+                        einlegeboedenWarning.setText("");
                     } catch (LagerVollException e) {
                         e.printStackTrace();
                     }
@@ -181,7 +213,7 @@ public class RegalConfigViewController extends ViewController {
 
         RegalComponentController regalComponentController = new RegalComponentController(regal);
         RegalComponent regalComponent = (RegalComponent) regalComponentController.getRootView();
-
+        submit.setVisible(false);
         // DRAG and DROP target-settings
 
         regalComponent.setOnDragOver(event -> {

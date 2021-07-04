@@ -117,7 +117,9 @@ public class PaketConfigView extends BorderPane {
         optionalGefahrgut = new TextField("Gefahrgut hinzuf.");
         optionalGefahrgut.setVisible(false);
         addGefahrgut = new Button("addG");
+        addGefahrgut.setVisible(false);
         removeGefahrgut = new Button("remG");
+        removeGefahrgut.setVisible(false);
         gefahrgutBox = new HBox(gefahrGutLabel, activateGefahrgutField,optionalGefahrgut,addGefahrgut, removeGefahrgut);
 
 
@@ -306,10 +308,15 @@ public class PaketConfigView extends BorderPane {
     }
 
     public void activateGefahrgutInput(){
+        this.addGefahrgut.setVisible(true);
+        this.removeGefahrgut.setVisible(true);
         this.optionalGefahrgut.setVisible(true);
     }
 
     public void deactivateGefahrgutInput(){
+        this.addGefahrgut.setVisible(false);
+        this.removeGefahrgut.setVisible(false);
         this.optionalGefahrgut.setVisible(false);
+
     }
 }
