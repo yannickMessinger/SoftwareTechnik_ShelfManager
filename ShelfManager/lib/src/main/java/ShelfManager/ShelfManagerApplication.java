@@ -1,6 +1,5 @@
 package ShelfManager;
 
-import ShelfManager.Lager.Command;
 import ShelfManager.Lager.Lager;
 import ShelfManager.gui.LagerConfigView.LagerConfigViewController;
 import ShelfManager.gui.LagerView.LagerViewController;
@@ -9,19 +8,14 @@ import ShelfManager.gui.PaketConfigView.PaketConfigViewController;
 import ShelfManager.gui.RegalConfigView.RegalConfigViewController;
 import ShelfManager.gui.Scenes;
 import ShelfManager.gui.ViewController;
-import ShelfManager.persistenz.JSONHandler;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 

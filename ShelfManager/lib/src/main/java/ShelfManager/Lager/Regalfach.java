@@ -4,7 +4,7 @@ import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 
-public class Regalfach extends Gegenstand {
+public class Regalfach  {
 
     private Einlegeboden boden;
     private ArrayList<Paket> pakete;
@@ -12,20 +12,9 @@ public class Regalfach extends Gegenstand {
     private int xPos;
     private int yPos;
 
-    /**
-     * Konstruktor - Regal
-     */
-    public Regalfach(Regal regal) {
-        setBoden(regal);
-        this.pakete = new ArrayList<Paket>();
-        //spaeter wird Hoehe über yPos im Regal bzw. Abstand zu naechstem Boden im Regal berechnet
-        this.hoehe = this.erfasseHoehe();
-        this.xPos = 0;
-        this.yPos = 0;
-    }
 
     /**
-     * Konstruktor fuer JSONHandler Parsing-Methods
+     * Konstruktor - Regalfach
      * @param boden
      * @param pakete
      * @param hoehe
@@ -41,6 +30,11 @@ public class Regalfach extends Gegenstand {
     }
 
 
+    /**
+     * Ueberprueft ob addedPaket in Regalfach hinzugefuegt werden kann
+     * @param addedPaket
+     * @return
+     */
     public boolean tryToAddPaket(Paket addedPaket) {
 
         if (!checkUnvertraeglichkeiten(addedPaket)) {
@@ -114,55 +108,14 @@ public class Regalfach extends Gegenstand {
 
         return true;
 
-        //Option:
     }
 
-    public boolean tryToAddStack(ArrayList<Paket> paketStack) {
-        int minY = paketStack.get(0).getyPos();
-        for (Paket p : paketStack) {
-            if (minY > p.getyPos()) {
-                minY = p.getyPos();
-            }
-        }
-        int stackHoehe = paketStack.get(0).getyPos() + paketStack.get(0).getHoehe() - minY;
-        int stackBreite = paketStack.get(0).getBreite();
 
-        //Stack passt nicht in Regalfach
-        if (stackHoehe > hoehe || stackBreite > boden.getBreite()) {
-            return false;
-        }
-
-
-
-//        for (Paket p : paketStack) {
-//            if (!tryToAddPaket(p)) {
-//                return false;
-//            }
-////            } else {
-////                getPakete().add(p);
-////            }
-//        }
-        int gesamtgewicht = 0;
-        for (Paket p : pakete) {
-            gesamtgewicht += p.getGewicht();
-        }
-
-        for (Paket p : paketStack) {
-            if (!checkUnvertraeglichkeiten(p)) {
-                return false;
-            }
-
-            //wenn Tragfaehigkeit ueberschritten
-            if (gesamtgewicht + p.getGewicht() > boden.getTragkraft()) {
-                return false;
-            }
-
-
-        }
-
-        return true;
-    }
-
+    /**
+     * Ueberprueft ob paket Unvertraeglichkeiten in dem Regalfach hat
+     * @param paket
+     * @return
+     */
     public boolean checkUnvertraeglichkeiten(Paket paket) {
 
         for (Paket p : pakete) {
@@ -205,11 +158,6 @@ public class Regalfach extends Gegenstand {
 
     //-----SETTER----------------------------
 
-
-    public void setBoden(Regal regal) {
-        System.out.println("Einlegeboden:");
-        //this.boden = new Einlegeboden(regal);
-    }
 
     public void setPakete(ArrayList<Paket> pakete) {
         this.pakete = pakete;

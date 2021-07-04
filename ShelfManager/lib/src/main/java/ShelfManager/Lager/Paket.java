@@ -4,13 +4,9 @@ package ShelfManager.Lager;
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-public class Paket extends Gegenstand{
-    public BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+public class Paket {
 
     private String paketName;
     private int hoehe;
@@ -31,14 +27,12 @@ public class Paket extends Gegenstand{
      * Konstruktor - Paket
      */
     public Paket(String paketName, int hoehePaket, int breitePaket, int gewichtPaket, int tragKraft, Color farbe) {
-        setName(paketName);
-        setHoehe(hoehePaket);
-        setBreite(breitePaket);
-        setGewicht(gewichtPaket);
-        //Farbe noch anpassen!!!
-        //this.farbe = new Color(255,255,255);
+        this.paketName = paketName;
+        this.hoehe = hoehePaket;
+        this.breite = breitePaket;
+        this.gewicht = gewichtPaket;
         this.farbe = farbe;
-        setTragkraft(tragKraft);
+        this.tragkraft = tragKraft;
         this.xPos = 0;
         this.yPos = 0;
         this.unvertraeglichkeiten = new ArrayList<>();
@@ -47,7 +41,7 @@ public class Paket extends Gegenstand{
     }
 
     /**
-     * Konstruktor fuer JSONHandler Parsing-Methods
+     * Konstruktor - Paket
      * @param paketName
      * @param hoehe
      * @param breite
@@ -68,9 +62,6 @@ public class Paket extends Gegenstand{
         this.xPos = xPos;
         this.yPos = yPos;
         this.unvertraeglichkeiten = unvertraeglichkeiten;
-        // TODO:
-        //this.paketsOnTop = paketsOnTop;
-        //this.gefahrgutListe = gefahrgutListe
     }
 
 
@@ -83,10 +74,8 @@ public class Paket extends Gegenstand{
 
         if (l1.getX() == r1.getX() || l1.getY() == r1.getY() || l2.getX() == r2.getX() || l2.getY() == r2.getY()) { return false; }
 
-        // If one rectangle is on left side of other
         if (l1.getX() >= r2.getX() || l2.getX() >= r1.getX()) { return false; }
 
-        // If one rectangle is above other
         if (l1.getY() >= r2.getY() || l2.getY() >= r1.getY()) { return false; }
 
         return true;
@@ -98,10 +87,6 @@ public class Paket extends Gegenstand{
         Point2D l2 = new Point2D(paket.getxPos(), paket.getyPos() + paket.getHoehe());
         Point2D r2 = new Point2D(paket.getxPos() + paket.getBreite(), paket.getyPos() + paket.getHoehe());
 
-//        if (paket.getBreite() <= this.getBreite()) {
-//            paket.setxPos(this.xPos);
-//            return false;
-//        }
 
         if (l2.getX() < l1.getX() || r2.getX() > r1.getX()) {
             return true;

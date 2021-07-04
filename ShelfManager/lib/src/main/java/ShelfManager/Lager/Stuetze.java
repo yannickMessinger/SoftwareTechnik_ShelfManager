@@ -1,15 +1,10 @@
 package ShelfManager.Lager;
 
-public class Stuetze extends Gegenstand {
+public class Stuetze {
     private int hoehe;
     private int breite;
     private int xPos;
     private int yPos;
-
-    public Stuetze() {
-        this.hoehe = erfasseHoehe();
-        this.breite = erfasseBreite();
-    }
 
     public Stuetze(int hoehe, int breite) {
         this.hoehe = hoehe;
@@ -58,11 +53,4 @@ public class Stuetze extends Gegenstand {
         this.breite = breite;
     }
 
-    public void setxPos(int xPos) {
-        this.xPos = xPos;
-    }
-
-    public void setyPos(int yPos) {
-        this.yPos = yPos;
-    }
 }

@@ -7,18 +7,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.paint.Color;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.List;
 
-public class Lager extends Gegenstand {
+public class Lager {
     private int hoehe;
     private int breite;
-    //private ArrayList<Regal> regale;
     private ObservableList<Regal> observableRegalList;
-    //private ArrayList<Paket> paketListe;
     private ObservableList<Paket> observablePaketList;
     private ObservableList<Paket> obervableFilteredList;
     private ObservableList<Paket> allPakets;
@@ -30,23 +24,18 @@ public class Lager extends Gegenstand {
      * Konstruktor - Lager
      */
     public Lager() {
-        //auskommentiert für Testzwecke wegen Threadproblematik
-        //this.hoehe = erfasseHoehe();
-        //this.breite = erfasseBreite();
-        //this.regale = new ArrayList<Regal>();
         this.observableRegalList = FXCollections.observableArrayList();
         this.obervableFilteredList = FXCollections.observableArrayList();
-        //this.paketListe = new ArrayList<Paket>();
         this.observablePaketList = FXCollections.observableArrayList();
         this.allPakets = FXCollections.observableArrayList();
         this.aktStack = new ArrayList<>();
-        this.aktPaket = new SimpleObjectProperty<Paket>();
+        this.aktPaket = new SimpleObjectProperty<>();
         this.paketWasDeleted = new SimpleBooleanProperty(false);
 
     }
 
     /**
-     * Konstruktor fuer JSONHandler Parsing-Methods
+     * Konstruktor - Lager
      * @param hoehe
      * @param breite
      * @param observableRegalList
@@ -65,13 +54,13 @@ public class Lager extends Gegenstand {
 
     public void filterPaketsByColor(Color color){
 
-
         for(Paket p : this.observablePaketList){
             if(p.getFarbe() .equals(color)){
                 this.obervableFilteredList.add(p);
 
             }
         }
+
     }
 
     public void resetFilterList(){
@@ -80,7 +69,6 @@ public class Lager extends Gegenstand {
 
 
     public void filterAllPaketsByColor(Color color){
-
 
         for(Paket p : this.allPakets){
             if(p.getFarbe() .equals(color)){
@@ -160,28 +148,6 @@ public class Lager extends Gegenstand {
         return breite;
     }
 
-//    public ArrayList<Regal> getRegale() {
-//        return regale;
-//    }
-
-//    public ArrayList<Paket> getPaketListe() {
-//        return paketListe;
-//    }
-
-    public Regalfach findPaket(Paket paket) {
-        for (Regal r : observableRegalList) {
-            for (Regalfach rf : r.getRegalfaecher()) {
-                for (Paket p : rf.getPakete()) {
-                    if (p == paket) {
-                        return rf;
-                    }
-                }
-            }
-        }
-        return null;
-    }
-
-
     public ObservableList<Regal> getObservableRegalList() {
         return observableRegalList;
     }
@@ -210,11 +176,6 @@ public class Lager extends Gegenstand {
     public void setBreite(int breite) {
         this.breite = breite;
     }
-
-//    public void setRegale(ArrayList<Regal> regale) {
-//        this.regale = regale;
-//    }
-
 
     public Paket getAktPaket() {
         return aktPaket.get();

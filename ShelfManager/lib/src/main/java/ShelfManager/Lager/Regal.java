@@ -5,7 +5,7 @@ import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 
-public class Regal extends Gegenstand{
+public class Regal {
     private ArrayList<Regalfach> regalfaecher;
 
     //Einlegeboeden for EinlegbodenListView
@@ -22,19 +22,6 @@ public class Regal extends Gegenstand{
     private int yPos;
 
 
-    /**
-     * Konstruktor - Regal
-     */
-    public Regal() {
-        this.regalfaecher = new ArrayList<>();
-        this.stuetzen = addSupport();
-        this.hoehe = this.stuetzen[0].getHoehe();
-        this.breite = this.erfasseBreite();
-        this.tragkraft = calculateLoadCapacity();
-        this.xPos = 0;
-        this.yPos = 0;
-    }
-
     public Regal(int hoehe, int breite) {
         this.regalfaecher = new ArrayList<>();
         this.einlegeboeden = FXCollections.observableArrayList();
@@ -47,7 +34,7 @@ public class Regal extends Gegenstand{
     }
 
     /**
-     * Konstruktor fuer JSONHandler Parsing-Methods
+     * Konstruktor - Regal
      * @param regalfaecher
      * @param einlegeboeden
      * @param stuetzen
@@ -83,18 +70,6 @@ public class Regal extends Gegenstand{
 
     /**
      * Liest die Stuetzen fuer ein Regal ein und gibt diese zurueck
-     * @return Stuetzen des Regals
-     */
-    public Stuetze[] addSupport() {
-        Stuetze stuetze1 = new Stuetze();
-        System.out.println("Stuetze 1 hinzugefügt");
-        Stuetze stuetze2 = new Stuetze();
-        System.out.println("Stuetze 2 hinzugefügt");
-        return new Stuetze[]{stuetze1, stuetze2};
-    }
-
-    /**
-     * Liest die Stuetzen fuer ein Regal ein und gibt diese zurueck
      * @param stuetzenhoehe und stuetzenbreite
      * @return Stuetzen des Regals
      */
@@ -108,10 +83,6 @@ public class Regal extends Gegenstand{
 
     public void installEinlegeboden(Einlegeboden einlegeboden) {
         installedEinlegeboeden.add(einlegeboden);
-    }
-
-    public Paket addPaketToRegalfach() {
-        return null;
     }
 
 

@@ -1,13 +1,6 @@
 package ShelfManager.Lager;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-
-import static java.lang.Integer.*;
-
-public class Einlegeboden extends Gegenstand {
+public class Einlegeboden {
 
     private Regal regal;
     private int hoehe;
@@ -15,23 +8,20 @@ public class Einlegeboden extends Gegenstand {
     private int tragkraft;
     private int xPos;
     private int yPos;
-    public BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
 
     public Einlegeboden(Regal regal, int hoehe, int tragkraft) {
         this.regal = regal;
-        setHoehe(hoehe);
-        setTragkraft(tragkraft);
-        //this.hoehe = this.erfasseHoehe();
+        this.hoehe = hoehe;
         this.breite = regal.getBreite();
-        //this.tragkraft = setTragkraft();
+        this.tragkraft = tragkraft;
         this.xPos = 0;
         this.yPos = 0;
 
     }
 
     /**
-     * Konstruktor fuer JSONHandler Parsing-Methods
+     * Konstruktor - Einlegeboden
      * @param regal
      * @param hoehe
      * @param breite
