@@ -144,11 +144,6 @@ public class PaketListComponentController extends ViewController {
             createdPaketsListView.refresh();
         });
 
-
-
-
-
-
         createdPaketsListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
             @Override

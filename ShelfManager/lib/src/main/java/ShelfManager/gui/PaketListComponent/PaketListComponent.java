@@ -3,9 +3,7 @@ package ShelfManager.gui.PaketListComponent;
 import ShelfManager.Lager.Paket;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 
 public class PaketListComponent extends Pane {
 
@@ -23,49 +21,45 @@ public class PaketListComponent extends Pane {
         //Name
         this.listenName = new Label("PAKETE");
 
-
         //List
         createdPaketsListView = new ListView<>();
 
-
         //Filter
         Label filterLabel = new Label(("Filterfarbe auswaehlen:"));
-        //filterColor = new ColorPicker();
-
-        //Filter mit Combobox
         colorFilter = new ComboBox();
-
-
-        //FilterButton
         filter = new Button("Pakete filtern");
         showAll = new Button("Alle Pakete anzeigen");
-        HBox FilterButton = new HBox(filter,showAll);
-        FilterButton.setSpacing(8);
-
+        Region spacer = new Region();
+        HBox filterButtonBox = new HBox(filter, spacer,  showAll);
+        VBox filterSection = new VBox(filterLabel, colorFilter, filterButtonBox);
 
         //Loeschen
         removePacket = new Button("Paket loeschen");
 
-        VBox box = new VBox(listenName,createdPaketsListView,filterLabel, FilterButton, colorFilter, removePacket);
+        VBox box = new VBox(listenName,createdPaketsListView,filterSection, removePacket);
         this.getChildren().addAll(box);
 
 
         //---------------------------STYLE-----------------------------------
 
         this.setStyle("-fx-background-color: rgba(120, 140, 120, 1)");
-        this.setPadding(new Insets(0,5,0,5));
+        box.setPadding(new Insets(10));
+        box.setSpacing(10);
 
         //Name
         listenName.setId("titleLabel");
 
+        //List
+        createdPaketsListView.setMaxHeight(100);
+
         //Filter
         filterLabel.setId("titleLabel");
-
+        filterSection.setSpacing(10);
 
         //FilterButton
         filter.setId("style-button-simple");
         showAll.setId("style-button-simple");
-        FilterButton.setPadding(new Insets(5,0,0,0));
+        HBox.setHgrow(spacer, Priority.ALWAYS);
 
         //Loeschen
         removePacket.setId("style-button-simple");

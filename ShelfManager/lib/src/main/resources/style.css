@@ -22,6 +22,10 @@
     -fx-font-weight: bold;
 }
 
+.light-font {
+    -fx-text-fill: WHITE;
+}
+
 .textField{
     -fx-font-family: "Quicksand";
     -fx-font-size: 18;
@@ -72,13 +76,20 @@
     -fx-background-radius: 0, 0, 0;
 }
 
+.icon-button:hover {
+    -fx-background-color: rgb(120, 98, 111);
+}
+
 .style-button{
     -fx-background-color: #644E5B;
     -fx-background-radius: 30;
     -fx-font-family: "Quicksand";
     -fx-font-size: 20px;
     -fx-text-fill: white;
-    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );
+}
+
+.style-button:hover{
+    -fx-background-color: rgb(120, 98, 111)
 }
 
 .style-button-simple{
@@ -87,31 +98,39 @@
     -fx-font-family: "Quicksand";
     -fx-font-size: 12px;
     -fx-text-fill: white;
-    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );
 }
+
+.style-button-simple:hover{
+    -fx-background-color: rgb(120, 98, 111)
+}
+
 #style-button-simple{
     -fx-background-color: #825974;
     -fx-background-radius: 3;
     -fx-font-family: "Quicksand";
     -fx-font-size: 12px;
     -fx-text-fill: white;
-    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );
 }
 
+
+/*
 #Box-Border{
     -fx-border-style: solid inside;
     -fx-border-width: 4;
     -fx-border-insets: 5;
     -fx-border-radius: 3;
-    -fx-border-color: #644E5B;
-
 }
+*/
 .Tooltip{
-
     -fx-font: normal bold 4 Quicksand;
     -fx-base: #AE3522;
     -fx-text-fill: #F7E4F2;
 }
 
 
-
+/*COMBOBOX------------*/
+.combo-box .list-cell
+{
+    -fx-background: white;
+    -fx-cell-size: 1.5em;
+}

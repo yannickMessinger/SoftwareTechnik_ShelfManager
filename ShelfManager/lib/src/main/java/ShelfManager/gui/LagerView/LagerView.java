@@ -36,17 +36,14 @@ public class LagerView extends BorderPane {
         lagerComponentController = new LagerComponentController(hauptLager);
         Tooltip tt = new Tooltip();
 
-
         createPacketButton = new Button();
-        HBox centerBox = new HBox(createPacketButton,lagerComponentController.getRootView() );
-        //Mous pop-up hover
+        VBox packetButtonBox = new VBox(createPacketButton);
+        HBox centerBox = new HBox(lagerComponentController.getRootView(), packetButtonBox);
+        //Mouse pop-up hover
         createPacketButton.setTooltip(new Tooltip("neues Paket anlegen"));
-        centerBox.setSpacing(20);
-
 
         //RightBox
         VBox rightComponents = new VBox(paketListComponentController.getRootView(),packageDetailComponentController.getRootView());
-        rightComponents.setPadding(new Insets(0,5,20,5));
 
         //ButtonBox
         createShelfButton = new Button();
@@ -58,18 +55,21 @@ public class LagerView extends BorderPane {
         Buttonbox.setSpacing(30);
 
 
-
         //---fuer Anzeige setzen-----
         this.setTop(viewName);
         this.setBottom(Buttonbox);
         this.setCenter(centerBox);
         this.setRight(rightComponents);
-        this.setPadding(new Insets(0,5,5,5));
 
         //---STYLE----------------------------
-
         this.getStyleClass().addAll("background");
+        this.setPadding(new Insets(20, 0, 20 ,20));
         viewName.setId("title");
+
+        centerBox.setSpacing(20);
+        packetButtonBox.setAlignment(Pos.CENTER);
+
+        rightComponents.setSpacing(10);
 
         //---Button
         createShelfButton.getStyleClass().addAll("shelf-icon", "icon-button");

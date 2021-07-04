@@ -4,6 +4,8 @@ import ShelfManager.Lager.Lager;
 import ShelfManager.ShelfManagerApplication;
 import ShelfManager.gui.Scenes;
 import ShelfManager.gui.ViewController;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -41,39 +43,42 @@ public class LagerConfigViewController extends ViewController {
     @Override
     public void initialize() {
         submit.addEventHandler(ActionEvent.ACTION, event -> {
-            int hoehePaket = 0;
-            int breitePaket = 0;
-            try {
-                int hoehe = Integer.parseInt(hoeheTextField.getText()) * METERTOCENTIMETER;
-                int breite = Integer.parseInt(breiteTextField.getText()) * METERTOCENTIMETER;
+            int hoehe = 0;
+            int breite = 0;
+
+            //ueberpruefe Feld und Hoehe
+            if(hoeheTextField.getText().equals("")){
+                hoeheWarning.setText("Feld darf nicht Leer sein");
+            } else if (!hoeheTextField.getText().matches("\\d")) {
+                hoeheWarning.setText("keine Buchstaben erlaubt");
+            } else if (Integer.parseInt(hoeheTextField.getText()) < 1 ) {
+                hoeheWarning.setText("Die Hoehe darf nich <= 0 sein");
+            } else {
+                hoehe = Integer.parseInt(hoeheTextField.getText()) * METERTOCENTIMETER;
+                hoeheWarning.setText("");
+            }
+
+            //ueberpruefe Feld und Breite
+            if(breiteTextField.getText().equals("")) {
+                breiteWarning.setText("Feld darf nicht Leer sein");
+            } else if (!breiteTextField.getText().matches("\\d")) {
+                breiteWarning.setText("keine Buchstaben erlaubt");
+            } else if (Integer.parseInt(breiteTextField.getText()) < 1) {
+                breiteWarning.setText("Die Breite darf nicht <= 0 sein");
+            } else {
+                breite = Integer.parseInt(breiteTextField.getText()) * METERTOCENTIMETER;
+                breiteWarning.setText("");
+            }
+
+            if (hoehe != 0 && breite !=0){
                 hauptLager.setHoehe(hoehe);
                 hauptLager.setBreite(breite);
                 System.out.println("Lagerparameter gesetzt. Höhe: " + hoehe + " Breite: " + breite);
                 hoeheTextField.setText("");
                 breiteTextField.setText("");
-
                 main.switchScene(Scenes.LAGER_VIEW);
-
-
-            }catch(NumberFormatException n){
-                System.out.println("keine Buchstaben erlaubt!");
             }
 
-            //ueberpruefe Feld und Hoehe
-            if(hoeheTextField.getText().equals("") || Integer.parseInt(hoeheTextField.getText()) < 1 ){
-                hoeheWarning.setText("Feld darf nicht Leer sein & Die Hoehe darf nich <= 0 sein");
-            } else {
-                hoehePaket = Integer.parseInt(hoeheTextField.getText());
-                hoeheWarning.setText("");
-            }
-
-            //ueberpruefe Feld und Breite
-            if(breiteTextField.getText().equals("") || Integer.parseInt(breiteTextField.getText()) < 1) {
-                breiteWarning.setText("Feld darf nicht Leer sein & Die Breite darf nicht <= 0 sein");
-            } else {
-                breitePaket = Integer.parseInt(breiteTextField.getText());
-                breiteWarning.setText("");
-            }
 
         });
     }
