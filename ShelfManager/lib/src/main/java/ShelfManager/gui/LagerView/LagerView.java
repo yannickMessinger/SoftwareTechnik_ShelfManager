@@ -98,3 +98,4 @@ public class LagerView extends BorderPane {
         return createdPaketsListView;
     }
 }
+

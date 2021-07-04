@@ -124,3 +124,4 @@ public class PackageDetailComponent extends Pane {
         this.currentPackageTragkraft = currentPackageTragkraft;
     }
 }
+
