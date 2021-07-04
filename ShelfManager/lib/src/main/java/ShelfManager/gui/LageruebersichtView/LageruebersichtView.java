@@ -30,7 +30,7 @@ public class LageruebersichtView<paketListComponent> extends BorderPane {
 
 
         //Titel
-        Label viewName = new Label("LageruebersichtView");
+        Label viewName = new Label("LAGERUEBERSICHTVIEW");
 
 
         //FilterName

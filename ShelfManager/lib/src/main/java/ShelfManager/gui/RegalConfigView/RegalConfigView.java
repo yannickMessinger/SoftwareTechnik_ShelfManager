@@ -32,7 +32,7 @@ public class RegalConfigView extends BorderPane {
 
     public RegalConfigView() {
 
-        Label viewName = new Label("Ein neues Regal erstellen");
+        Label viewName = new Label("EIN NEUES REGAL ERSTELLEN");
         viewName.setId("title");
 
         //Warnings----

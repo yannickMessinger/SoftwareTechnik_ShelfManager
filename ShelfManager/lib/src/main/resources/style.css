@@ -8,6 +8,12 @@
     -fx-text-fill:#254E58;
     -fx-font-weight: bold;
 }
+.title{
+    -fx-font-size: 25.0 ;
+    -fx-font-family: 'Lucida Console", "Courier New", monospace';
+    -fx-text-fill:#143F37;
+    -fx-font-weight: bold;
+}
 .titleLabel{
     -fx-font-size: 15.0 ;
     -fx-font-family: 'Lucida Console", "Courier New", monospace';
@@ -126,6 +132,28 @@
     -fx-base: #AE3522;
     -fx-text-fill: #F7E4F2;
 }
+.list-cell{
+
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+    -fx-background-color:#D1E8E2;
+
+
+}
+.list-view .list-cell:hover {
+    -fx-background-color: grey;
+
+
+}
+.list-view .list-cell {
+    -fx-background-color: #B8D1CA;
+    -fx-text-fill: GREY;
+    -fx-font-family: "Quicksand";
+    -fx-font-size: 18;
+
+
+}
+
 
 
 /*COMBOBOX------------*/

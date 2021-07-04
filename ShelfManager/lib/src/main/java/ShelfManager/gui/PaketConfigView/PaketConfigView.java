@@ -42,7 +42,7 @@ public class PaketConfigView extends BorderPane {
 
     public PaketConfigView() {
 
-        Label viewName = new Label("Erstelle ein neues Paket");
+        Label viewName = new Label("ERSTELLE EIN NEUES PAKET");
 
 
         //Warnings----
@@ -82,72 +82,87 @@ public class PaketConfigView extends BorderPane {
         VBox gewichtBox = new VBox(gewicht, gewichtInputBox, gewichtWarning);
 
         //Tragkraft--------------------------
-        Label tragKraft = new Label ("Tragkraft");
+        Label tragKraft = new Label("Tragkraft");
         tragKraftField = new TextField();
         tragKraftField.setPromptText("Bitte Zahl eingeben");
         HBox tragKraftInputBox = new HBox(tragKraftField, new Label("kg"));
         VBox tragKraftBox = new VBox(tragKraft, tragKraftInputBox, tragKraftWarning);
 
-        //Farbe------------------------------
-        Label paketFarbe = new Label("Paketfarbe");
-        paketColor = new ColorPicker();
-        HBox paketColorBox = new HBox( paketColor);
-        paketColor.getStyleClass().add("style-button-simple");
-        HBox colorBox = new HBox(paketFarbe, paketColorBox);
-        paketColorBox.setPadding(new Insets(0, 0, 5, 24));
 
         //Unvertraeglichkeiten---------------
         Label unvertraeglMit = new Label("Unvertr. mit:");
-        Label aktUnvertraeglichkeiten = new Label("akuelle Unvertr.: ");
-
-        unvertraeglichkeiten = new ColorPicker();
         addUnvertraeglichkeit = new Button(("Unvertraeglichkeit hinzufuegen"));
         removeUnvertraeglichkeit = new Button("Unvertraeg. loeschen");
-        HBox unvertraeglichkeitenBox = new HBox( unvertraeglichkeiten, addUnvertraeglichkeit, removeUnvertraeglichkeit);
+        unvertraeglichkeiten = new ColorPicker();
+        HBox unvertraeglichkeitenBox = new HBox(unvertraeglichkeiten, addUnvertraeglichkeit, removeUnvertraeglichkeit);
+        HBox unvertraeglichkeitenBoxAll = new HBox(unvertraeglMit, unvertraeglichkeitenBox);
 
 
-        Rectangle unverT1, unverT2, unverT3, unverT4, unverT5;
-        HBox showAktUnvertraeglichkeiten = new HBox(aktUnvertraeglichkeiten,unvertraeglichkeitenList = new ListView<Color>(),gefahrgutList = new ListView<String>());
-        HBox unvertraeglichkeitenBoxAll = new HBox(unvertraeglMit,unvertraeglichkeitenBox);
+        Label aktUnvertraeglichkeiten = new Label("akuelle " + "\n" + "Unvertrgl.    :  ");
+        //Rectangle unverT1, unverT2, unverT3, unverT4, unverT5;
+        HBox showAktUnvertraeglichkeiten = new HBox(aktUnvertraeglichkeiten, unvertraeglichkeitenList = new ListView<Color>(), gefahrgutList = new ListView<String>());
+        showAktUnvertraeglichkeiten.setSpacing(5);
+        gefahrgutList.getStyleClass().add("list-cell");
+        unvertraeglichkeitenList.getStyleClass().add("list-cell");
+        unvertraeglichkeitenBox.setPadding(new Insets(60, 0, 0, 0));
+        VBox ButtomRecht = new VBox(unvertraeglichkeitenBoxAll, showAktUnvertraeglichkeiten);
+        ButtomRecht.setSpacing(20);
+
+
+        //Farbe------------------------------
+        Label paketFarbe = new Label("Paketfarbe");
+        paketColor = new ColorPicker();
+        HBox paketColorBox = new HBox(paketColor);
+        HBox colorBox = new HBox(paketFarbe, paketColorBox);
 
         //optionales Gefahrgutfenster---------------
         Label gefahrGutLabel = new Label("Gefahrgut: ");
-
         activateGefahrgutField = new Button("Gefahrgutfeld einblenden");
-        optionalGefahrgut = new TextField("Gefahrgut hinzuf.");
+        optionalGefahrgut = new TextField();
         optionalGefahrgut.setVisible(false);
-        addGefahrgut = new Button("addG");
-        addGefahrgut.setVisible(false);
-        removeGefahrgut = new Button("remG");
-        removeGefahrgut.setVisible(false);
-        gefahrgutBox = new HBox(gefahrGutLabel, activateGefahrgutField,optionalGefahrgut,addGefahrgut, removeGefahrgut);
+        HBox activateGefahrgutButtonBox = new HBox(gefahrGutLabel, activateGefahrgutField, optionalGefahrgut);
+        activateGefahrgutButtonBox.setSpacing(10);
+        addGefahrgut = new Button("addGefahr");
+        removeGefahrgut = new Button("remGefahr");
+        HBox GefahrgutButtonBox = new HBox(addGefahrgut, removeGefahrgut);
+        VBox GefahrgutBox = new VBox(activateGefahrgutButtonBox, GefahrgutButtonBox);
+        VBox ButtomLinks = new VBox(colorBox, GefahrgutBox);
+
+
+        //Buttom output
+        HBox ButtomBox = new HBox(ButtomRecht, ButtomLinks);
+        ButtomBox.setSpacing(50);
 
 
         //Buttons----------------------------
         addNewPaket = new Button();
+        addNewPaket.setTooltip(new Tooltip("Neue Paket Hinzufuegen"));
         Region spacer = new Region();
-
         getBackToLagerView = new Button();
+        getBackToLagerView.setTooltip(new Tooltip("Zurueck"));
         HBox buttonBox = new HBox(getBackToLagerView, spacer, addNewPaket);
 
-        VBox inputBox = new VBox(viewName, nameBox, hoeheBox, breiteBox, gewichtBox, tragKraftBox, colorBox, unvertraeglichkeitenBoxAll, showAktUnvertraeglichkeiten,gefahrgutBox, buttonBox);
+
+        //OutuptAll
+        VBox inputBox = new VBox(viewName, nameBox, hoeheBox, breiteBox, gewichtBox, tragKraftBox, ButtomBox, buttonBox);
         this.setCenter(inputBox);
 
 
         //-------------------------------------------------------------------
         //---------------------------STYLE-----------------------------------
         //-------------------------------------------------------------------
-        inputBox.setPadding(new Insets(20));
-        inputBox.setSpacing(8);
+
+        inputBox.setPadding(new Insets(5, 20, 20, 20));
+
 
         //Name---------------------------
-        viewName.setId("title");
+        viewName.getStyleClass().add("title");
 
         //Name---------------------------
         nameField.getStyleClass().add("textField");
         name.getStyleClass().add("titleLabel");
-        //nameField.setMaxWidth(600);
         nameInputBox.setSpacing(10);
+        nameInputBox.setMaxWidth(1135);
         nameInputBox.setHgrow(nameField, Priority.ALWAYS);
         nameBox.setSpacing(10);
         nameWarning.getStyleClass().add("warning");
@@ -155,7 +170,7 @@ public class PaketConfigView extends BorderPane {
         //Hoehe---------------------------
         hoeheField.getStyleClass().add("textField");
         hoehe.getStyleClass().add("titleLabel");
-        //hoeheField.setMaxWidth(600);
+
         hoeheInputBox.setSpacing(10);
         hoeheInputBox.setHgrow(hoeheField, Priority.ALWAYS);
         hoeheBox.setSpacing(10);
@@ -164,7 +179,7 @@ public class PaketConfigView extends BorderPane {
         //Breite---------------------------
         breiteField.getStyleClass().add("textField");
         breite.getStyleClass().add("titleLabel");
-        //breiteField.setMaxWidth(600);
+
         breiteInputBox.setSpacing(10);
         breiteInputBox.setHgrow(breiteField, Priority.ALWAYS);
         breiteBox.setSpacing(10);
@@ -173,7 +188,7 @@ public class PaketConfigView extends BorderPane {
         //Gewicht---------------------------
         gewicht.getStyleClass().add("titleLabel");
         gewichtField.getStyleClass().add("textField");
-        //gewichtField.setMaxWidth(600);
+
         gewichtInputBox.setSpacing(10);
         gewichtInputBox.setHgrow(gewichtField, Priority.ALWAYS);
         gewichtBox.setSpacing(10);
@@ -182,7 +197,6 @@ public class PaketConfigView extends BorderPane {
         //Tragkraft---------------------------
         tragKraftField.getStyleClass().add("textField");
         tragKraft.getStyleClass().add("titleLabel");
-        //tragKraftField.setMaxWidth(600);
         tragKraftInputBox.setSpacing(10);
         tragKraftInputBox.setHgrow(tragKraftField, Priority.ALWAYS);
         tragKraftBox.setSpacing(10);
@@ -191,7 +205,8 @@ public class PaketConfigView extends BorderPane {
         //Farbe---------------------------
         paketFarbe.getStyleClass().add("titleLabel");
         colorBox.setSpacing(10);
-        paketColorBox.setPadding(new Insets(0, 0, 0, 24));
+        paketColor.getStyleClass().add("style-button-simple");
+        paketColorBox.setPadding(new Insets(0, 0, 5, 10));
 
         //Unverträglichkeiten---------------
         addUnvertraeglichkeit.setId("style-button-simple");
@@ -209,7 +224,22 @@ public class PaketConfigView extends BorderPane {
         buttonBox.setHgrow(spacer, Priority.ALWAYS);
 
 
+        //optionales Gefahrgutfenster---------------
+        gefahrGutLabel.getStyleClass().add("titleLabel");
+        activateGefahrgutField.setId("style-button-simple");
+        optionalGefahrgut.getStyleClass().add("textField");
+        addGefahrgut.setId("style-button-simple");
+        removeGefahrgut.setId("style-button-simple");
+        GefahrgutButtonBox.setSpacing(10);
+        GefahrgutButtonBox.setPadding(new Insets(0, 0, 5, 90));
+        optionalGefahrgut.setPromptText("Gefahrgut hinzuf.");
+        GefahrgutBox.setSpacing(20);
+        ButtomLinks.setSpacing(20);
+
+
         this.getStyleClass().addAll("background");
+
+
 
     }
 

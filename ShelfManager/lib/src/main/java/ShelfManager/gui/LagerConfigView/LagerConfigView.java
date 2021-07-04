@@ -27,7 +27,6 @@ public class LagerConfigView extends BorderPane {
 
 
         Label viewName = new Label("Neues Lager");
-
         VBox titelBox = new VBox(viewName);
 
 
