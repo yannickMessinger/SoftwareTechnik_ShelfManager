@@ -22,6 +22,7 @@ public class Paket extends Gegenstand{
     private int yPos;
     private ArrayList<Color> unvertraeglichkeiten;
     private ArrayList<Paket> paketsOnTop;
+    private Paket paketBelow;
 
 
     /**
@@ -113,9 +114,28 @@ public class Paket extends Gegenstand{
         }
         if (gesamtgewicht + paket.getGewicht() <= tragkraft) {
             this.paketsOnTop.add(paket);
+            paket.setPaketBelow(this);
             return true;
         }
         return false;
+    }
+
+    public void removeFromTop(Paket paket) {
+        paketsOnTop.remove(paket);
+    }
+
+    public ArrayList<Paket> allPaketsOnTop() {
+        ArrayList<Paket> allPaketsOnTop = new ArrayList<>();
+
+        allPaketsOnTop.add(this);
+        for (Paket p : paketsOnTop) {
+            ArrayList<Paket> nextLayer = p.allPaketsOnTop();
+            for (Paket paket : nextLayer) {
+                allPaketsOnTop.add(paket);
+            }
+        }
+
+        return allPaketsOnTop;
     }
 
 
@@ -157,6 +177,14 @@ public class Paket extends Gegenstand{
 
     public ArrayList<Color> getUnvertraeglichkeiten() {
         return unvertraeglichkeiten;
+    }
+
+    public ArrayList<Paket> getPaketsOnTop() {
+        return paketsOnTop;
+    }
+
+    public Paket getPaketBelow() {
+        return paketBelow;
     }
 
     //-----SETTER----------------------------
@@ -207,5 +235,9 @@ public class Paket extends Gegenstand{
 
     public void setUnvertraeglichkeiten(ArrayList<Color> unvertraeglichkeiten) {
         this.unvertraeglichkeiten = unvertraeglichkeiten;
+    }
+
+    public void setPaketBelow(Paket paketBelow) {
+        this.paketBelow = paketBelow;
     }
 }

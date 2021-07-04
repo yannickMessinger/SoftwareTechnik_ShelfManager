@@ -117,6 +117,34 @@ public class Regalfach extends Gegenstand {
         //Option:
     }
 
+    public boolean tryToAddStack(ArrayList<Paket> paketStack) {
+        int minY = paketStack.get(0).getyPos();
+        for (Paket p : paketStack) {
+            if (minY > p.getyPos()) {
+                minY = p.getyPos();
+            }
+        }
+        int stackHoehe = paketStack.get(0).getyPos() + paketStack.get(0).getHoehe() - minY;
+        int stackBreite = paketStack.get(0).getBreite();
+
+        //Stack passt nicht in Regalfach
+        if (stackHoehe > hoehe || stackBreite > boden.getBreite()) {
+            return false;
+        }
+
+        for (Paket p : paketStack) {
+            if (!tryToAddPaket(p)) {
+                return false;
+            } else {
+                getPakete().add(p);
+            }
+        }
+
+
+
+        return true;
+    }
+
     public boolean checkUnvertraeglichkeiten(Paket paket) {
 
         for (Paket p : pakete) {

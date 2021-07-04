@@ -22,6 +22,7 @@ public class Lager extends Gegenstand {
     private ObservableList<Paket> observablePaketList;
     private ObservableList<Paket> obervableFilteredList;
     private ObservableList<Paket> allPakets;
+    private ArrayList<Paket> aktStack;
     private SimpleObjectProperty<Paket> aktPaket;
     private SimpleBooleanProperty paketWasDeleted;
 
@@ -38,6 +39,7 @@ public class Lager extends Gegenstand {
         //this.paketListe = new ArrayList<Paket>();
         this.observablePaketList = FXCollections.observableArrayList();
         this.allPakets = FXCollections.observableArrayList();
+        this.aktStack = new ArrayList<>();
         this.aktPaket = new SimpleObjectProperty<Paket>();
         this.paketWasDeleted = new SimpleBooleanProperty(false);
 
@@ -171,6 +173,9 @@ public class Lager extends Gegenstand {
         return obervableFilteredList;
     }
 
+    public ArrayList<Paket> getAktStack() {
+        return aktStack;
+    }
 
     //-----SETTER----------------------------
     public void setHoehe(int hoehe) {
@@ -209,5 +214,9 @@ public class Lager extends Gegenstand {
 
     public void setPaketWasDeleted(boolean paketWasDeleted) {
         this.paketWasDeleted.set(paketWasDeleted);
+    }
+
+    public void setAktStack(ArrayList<Paket> aktStack) {
+        this.aktStack = aktStack;
     }
 }
