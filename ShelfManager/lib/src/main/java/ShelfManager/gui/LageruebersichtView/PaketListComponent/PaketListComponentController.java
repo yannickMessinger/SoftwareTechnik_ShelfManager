@@ -1,28 +1,21 @@
-package ShelfManager.gui.PaketListComponent;
+package ShelfManager.gui.LageruebersichtView.PaketListComponent;
 
-import ShelfManager.Lager.Einlegeboden;
 import ShelfManager.Lager.Lager;
 import ShelfManager.Lager.Paket;
-import ShelfManager.gui.RegalConfigView.EinlegebodenList.EinlegebodenCell;
 import ShelfManager.gui.ViewController;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.SnapshotParameters;
-import javafx.scene.control.*;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.Dragboard;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TransferMode;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.transform.Transform;
 import javafx.util.Callback;
-
 
 
 public class PaketListComponentController extends ViewController {
@@ -34,7 +27,7 @@ public class PaketListComponentController extends ViewController {
     private Button showFilterPakets;
     private Button showAll;
     private ComboBox colorFilter;
-    private Button removePacket;
+
 
 
     public PaketListComponentController(Lager hauptLager) {
@@ -45,7 +38,7 @@ public class PaketListComponentController extends ViewController {
         this.showFilterPakets = paketListComponent.getFilter();
         this.showAll = paketListComponent.getShowAll();
         this.colorFilter = paketListComponent.getColorFilter();
-        this.removePacket = paketListComponent.getRemovePacket();
+
         rootView = this.paketListComponent;
         initialize();
 
@@ -59,7 +52,7 @@ public class PaketListComponentController extends ViewController {
 
 
         ObservableList<Paket> uiModel = createdPaketsListView.getItems();
-        ObservableList<Paket> pakete = hauptLager.getObservablePaketList();
+        ObservableList<Paket> pakete = hauptLager.getAllPakets();
         uiModel.addAll(pakete);
 
         ObservableList<Color> paketfarben = FXCollections.observableArrayList();
@@ -70,15 +63,6 @@ public class PaketListComponentController extends ViewController {
             }
         });
 
-        removePacket.addEventHandler(ActionEvent.ACTION, event -> {
-            Paket aktPaket =  createdPaketsListView.getSelectionModel().getSelectedItem();
-            if(aktPaket != null) {
-
-                hauptLager.removePaketFromList(aktPaket);
-                hauptLager.removePaketFromAllPakets(aktPaket);
-                hauptLager.setPaketWasDeleted(true);
-            }
-        });
 
 
 
@@ -86,30 +70,6 @@ public class PaketListComponentController extends ViewController {
             @Override
             public ListCell<Paket> call(ListView<Paket> param) {
                 PaketCell cell = new PaketCell();
-
-                cell.setOnDragDetected(event -> {
-                    if (! cell.isEmpty()) {
-                        Dragboard db = cell.startDragAndDrop(TransferMode.MOVE);
-                        ClipboardContent cc = new ClipboardContent();
-                        cc.putString(String.valueOf(cell.getIndex()));
-                        db.setContent(cc);
-
-                        Rectangle rectangle = new Rectangle(cell.getItem().getBreite(), cell.getItem().getHoehe(), cell.getItem().getFarbe());
-                        SnapshotParameters snapshotParameters = new SnapshotParameters();
-                        snapshotParameters.setTransform(Transform.scale(2,2));
-//                        db.setDragView(rectangle.snapshot(snapshotParameters, null), event.getX(), event.getY());
-                        db.setDragView(rectangle.snapshot(snapshotParameters, null), 0, 0);
-                    }
-                });
-
-                cell.setOnDragDone(event -> {
-                    if (event.getTransferMode() == TransferMode.MOVE) {
-                        pakete.remove(cell.getItem());
-                    }
-                    event.consume();
-                });
-
-
                 return cell;
             }
         });
@@ -132,7 +92,7 @@ public class PaketListComponentController extends ViewController {
         showFilterPakets.addEventHandler(ActionEvent.ACTION, event -> {
             System.out.println("Filter aktiviert");
             Color color = (Color) colorFilter.getSelectionModel().getSelectedItem();
-            hauptLager.filterPaketsByColor(color);
+            hauptLager.filterAllPaketsByColor(color);
             uiModel.clear();
             uiModel.addAll(hauptLager.getObervableFilteredList());
             createdPaketsListView.refresh();

@@ -2,8 +2,9 @@ package ShelfManager.gui.LageruebersichtView;
 
 import ShelfManager.Lager.Lager;
 import ShelfManager.Lager.Paket;
-import ShelfManager.gui.PaketListComponent.PaketListComponent;
-import ShelfManager.gui.PaketListComponent.PaketListComponentController;
+
+
+import ShelfManager.gui.LageruebersichtView.PaketListComponent.PaketListComponentController;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

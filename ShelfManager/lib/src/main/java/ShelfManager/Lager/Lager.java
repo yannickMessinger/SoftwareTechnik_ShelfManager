@@ -79,6 +79,18 @@ public class Lager extends Gegenstand {
     }
 
 
+    public void filterAllPaketsByColor(Color color){
+
+
+        for(Paket p : this.allPakets){
+            if(p.getFarbe() .equals(color)){
+                this.obervableFilteredList.add(p);
+
+            }
+        }
+    }
+
+
 
     /**
      * prueft vor dem Hinzufuegen eines neuen Regals,
