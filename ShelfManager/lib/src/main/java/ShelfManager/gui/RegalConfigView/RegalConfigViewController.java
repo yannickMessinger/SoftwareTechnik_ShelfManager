@@ -78,6 +78,9 @@ public class RegalConfigViewController extends ViewController {
 
         backToLagerView.addEventHandler(ActionEvent.ACTION, event -> {
             regalConfigView.setCenter(inputBox);
+            submit.setVisible(true);
+            saveRegal.setVisible(false);
+            einlegeboedenWarning.setText("");
             main.switchScene(Scenes.LAGER_VIEW);
         });
 
@@ -127,36 +130,27 @@ public class RegalConfigViewController extends ViewController {
                 //SHohe---------------------------
                 if (stuetzenhoeheTextField.getText().equals("")) {
                     sHoeheWarning.setText("Die Stuetze darf nicht leer sein");}
-
                 else if (!stuetzenhoeheTextField.getText().matches("\\d+")) {
                     sHoeheWarning.setText("keine Buchstaben erlaubt");
-
-                }else if(Integer.parseInt(stuetzenhoeheTextField.getText()) < Integer.parseInt(hoeheTextField.getText())){
+                } else if(Integer.parseInt(stuetzenhoeheTextField.getText()) < hoehe){
                     sHoeheWarning.setText("Die Stuetze muss mindestens so hoch sein, wie das Regal");
-                }
-
-                else if (Integer.parseInt(stuetzenbreiteTextField.getText()) > hauptLager.getHoehe()){
+                } else if (Integer.parseInt(stuetzenhoeheTextField.getText()) > hauptLager.getHoehe()){
                     sHoeheWarning.setText("Die Stütze ist zu hoch für das Lager");
                 } else {
-
                     stuetzenhoehe = Integer.parseInt(stuetzenhoeheTextField.getText());
                     sHoeheWarning.setText("");
                 }
 
                 //SBreite-------------------------
                 if (stuetzenbreiteTextField.getText().equals("")) {
-                    sBreiteWarning.setText("Die Stuetzenbreite darf nicht leer");}
-
-                else if (!stuetzenbreiteTextField.getText().matches("\\d+")) {
+                    sBreiteWarning.setText("Die Stuetzenbreite darf nicht leer");
+                } else if (!stuetzenbreiteTextField.getText().matches("\\d+")) {
                     sBreiteWarning.setText("keine Buchstaben erlaubt");
-
                 } else if(Integer.parseInt(stuetzenbreiteTextField.getText()) < 1){
                     sBreiteWarning.setText("Die Stuetzenbreite darf nicht 0 sein");
-                }
-                else if (Integer.parseInt(stuetzenbreiteTextField.getText()) > Integer.parseInt(breiteTextField.getText())){
+                } else if (Integer.parseInt(stuetzenbreiteTextField.getText()) > breite){
                     sBreiteWarning.setText("Die Stütze ist Breiter als das Regal, das ist Unsinn");
                 } else {
-                    //stuetzenbreite = Integer.parseInt(breiteTextField.getText()) * METERTOCENTIMETER;
                     stuetzenbreite = Integer.parseInt(stuetzenbreiteTextField.getText());
                     sBreiteWarning.setText("");
                 }
