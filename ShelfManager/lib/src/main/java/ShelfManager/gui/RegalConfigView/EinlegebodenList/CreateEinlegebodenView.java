@@ -15,16 +15,26 @@ public class CreateEinlegebodenView extends VBox {
     public CreateEinlegebodenView(){
 
         Label hoeheLabel = new Label("Hoehe:");
+        hoeheLabel.getStyleClass().add("titleLabel");
         hoeheInput = new TextField();
+        hoeheInput.getStyleClass().add("textField");
+
+
         Label tragkraftLabel = new Label("Tragkraft:");
+        tragkraftLabel.getStyleClass().add("titleLabel");
         tragkraftInput = new TextField();
+        tragkraftInput.getStyleClass().add("textField");
+
 
         addEinlegeboden = new Button("+");
+        addEinlegeboden.getStyleClass().add("style-button");
+
 
 
         //---setzen-----------------------------
         this.getChildren().addAll(hoeheLabel, hoeheInput, tragkraftLabel, tragkraftInput, addEinlegeboden);
-
+        this.setSpacing(10);
+        this.getStyleClass().addAll("background");
     }
 
     public TextField getHoeheInput() {

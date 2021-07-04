@@ -14,13 +14,10 @@ public class EinlegebodenListView extends VBox {
     public EinlegebodenListView(Regal regal) {
         this.einlegebodenList = new ListView<>();
         this.createEinlegebodenViewController = new CreateEinlegebodenViewController(regal);
-
+        einlegebodenList.getStyleClass().add("list-cell");
 
 
         this.getChildren().addAll(einlegebodenList, createEinlegebodenViewController.getRootView());
-
-
-
 
 
     }

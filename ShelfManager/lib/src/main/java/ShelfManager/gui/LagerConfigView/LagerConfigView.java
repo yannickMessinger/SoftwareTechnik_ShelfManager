@@ -88,7 +88,7 @@ public class LagerConfigView extends BorderPane {
         breiteBox.setAlignment(Pos.CENTER);
 
         //Button
-        buttonBox.setAlignment(Pos.CENTER_RIGHT);
+        buttonBox.setAlignment(Pos.CENTER);
 
 
         this.getStyleClass().addAll("background");
