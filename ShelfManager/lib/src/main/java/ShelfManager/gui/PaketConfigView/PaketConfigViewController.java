@@ -103,9 +103,6 @@ public class PaketConfigViewController extends ViewController {
     public void initialize() {
 
 
-
-
-
         addNewPaket.addEventHandler(ActionEvent.ACTION, event -> {
             String paketName = "";
             int hoehePaket = 0;
@@ -136,7 +133,11 @@ public class PaketConfigViewController extends ViewController {
             }
 
             //ueberpruefe Hoehe-----------
-            if(hoeheField.getText().equals("") || Integer.parseInt(hoeheField.getText()) < 1 ){
+            if(hoeheField.getText().equals("")){
+                hoeheWarning.setText("Das Feld darf nich leer");
+            } else if (!hoeheField.getText().matches("\\d+")) {
+                hoeheWarning.setText("keine Buchstaben erlaubt");
+            } else if (Integer.parseInt(hoeheField.getText()) < 1 ) {
                 hoeheWarning.setText("Die Hoehe darf nich <= 0 sein");
             } else {
                 hoehePaket = Integer.parseInt(hoeheField.getText());
@@ -144,7 +145,11 @@ public class PaketConfigViewController extends ViewController {
             }
 
             //ueberpruefe Breite-----------
-            if(breiteField.getText().equals("") || Integer.parseInt(breiteField.getText()) < 1) {
+            if(breiteField.getText().equals("")) {
+                breiteWarning.setText("Das Feld darf nicht leer sein");
+            } else if (!breiteField.getText().matches("\\d+")) {
+                breiteWarning.setText("keine Buchstaben erlaubt");
+            } else if (Integer.parseInt(breiteField.getText()) < 1) {
                 breiteWarning.setText("Die Breite darf nicht <= 0 sein");
             } else {
                 breitePaket = Integer.parseInt(breiteField.getText());
@@ -152,8 +157,12 @@ public class PaketConfigViewController extends ViewController {
             }
 
             //ueberpruefe Gewicht-----------
-            if(gewichtField.getText().equals("") || Integer.parseInt(gewichtField.getText()) < 1) {
-                gewichtWarning.setText("Das Gewicht darf nich <= 0 sein");
+            if(gewichtField.getText().equals("")) {
+                gewichtWarning.setText("Das Feld darf nicht leer sein");
+            } else if (!gewichtField.getText().matches("\\d+")) {
+                gewichtWarning.setText("keine Buchstaben erlaubt");
+            } else if (Integer.parseInt(gewichtField.getText()) < 1) {
+                gewichtWarning.setText("Das Gewicht darf nicht <= 0 sein");
             } else {
                 gewichtPaket = Integer.parseInt(gewichtField.getText());
                 gewichtWarning.setText("");
@@ -162,6 +171,8 @@ public class PaketConfigViewController extends ViewController {
             //ueberpruefe Tragkraft-----------
             if(tragKraftField.getText().equals("")) {
                 tragKraftWarning.setText("Trage bitte zuerst eine Tragkraft ein");
+            } else if (!tragKraftField.getText().matches("\\d+")) {
+                tragKraftWarning.setText("keine Buchstaben erlaubt");
             } else if(Integer.parseInt(tragKraftField.getText()) < 0) {
                 tragKraftWarning.setText("Die Tragkraft darf nicht negativ sein");
             } else {

@@ -49,7 +49,7 @@ public class LagerConfigViewController extends ViewController {
             //ueberpruefe Feld und Hoehe
             if(hoeheTextField.getText().equals("")){
                 hoeheWarning.setText("Feld darf nicht Leer sein");
-            } else if (!hoeheTextField.getText().matches("\\d")) {
+            } else if (!hoeheTextField.getText().matches("\\d+")) {
                 hoeheWarning.setText("keine Buchstaben erlaubt");
             } else if (Integer.parseInt(hoeheTextField.getText()) < 1 ) {
                 hoeheWarning.setText("Die Hoehe darf nich <= 0 sein");
@@ -61,7 +61,7 @@ public class LagerConfigViewController extends ViewController {
             //ueberpruefe Feld und Breite
             if(breiteTextField.getText().equals("")) {
                 breiteWarning.setText("Feld darf nicht Leer sein");
-            } else if (!breiteTextField.getText().matches("\\d")) {
+            } else if (!breiteTextField.getText().matches("\\d+")) {
                 breiteWarning.setText("keine Buchstaben erlaubt");
             } else if (Integer.parseInt(breiteTextField.getText()) < 1) {
                 breiteWarning.setText("Die Breite darf nicht <= 0 sein");
