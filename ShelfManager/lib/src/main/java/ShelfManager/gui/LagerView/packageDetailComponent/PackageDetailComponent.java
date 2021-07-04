@@ -19,7 +19,9 @@ public class PackageDetailComponent extends Pane {
     private Label currentPackageGewicht;
     private Label currentPackageTragkraft;
     private Label currentUnvertraeglichkeiten;
+    private Label currentGefahrgut;
     private ListView<Color>  unvertraeglichkeiten;
+    private ListView<String> gefahrgutList;
 
     //Liste bzw. Anzeigemöglichkeit für Unverträglichkeiten hinzufügen
 
@@ -29,6 +31,7 @@ public class PackageDetailComponent extends Pane {
         HBox rectangleBox = new HBox(currentPackage);
 
         this.unvertraeglichkeiten = new ListView<Color>();
+        this.gefahrgutList = new ListView<String>();
 
         currentPackageName = new Label("Name");
         currentPackageHoehe = new Label("Hoehe");
@@ -36,15 +39,17 @@ public class PackageDetailComponent extends Pane {
         currentPackageGewicht = new Label("Gewicht");
         currentPackageTragkraft = new Label("Tragkraft");
         currentUnvertraeglichkeiten = new Label("Unvertraeglichkeiten:");
+        currentGefahrgut = new Label("Gefahrgut: ");
+
 
 
 
         VBox detailLabels = new VBox(currentPackageName, currentPackageHoehe, currentPackageBreite, currentPackageGewicht,currentPackageTragkraft);
         VBox listBox = new VBox(currentUnvertraeglichkeiten, unvertraeglichkeiten);
+        VBox listGefahrBox = new VBox(currentGefahrgut, gefahrgutList );
         listBox.setPrefHeight(40);
-        VBox currentPackageInfo = new VBox(rectangleBox, detailLabels,listBox);
-
-        //Unverträglichkeitenliste noch in VBox packen, passt aber nicht vom Layout!
+        VBox currentPackageInfo = new VBox(rectangleBox, detailLabels,listBox, listGefahrBox);
+        listGefahrBox.setPrefHeight(40);
 
 
         this.getChildren().addAll(currentPackageInfo);
@@ -82,6 +87,8 @@ public class PackageDetailComponent extends Pane {
     public ListView<Color> getUnvertraeglichkeiten(){
         return unvertraeglichkeiten;
     }
+
+    public ListView<String> getGefahrgutList(){return gefahrgutList;}
     //-----------------------SETTER
 
 

@@ -23,6 +23,8 @@ public class Paket extends Gegenstand{
     private ArrayList<Color> unvertraeglichkeiten;
     private ArrayList<Paket> paketsOnTop;
     private Paket paketBelow;
+    private ArrayList<String> gefahrgutListe;
+
 
 
     /**
@@ -41,6 +43,7 @@ public class Paket extends Gegenstand{
         this.yPos = 0;
         this.unvertraeglichkeiten = new ArrayList<>();
         this.paketsOnTop = new ArrayList<>();
+        this.gefahrgutListe = new ArrayList<>();
     }
 
     /**
@@ -139,6 +142,17 @@ public class Paket extends Gegenstand{
     }
 
 
+    public void removeGefahrgut(String gefahrgut){
+        for(String e : gefahrgutListe){
+            if(e.equals(gefahrgut)){
+                gefahrgutListe.remove(e);
+            }
+        }
+    }
+
+    public void resetGefahrgut(){
+        gefahrgutListe.clear();
+    }
 
 //-----GETTER----------------------------
 
@@ -185,6 +199,10 @@ public class Paket extends Gegenstand{
 
     public Paket getPaketBelow() {
         return paketBelow;
+    }
+
+    public ArrayList<String> getGefahrgutListe(){
+        return gefahrgutListe;
     }
 
     //-----SETTER----------------------------
@@ -239,5 +257,9 @@ public class Paket extends Gegenstand{
 
     public void setPaketBelow(Paket paketBelow) {
         this.paketBelow = paketBelow;
+    }
+
+    public void setGefahrgut(String gefahrgut){
+        gefahrgutListe.add(gefahrgut);
     }
 }

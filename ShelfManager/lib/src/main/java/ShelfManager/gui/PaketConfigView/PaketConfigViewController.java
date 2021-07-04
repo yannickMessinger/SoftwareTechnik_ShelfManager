@@ -17,6 +17,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -44,6 +45,13 @@ public class PaketConfigViewController extends ViewController {
     private ObservableList<Color> collectUnvertraeglichkeiten;
     private ListView<Color> unvertraeglichkeitenList;
     private Button removeUnvertraeglichkeit;
+    private Button activateGefahrgutField;
+    private Button addGefahrgut;
+    private Button removeGefahrgut;
+    private HBox gefahrgutbox;
+    private TextField gefahrenInput;
+    private ObservableList<String> collectGefahrgut;
+    private ListView<String> gefahrgutList;
 
 
     //Warnings----
@@ -76,9 +84,16 @@ public class PaketConfigViewController extends ViewController {
         this.addUnvertraeglichkeit = paketConfigView.getAddUnvertraeglichkeit();
         this.unvertraeglichkeiten = paketConfigView.getUnvertraeglichkeiten();
         this.collectUnvertraeglichkeiten = FXCollections.observableArrayList();
+        this.collectGefahrgut = FXCollections.observableArrayList();
         this.unvertraeglichkeitenList = paketConfigView.getUnvertraeglichkeitenList();
         this.removeUnvertraeglichkeit = paketConfigView.getRemoveUnvertraeglichkeit();
-
+        this.addUnvertraeglichkeit = paketConfigView.getAddUnvertraeglichkeit();
+        this.removeUnvertraeglichkeit = paketConfigView.getRemoveUnvertraeglichkeit();
+        this.activateGefahrgutField = paketConfigView.getActivateGefahrgutField();
+        this.gefahrenInput = paketConfigView.getOptionalGefahrgut();
+        this.addGefahrgut = paketConfigView.getAddGefahrgut();
+        this.gefahrgutList = paketConfigView.getGefahrgutList();
+        this.removeGefahrgut = paketConfigView.getRemoveGefahrgut();
 
         rootView = this.paketConfigView;
         initialize();
@@ -168,8 +183,14 @@ public class PaketConfigViewController extends ViewController {
                     paketToAdd.getUnvertraeglichkeiten().add(c);
                 }
 
+                //Gefahrgut hinzufügen
+                for(String s : collectGefahrgut){
+                    paketToAdd.getGefahrgutListe().add(s);
+                }
+
 
                 this.collectUnvertraeglichkeiten.clear();
+                this.collectGefahrgut.clear();
                 hauptLager.addPaketToList(paketToAdd);
                 hauptLager.addPaketToAllPakets(paketToAdd);
 
@@ -190,8 +211,6 @@ public class PaketConfigViewController extends ViewController {
         backToLagerView.addEventHandler(ActionEvent.ACTION, event -> {
             main.switchScene(Scenes.LAGER_VIEW);
         });
-
-
 
 
 
@@ -236,9 +255,75 @@ public class PaketConfigViewController extends ViewController {
         });
 
 
+        collectGefahrgut.addListener(new ListChangeListener<String>() {
+            @Override
+            public void onChanged(Change<? extends String> c) {
+                gefahrgutList.getItems().clear();
+                gefahrgutList.getItems().addAll(collectGefahrgut);
+            }
+        });
+
+        gefahrgutList.setCellFactory(
+
+                new Callback<ListView<String>, ListCell<String>>() {
+                    @Override
+                    public ListCell<String> call(ListView<String> v) {
+                        return new GefahrgutCell();
+                    }
+                });
+
+
+        gefahrgutList.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent click) {
+                String aktGefahrgut = aktGefahrgut = gefahrgutList.getSelectionModel().getSelectedItem();
+                if (click.getClickCount() == 2) {
+
+                    if(aktGefahrgut != null) {
+                        aktGefahrgut = gefahrgutList.getSelectionModel().getSelectedItem();
+                        System.out.println("Gefahrgut gewählt" + gefahrgutList.getSelectionModel().getSelectedItem());
+                    }
+                }
+            }
+        });
+
+
+
+
+
+
+        activateGefahrgutField.addEventHandler(ActionEvent.ACTION, event -> {
+            paketConfigView.activateGefahrgutInput();
+        });
+
+
+        addGefahrgut.addEventHandler(ActionEvent.ACTION, event -> {
+            String input = paketConfigView.getOptionalGefahrgut().getText();
+            this.collectGefahrgut.add(input);
+            paketConfigView.getOptionalGefahrgut().setText("");
+
+        });
+
+        removeGefahrgut.addEventHandler(ActionEvent.ACTION, event -> {
+
+            String aktGefahrgut = aktGefahrgut = gefahrgutList.getSelectionModel().getSelectedItem();
+            if(aktGefahrgut != null){
+                aktGefahrgut = gefahrgutList.getSelectionModel().getSelectedItem();
+                collectGefahrgut.remove(aktGefahrgut);
+
+            }
+
+
+
+        });
+
+
+
 
 
     }
+
 
         public Pane getRootView () {
             return rootView;

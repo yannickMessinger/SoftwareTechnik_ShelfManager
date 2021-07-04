@@ -31,6 +31,8 @@ public class PackageDetailComponentController extends ViewController {
     private Label currentPackageTragkraft;
     private ListView<Color> unvertraeglichkeitenFromView;
     private ObservableList<Color>  observableUnvertraeglichkeiten;
+    private ListView<String> gefahrgutListFromview;
+    private ObservableList<String> observableGefahrgut;
 
 
     public PackageDetailComponentController(Lager hauptLager){
@@ -48,6 +50,8 @@ public class PackageDetailComponentController extends ViewController {
         this.currentPackageTragkraft = packageDetailComponent.getCurrentPackageTragkraft();
         this.observableUnvertraeglichkeiten = FXCollections.observableArrayList();
         this.unvertraeglichkeitenFromView = packageDetailComponent.getUnvertraeglichkeiten();
+        this.observableGefahrgut = FXCollections.observableArrayList();
+        this.gefahrgutListFromview = packageDetailComponent.getGefahrgutList();
 
         initialize();
     }
@@ -70,6 +74,7 @@ public class PackageDetailComponentController extends ViewController {
             currentPackageGewicht.setText("Paketgewicht: " + String.valueOf(newValue.getGewicht()));
             currentPackageTragkraft.setText("Pakettragkraft: " + String.valueOf(newValue.getTragkraft()));
             observableUnvertraeglichkeiten.setAll(newValue.getUnvertraeglichkeiten());
+            observableGefahrgut.setAll((newValue.getGefahrgutListe()));
 
 
         });
@@ -106,8 +111,25 @@ public class PackageDetailComponentController extends ViewController {
             }
         });
 
+        gefahrgutListFromview.setCellFactory(
+
+                new Callback<ListView<String>, ListCell<String>>() {
+                    @Override
+                    public ListCell<String> call(ListView<String> v) {
+                        return new GefahrgutCell();
+                    }
+                });
 
 
+      observableGefahrgut.addListener(new ListChangeListener<String>() {
+            @Override
+            public void onChanged(Change<? extends String> s) {
+
+                gefahrgutListFromview.getItems().clear();
+                gefahrgutListFromview.getItems().addAll(observableGefahrgut);
+                gefahrgutListFromview.refresh();
+            }
+        });
 
 
 

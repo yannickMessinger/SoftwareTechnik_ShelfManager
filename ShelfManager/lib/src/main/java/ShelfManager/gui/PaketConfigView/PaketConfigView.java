@@ -16,13 +16,19 @@ public class PaketConfigView extends BorderPane {
     private TextField breiteField;
     private TextField gewichtField;
     private TextField tragKraftField;
+    private TextField optionalGefahrgut;
     private ColorPicker paketColor;
     private ColorPicker unvertraeglichkeiten;
     private Button addNewPaket;
     private Button getBackToLagerView;
     private Button addUnvertraeglichkeit;
     private Button removeUnvertraeglichkeit;
+    private Button activateGefahrgutField;
+    private Button addGefahrgut;
+    private Button removeGefahrgut;
+    private HBox gefahrgutBox;
     private ListView<Color> unvertraeglichkeitenList;
+    private ListView<String>gefahrgutList;
 
     //Warnings----
     private Label nameWarning;
@@ -90,16 +96,30 @@ public class PaketConfigView extends BorderPane {
         HBox colorBox = new HBox(paketFarbe, paketColorBox);
         paketColorBox.setPadding(new Insets(0, 0, 5, 24));
 
-        //Unvertraeglcihkeiten---------------
+        //Unvertraeglichkeiten---------------
         Label unvertraeglMit = new Label("Unvertr. mit:");
         Label aktUnvertraeglichkeiten = new Label("akuelle Unvertr.: ");
+
         unvertraeglichkeiten = new ColorPicker();
         addUnvertraeglichkeit = new Button(("Unvertraeglichkeit hinzufuegen"));
         removeUnvertraeglichkeit = new Button("Unvertraeg. loeschen");
         HBox unvertraeglichkeitenBox = new HBox( unvertraeglichkeiten, addUnvertraeglichkeit, removeUnvertraeglichkeit);
+
+
         Rectangle unverT1, unverT2, unverT3, unverT4, unverT5;
-        HBox showAktUnvertraeglichkeiten = new HBox(aktUnvertraeglichkeiten,unvertraeglichkeitenList = new ListView<Color>());
+        HBox showAktUnvertraeglichkeiten = new HBox(aktUnvertraeglichkeiten,unvertraeglichkeitenList = new ListView<Color>(),gefahrgutList = new ListView<String>());
         HBox unvertraeglichkeitenBoxAll = new HBox(unvertraeglMit,unvertraeglichkeitenBox);
+
+        //optionales Gefahrgutfenster---------------
+        Label gefahrGutLabel = new Label("Gefahrgut: ");
+
+        activateGefahrgutField = new Button("Gefahrgutfeld einblenden");
+        optionalGefahrgut = new TextField("Gefahrgut hinzuf.");
+        optionalGefahrgut.setVisible(false);
+        addGefahrgut = new Button("addG");
+        removeGefahrgut = new Button("remG");
+        gefahrgutBox = new HBox(gefahrGutLabel, activateGefahrgutField,optionalGefahrgut,addGefahrgut, removeGefahrgut);
+
 
         //Buttons----------------------------
         addNewPaket = new Button();
@@ -108,7 +128,7 @@ public class PaketConfigView extends BorderPane {
         getBackToLagerView = new Button();
         HBox buttonBox = new HBox(getBackToLagerView, spacer, addNewPaket);
 
-        VBox inputBox = new VBox(viewName, nameBox, hoeheBox, breiteBox, gewichtBox, tragKraftBox, colorBox, unvertraeglichkeitenBoxAll, showAktUnvertraeglichkeiten, buttonBox);
+        VBox inputBox = new VBox(viewName, nameBox, hoeheBox, breiteBox, gewichtBox, tragKraftBox, colorBox, unvertraeglichkeitenBoxAll, showAktUnvertraeglichkeiten,gefahrgutBox, buttonBox);
         this.setCenter(inputBox);
 
 
@@ -225,6 +245,28 @@ public class PaketConfigView extends BorderPane {
         return unvertraeglichkeitenList;
     }
 
+    public TextField getOptionalGefahrgut() {
+        return optionalGefahrgut;
+    }
+
+    public Button getActivateGefahrgutField() {
+        return activateGefahrgutField;
+    }
+
+    public Button getAddGefahrgut() {
+        return addGefahrgut;
+    }
+
+    public ListView<String> getGefahrgutList() {
+        return gefahrgutList;
+    }
+
+    public Button getRemoveGefahrgut() {
+        return removeGefahrgut;
+    }
+
+
+
     /*public ComboBox<Color> getColor() {
         return color;
     }*/
@@ -261,5 +303,13 @@ public class PaketConfigView extends BorderPane {
 
     public Label getTragKraftWarning() {
         return tragKraftWarning;
+    }
+
+    public void activateGefahrgutInput(){
+        this.optionalGefahrgut.setVisible(true);
+    }
+
+    public void deactivateGefahrgutInput(){
+        this.optionalGefahrgut.setVisible(false);
     }
 }
