@@ -11,10 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tooltip;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 
 public class LagerView extends BorderPane {
 
@@ -67,7 +64,11 @@ public class LagerView extends BorderPane {
         viewName.setId("title");
 
         centerBox.setSpacing(20);
+        centerBox.setAlignment(Pos.CENTER_RIGHT);
+        HBox.setHgrow(centerBox, Priority.ALWAYS);
         packetButtonBox.setAlignment(Pos.CENTER);
+        packetButtonBox.setPadding(new Insets(20, 50, 20, 20));
+        packetButtonBox.setStyle("-fx-background-color: rgba(50, 255, 150, 1)");
 
         rightComponents.setSpacing(10);
 

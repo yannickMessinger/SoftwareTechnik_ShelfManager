@@ -69,7 +69,7 @@ public class ShelfManagerApplication extends Application {
 
             this.primaryStage.setScene(scene);
             this.primaryStage.setTitle("ShelfManager");
-
+            this.primaryStage.setMaximized(true);
 
         switchScene(Scenes.LAGER_CONFIG_VIEW);
 
