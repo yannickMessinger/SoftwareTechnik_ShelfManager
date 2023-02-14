@@ -1,2 +1,2 @@
 # SoftwareTechnik_ShelfManager
-# Implementierung einer Lagersoftware zum organisieren von Regalen
+# Implementierung einer Lagersoftware zum organisieren von Regalen im Fach Softwaretechnik
